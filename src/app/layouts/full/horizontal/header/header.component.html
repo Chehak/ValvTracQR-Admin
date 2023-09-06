@@ -7,7 +7,8 @@
     <!-- Mobile Menu -->
     <button
       mat-icon-button
-      (click)="toggleMobileNav.emit()" class="d-block d-lg-none"
+      (click)="toggleMobileNav.emit()"
+      class="d-block d-lg-none"
     >
       <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
     </button>
@@ -156,7 +157,11 @@
         matBadgeColor="primary"
       ></i-tabler>
     </button>
-    <mat-menu #notificationmenu="matMenu" xPosition="before" class="topbar-dd cardWithShadow">
+    <mat-menu
+      #notificationmenu="matMenu"
+      xPosition="before"
+      class="topbar-dd cardWithShadow"
+    >
       <div class="d-flex align-items-center p-x-32 p-y-16">
         <h6 class="f-s-16 f-w-600 m-0">Notifications</h6>
         <span class="m-l-auto">
@@ -196,18 +201,22 @@
       aria-label="Notifications"
     >
       <img
-        src="/assets/images/profile/user-1.jpg"
+        src="assets/images/profile/user-1.jpg"
         class="rounded-circle object-cover"
         width="35"
       />
     </button>
-    <mat-menu #profilemenu="matMenu" xPosition="before" class="topbar-dd cardWithShadow">
+    <mat-menu
+      #profilemenu="matMenu"
+      xPosition="before"
+      class="topbar-dd cardWithShadow"
+    >
       <div class="p-x-32 p-y-16">
         <h6 class="f-s-16 f-w-600 m-0">User Profile</h6>
 
         <div class="d-flex align-items-center p-b-24 b-b-1 m-t-16">
           <img
-            src="/assets/images/profile/user-1.jpg"
+            src="assets/images/profile/user-1.jpg"
             class="rounded-circle"
             width="95"
           />
@@ -260,7 +269,7 @@
             </div>
             <div class="m-l-auto">
               <img
-                src="/assets/images/backgrounds/unlimited-bg.png"
+                src="assets/images/backgrounds/unlimited-bg.png"
                 alt="upgrade-bg"
                 class="upgrade-bg"
               />
