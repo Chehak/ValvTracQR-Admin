@@ -16,7 +16,6 @@ import { CommonModule, NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
-
 interface notifications {
   id: number;
   img: string;
@@ -49,12 +48,17 @@ interface quicklinks {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, CommonModule, NgScrollbarModule, TablerIconsModule, MaterialModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    NgScrollbarModule,
+    TablerIconsModule,
+    MaterialModule,
+  ],
   templateUrl: './header.component.html',
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
-  
   @Input() showToggle = true;
   @Input() toggleChecked = false;
   @Output() toggleMobileNav = new EventEmitter<void>();
@@ -67,7 +71,7 @@ export class HeaderComponent {
     language: 'English',
     code: 'en',
     type: 'US',
-    icon: '/assets/images/flag/icon-flag-en.svg',
+    icon: 'assets/images/flag/icon-flag-en.svg',
   };
 
   public languages: any[] = [
@@ -75,22 +79,22 @@ export class HeaderComponent {
       language: 'English',
       code: 'en',
       type: 'US',
-      icon: '/assets/images/flag/icon-flag-en.svg',
+      icon: 'assets/images/flag/icon-flag-en.svg',
     },
     {
       language: 'Español',
       code: 'es',
-      icon: '/assets/images/flag/icon-flag-es.svg',
+      icon: 'assets/images/flag/icon-flag-es.svg',
     },
     {
       language: 'Français',
       code: 'fr',
-      icon: '/assets/images/flag/icon-flag-fr.svg',
+      icon: 'assets/images/flag/icon-flag-fr.svg',
     },
     {
       language: 'German',
       code: 'de',
-      icon: '/assets/images/flag/icon-flag-de.svg',
+      icon: 'assets/images/flag/icon-flag-de.svg',
     },
   ];
 
@@ -118,31 +122,31 @@ export class HeaderComponent {
   notifications: notifications[] = [
     {
       id: 1,
-      img: '/assets/images/profile/user-1.jpg',
+      img: 'assets/images/profile/user-1.jpg',
       title: 'Roman Joined the Team!',
       subtitle: 'Congratulate him',
     },
     {
       id: 2,
-      img: '/assets/images/profile/user-2.jpg',
+      img: 'assets/images/profile/user-2.jpg',
       title: 'New message received',
       subtitle: 'Salma sent you new message',
     },
     {
       id: 3,
-      img: '/assets/images/profile/user-3.jpg',
+      img: 'assets/images/profile/user-3.jpg',
       title: 'New Payment received',
       subtitle: 'Check your earnings',
     },
     {
       id: 4,
-      img: '/assets/images/profile/user-4.jpg',
+      img: 'assets/images/profile/user-4.jpg',
       title: 'Jolly completed tasks',
       subtitle: 'Assign her new tasks',
     },
     {
       id: 5,
-      img: '/assets/images/profile/user-5.jpg',
+      img: 'assets/images/profile/user-5.jpg',
       title: 'Roman Joined the Team!',
       subtitle: 'Congratulate him',
     },
@@ -151,21 +155,21 @@ export class HeaderComponent {
   profiledd: profiledd[] = [
     {
       id: 1,
-      img: '/assets/images/svgs/icon-account.svg',
+      img: 'assets/images/svgs/icon-account.svg',
       title: 'My Profile',
       subtitle: 'Account Settings',
       link: '/',
     },
     {
       id: 2,
-      img: '/assets/images/svgs/icon-inbox.svg',
+      img: 'assets/images/svgs/icon-inbox.svg',
       title: 'My Inbox',
       subtitle: 'Messages & Email',
       link: '/apps/email/inbox',
     },
     {
       id: 3,
-      img: '/assets/images/svgs/icon-tasks.svg',
+      img: 'assets/images/svgs/icon-tasks.svg',
       title: 'My Tasks',
       subtitle: 'To-do and Daily Tasks',
       link: '/apps/taskboard',
@@ -175,56 +179,56 @@ export class HeaderComponent {
   apps: apps[] = [
     {
       id: 1,
-      img: '/assets/images/svgs/icon-dd-chat.svg',
+      img: 'assets/images/svgs/icon-dd-chat.svg',
       title: 'Chat Application',
       subtitle: 'Messages & Emails',
       link: '/apps/chat',
     },
     {
       id: 2,
-      img: '/assets/images/svgs/icon-dd-cart.svg',
+      img: 'assets/images/svgs/icon-dd-cart.svg',
       title: 'Todo App',
       subtitle: 'Completed task',
       link: '/apps/todo',
     },
     {
       id: 3,
-      img: '/assets/images/svgs/icon-dd-invoice.svg',
+      img: 'assets/images/svgs/icon-dd-invoice.svg',
       title: 'Invoice App',
       subtitle: 'Get latest invoice',
       link: '/apps/invoice',
     },
     {
       id: 4,
-      img: '/assets/images/svgs/icon-dd-date.svg',
+      img: 'assets/images/svgs/icon-dd-date.svg',
       title: 'Calendar App',
       subtitle: 'Get Dates',
       link: '/apps/calendar',
     },
     {
       id: 5,
-      img: '/assets/images/svgs/icon-dd-mobile.svg',
+      img: 'assets/images/svgs/icon-dd-mobile.svg',
       title: 'Contact Application',
       subtitle: '2 Unsaved Contacts',
       link: '/apps/contacts',
     },
     {
       id: 6,
-      img: '/assets/images/svgs/icon-dd-lifebuoy.svg',
+      img: 'assets/images/svgs/icon-dd-lifebuoy.svg',
       title: 'Tickets App',
       subtitle: 'Create new ticket',
       link: '/apps/tickets',
     },
     {
       id: 7,
-      img: '/assets/images/svgs/icon-dd-message-box.svg',
+      img: 'assets/images/svgs/icon-dd-message-box.svg',
       title: 'Email App',
       subtitle: 'Get new emails',
       link: '/apps/email/inbox',
     },
     {
       id: 8,
-      img: '/assets/images/svgs/icon-dd-application.svg',
+      img: 'assets/images/svgs/icon-dd-application.svg',
       title: 'Courses',
       subtitle: 'Create new course',
       link: '/apps/courses',
