@@ -8,25 +8,29 @@ import { CoreService } from 'src/app/services/core.service';
   imports: [NgIf],
   template: `
     <div class="branding">
-      <a href="/" *ngIf="options.theme === 'light'">
-        <img
-          src="./assets/images/logos/dark-logo.svg"
-          class="align-middle m-2"
-          alt="logo"
-        />
-      </a>
-      <a href="/" *ngIf="options.theme === 'dark'">
-        <img
-          src="./assets/images/logos/light-logo.svg"
-          class="align-middle m-2"
-          alt="logo"
-        />
-      </a>
+      <h1>JC Valves</h1>
     </div>
   `,
 })
 export class BrandingComponent {
   options = this.settings.getOptions();
- 
+
   constructor(private settings: CoreService) {}
 }
+
+//  <div class="branding">
+//       <a href="/" *ngIf="options.theme === 'light'">
+//         <img
+//           src="./assets/images/logos/dark-logo.svg"
+//           class="align-middle m-2"
+//           alt="logo"
+//         />
+//       </a>
+//       <a href="/" *ngIf="options.theme === 'dark'">
+//         <img
+//           src="./assets/images/logos/light-logo.svg"
+//           class="align-middle m-2"
+//           alt="logo"
+//         />
+//       </a>
+//     </div>
