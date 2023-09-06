@@ -25,6 +25,11 @@ const routes: Routes = [
             (m) => m.DashboardModule
           ),
       },
+      {
+        path: 'apps',
+        loadChildren: () =>
+          import('./pages/apps/apps.module').then((m) => m.AppsModule),
+      },
     ],
   },
   {
