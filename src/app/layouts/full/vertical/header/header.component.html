@@ -8,7 +8,7 @@
     class="d-flex justify-content-center"
   >
     <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
-  </button> 
+  </button>
 
   <!-- Mobile Menu -->
   <button
@@ -36,7 +36,7 @@
     <!-- --------------------------------------------------------------- -->
     <!--  Links -->
     <!-- --------------------------------------------------------------- -->
-    <button
+    <!-- <button
       mat-button
       [matMenuTriggerFor]="appsmenu"
       aria-label="Notifications"
@@ -44,7 +44,7 @@
       <div class="d-flex align-items-center">
         Apps <i-tabler name="chevron-down" class="icon-16 m-l-4"></i-tabler>
       </div>
-    </button>
+    </button> -->
     <mat-menu #appsmenu="matMenu" class="apps-dd cardWithShadow">
       <div class="row">
         <div class="col-sm-8 b-r-1 p-r-0">
@@ -110,9 +110,9 @@
         </div>
       </div>
     </mat-menu>
-    <a mat-button [routerLink]="['/apps/chat']">Chat</a>
+    <!-- <a mat-button [routerLink]="['/apps/chat']">Chat</a>
     <a mat-button [routerLink]="['/apps/calendar']">Calendar</a>
-    <a mat-button [routerLink]="['/apps/email/inbox']">Email</a>
+    <a mat-button [routerLink]="['/apps/email/inbox']">Email</a> -->
   </div>
 
   <span class="flex-1-auto"></span>
@@ -212,10 +212,7 @@
     />
   </button>
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
-    <ng-scrollbar
-      class="position-relative"
-      style="height: 647px"
-    >
+    <ng-scrollbar class="position-relative" style="height: 647px">
       <div class="p-x-32 p-y-16">
         <h6 class="f-s-16 f-w-600 m-0">User Profile</h6>
 

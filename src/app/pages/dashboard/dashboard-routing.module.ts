@@ -9,10 +9,10 @@ export const DashboardRoutes: Routes = [
         path: 'dashboard-view',
         component: DashboardViewComponent,
         data: {
-          title: 'Analytical',
+          title: 'Dashboard',
           urls: [
             { title: 'Dashboard', url: '/dashboard/dashboard-view' },
-            { title: 'Analytical' },
+            { title: 'Dashboard' },
           ],
         },
       },
