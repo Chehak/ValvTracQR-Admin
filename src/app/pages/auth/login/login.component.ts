@@ -26,21 +26,37 @@ import { MaterialModule } from 'src/app/material.module';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  inputType: string = 'password';
+  inputTypeShop: string = 'password';
   options = this.settings.getOptions();
 
   constructor(private settings: CoreService, private router: Router) {}
 
-  form = new FormGroup({
+  formManager = new FormGroup({
     uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
     password: new FormControl('', [Validators.required]),
   });
 
-  get f() {
-    return this.form.controls;
+  formShop = new FormGroup({
+    unameShop: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+    passwordShop: new FormControl('', [Validators.required]),
+  });
+
+  get fManager() {
+    return this.formManager.controls;
   }
 
-  submit() {
-    // console.log(this.form.value);
+  get fShop() {
+    return this.formShop.controls;
+  }
+
+  submitManager() {
+    this.router.navigate(['/dashboard/dashboard-view']);
+  }
+  submitShop() {
     this.router.navigate(['/dashboard/dashboard-view']);
   }
 }
