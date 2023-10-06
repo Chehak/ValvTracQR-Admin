@@ -75,6 +75,9 @@ import { AddedDialogComponent } from './invoice/add-invoice/added-dialog/added-d
 // blog
 import { AppBlogsComponent } from './blogs/blogs.component';
 import { AppBlogDetailsComponent } from './blogs/details/details.component';
+import { RolesUsersComponent } from './roles-users/roles-users.component';
+import { AddComponent } from './roles-users/add/add.component';
+import { AppRolesDialogComponent } from './roles-users/roles-users.component';
 
 @NgModule({
   imports: [
@@ -110,6 +113,7 @@ import { AppBlogDetailsComponent } from './blogs/details/details.component';
     ListingDialogDataExampleDialogComponent,
     ListingComponent,
     DetailComponent,
+    AppRolesDialogComponent,
     AppEmailComponent,
     AppFullcalendarComponent,
     CalendarDialogComponent,
@@ -131,6 +135,8 @@ import { AppBlogDetailsComponent } from './blogs/details/details.component';
     OkDialogComponent,
     AppBlogsComponent,
     AppBlogDetailsComponent,
+    RolesUsersComponent,
+    AddComponent,
   ],
   providers: [DatePipe],
 })

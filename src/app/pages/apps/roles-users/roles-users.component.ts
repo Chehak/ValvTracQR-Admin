@@ -13,36 +13,33 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
-import { AppAddEmployeeComponent } from './add/add.component';
+import { AddComponent } from './add/add.component';
 
-export interface Employee {
+export interface Roles {
   id: number;
   Name: string;
-  Position: string;
+  Role: string;
   Email: string;
   Mobile: number;
   DateOfJoining: Date;
-  Salary: number;
-  Projects: number;
   imagePath: string;
 }
 
-const employees = [
+const roles = [
   {
     id: 1,
     Name: 'Johnathan Deo',
-    Position: 'Seo Expert',
+    Role: 'Seo Expert',
     Email: 'r@gmail.com',
     Mobile: 9786838,
     DateOfJoining: new Date('01-2-2020'),
-    Salary: 12000,
-    Projects: 10,
+
     imagePath: 'assets/images/profile/user-2.jpg',
   },
   {
     id: 2,
     Name: 'Mark Zukerburg',
-    Position: 'Web Developer',
+    Role: 'Web Developer',
     Email: 'mark@gmail.com',
     Mobile: 8786838,
     DateOfJoining: new Date('04-2-2020'),
@@ -53,7 +50,7 @@ const employees = [
   {
     id: 3,
     Name: 'Sam smith',
-    Position: 'Web Designer',
+    Role: 'Web Designer',
     Email: 'sam@gmail.com',
     Mobile: 7788838,
     DateOfJoining: new Date('02-2-2020'),
@@ -64,7 +61,7 @@ const employees = [
   {
     id: 4,
     Name: 'John Deo',
-    Position: 'Tester',
+    Role: 'Tester',
     Email: 'john@gmail.com',
     Mobile: 8786838,
     DateOfJoining: new Date('03-2-2020'),
@@ -75,7 +72,7 @@ const employees = [
   {
     id: 5,
     Name: 'Genilia',
-    Position: 'Actor',
+    Role: 'Actor',
     Email: 'genilia@gmail.com',
     Mobile: 8786838,
     DateOfJoining: new Date('05-2-2020'),
@@ -86,7 +83,7 @@ const employees = [
   {
     id: 6,
     Name: 'Jack Sparrow',
-    Position: 'Content Writer',
+    Role: 'Content Writer',
     Email: 'jac@gmail.com',
     Mobile: 8786838,
     DateOfJoining: new Date('05-21-2020'),
@@ -97,7 +94,7 @@ const employees = [
   {
     id: 7,
     Name: 'Tom Cruise',
-    Position: 'Actor',
+    Role: 'Actor',
     Email: 'tom@gmail.com',
     Mobile: 8786838,
     DateOfJoining: new Date('02-15-2019'),
@@ -108,7 +105,7 @@ const employees = [
   {
     id: 8,
     Name: 'Hary Porter',
-    Position: 'Actor',
+    Role: 'Actor',
     Email: 'hary@gmail.com',
     Mobile: 8786838,
     DateOfJoining: new Date('07-3-2019'),
@@ -119,7 +116,7 @@ const employees = [
   {
     id: 9,
     Name: 'Kristen Ronaldo',
-    Position: 'Player',
+    Role: 'Player',
     Email: 'kristen@gmail.com',
     Mobile: 8786838,
     DateOfJoining: new Date('01-15-2019'),
@@ -130,9 +127,11 @@ const employees = [
 ];
 
 @Component({
-  templateUrl: './employee.component.html',
+  selector: 'app-roles-users',
+  templateUrl: './roles-users.component.html',
+  // styleUrls: ['./roles-users.component.css']
 })
-export class AppEmployeeComponent implements AfterViewInit {
+export class RolesUsersComponent implements AfterViewInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any> =
     Object.create(null);
   searchText: any;
@@ -141,12 +140,10 @@ export class AppEmployeeComponent implements AfterViewInit {
     'name',
     'email',
     'mobile',
-    'date of joining',
-    'salary',
-    'projects',
+    'role',
     'action',
   ];
-  dataSource = new MatTableDataSource(employees);
+  dataSource = new MatTableDataSource(roles);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
     Object.create(null);
 
@@ -162,7 +159,7 @@ export class AppEmployeeComponent implements AfterViewInit {
 
   openDialog(action: string, obj: any): void {
     obj.action = action;
-    const dialogRef = this.dialog.open(AppEmployeeDialogContentComponent, {
+    const dialogRef = this.dialog.open(AppRolesDialogComponent, {
       data: obj,
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -177,34 +174,32 @@ export class AppEmployeeComponent implements AfterViewInit {
   }
 
   // tslint:disable-next-line - Disables all
-  addRowData(row_obj: Employee): void {
+  addRowData(row_obj: Roles): void {
     this.dataSource.data.unshift({
-      id: employees.length + 1,
+      id: roles.length + 1,
       Name: row_obj.Name,
-      Position: row_obj.Position,
+      Role: row_obj.Role,
       Email: row_obj.Email,
       Mobile: row_obj.Mobile,
 
       DateOfJoining: new Date(),
-      Salary: row_obj.Salary,
-      Projects: row_obj.Projects,
+      // Salary: row_obj.Salary,
+      // Projects: row_obj.Projects,
       imagePath: row_obj.imagePath,
     });
-    this.dialog.open(AppAddEmployeeComponent);
+    this.dialog.open(AddComponent);
     this.table.renderRows();
   }
 
   // tslint:disable-next-line - Disables all
-  updateRowData(row_obj: Employee): boolean | any {
+  updateRowData(row_obj: Roles): boolean | any {
     this.dataSource.data = this.dataSource.data.filter((value: any) => {
       if (value.id === row_obj.id) {
         value.Name = row_obj.Name;
-        value.Position = row_obj.Position;
+        value.Role = row_obj.Role;
         value.Email = row_obj.Email;
         value.Mobile = row_obj.Mobile;
         value.DateOfJoining = row_obj.DateOfJoining;
-        value.Salary = row_obj.Salary;
-        value.Projects = row_obj.Projects;
         value.imagePath = row_obj.imagePath;
       }
       return true;
@@ -212,7 +207,7 @@ export class AppEmployeeComponent implements AfterViewInit {
   }
 
   // tslint:disable-next-line - Disables all
-  deleteRowData(row_obj: Employee): boolean | any {
+  deleteRowData(row_obj: Roles): boolean | any {
     this.dataSource.data = this.dataSource.data.filter((value: any) => {
       return value.id !== row_obj.id;
     });
@@ -222,10 +217,10 @@ export class AppEmployeeComponent implements AfterViewInit {
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'app-dialog-content',
-  templateUrl: 'employee-dialog-content.html',
+  templateUrl: 'roles-dialog-content.html',
 })
 // tslint:disable-next-line: component-class-suffix
-export class AppEmployeeDialogContentComponent {
+export class AppRolesDialogComponent {
   action: string;
   // tslint:disable-next-line - Disables all
   local_data: any;
@@ -234,9 +229,9 @@ export class AppEmployeeDialogContentComponent {
 
   constructor(
     public datePipe: DatePipe,
-    public dialogRef: MatDialogRef<AppEmployeeDialogContentComponent>,
+    public dialogRef: MatDialogRef<AppRolesDialogComponent>,
     // @Optional() is used to prevent error if no data is passed
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: Employee
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: Roles
   ) {
     this.local_data = { ...data };
     this.action = this.local_data.action;

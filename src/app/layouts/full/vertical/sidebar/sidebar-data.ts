@@ -43,9 +43,14 @@ export const navItems: NavItem[] = [
   //   route: 'apps/courses',
   // },
   {
-    displayName: 'Employee',
+    displayName: 'Users',
     iconName: 'brand-ctemplar',
     route: 'apps/employee',
+  },
+  {
+    displayName: 'Roles',
+    iconName: 'lock-access',
+    route: 'apps/roles-users',
   },
   // {
   //   displayName: 'Notes',
@@ -93,11 +98,11 @@ export const navItems: NavItem[] = [
   // {
   //   navCap: 'Pages',
   // },
-  {
-    displayName: 'Roll Base Access',
-    iconName: 'lock-access',
-    route: 'apps/permission',
-  },
+  // {
+  //   displayName: 'Roll Base Access',
+  //   iconName: 'lock-access',
+  //   route: 'apps/permission',
+  // },
   // {
   //   displayName: 'Treeview',
   //   iconName: 'git-merge',
