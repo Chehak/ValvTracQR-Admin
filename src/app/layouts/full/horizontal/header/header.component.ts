@@ -108,6 +108,8 @@ export class AppHorizontalHeaderComponent {
   }
 
   changeLanguage(lang: any): void {
+    console.log('jhdjshds');
+
     this.translate.use(lang.code);
     this.selectedLanguage = lang;
   }

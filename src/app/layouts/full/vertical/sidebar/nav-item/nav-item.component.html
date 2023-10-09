@@ -19,7 +19,7 @@
     name="{{ item.iconName }}"
     matListItemIcon
   ></i-tabler>
-  <span class="hide-menu">{{ item.displayName | translate }}</span>
+  <span class="hide-menu">{{ item.displayName | translate }} nnn</span>
   <span class="arrow-icon" fxFlex *ngIf="item.children && item.children.length">
     <span fxFlex></span>
     <mat-icon [@indicatorRotate]="expanded ? 'expanded' : 'collapsed'">
@@ -46,7 +46,7 @@
     name="{{ item.iconName }}"
     matListItemIcon
   ></i-tabler>
-  <span class="hide-menu">{{ item.displayName | translate }}</span>
+  <span class="hide-menu">{{ item.displayName | translate }}nnnn</span>
 </mat-list-item>
 
 <!-- children -->
