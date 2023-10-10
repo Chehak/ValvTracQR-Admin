@@ -16,11 +16,11 @@ import { CommonModule, NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
-interface notifications {
-  id: number;
-  img: string;
+interface settings {
+  // id: number;
+  // img: string;
   title: string;
-  subtitle: string;
+  // subtitle: string;
 }
 
 interface profiledd {
@@ -121,36 +121,27 @@ export class HeaderComponent {
     this.selectedLanguage = lang;
   }
 
-  notifications: notifications[] = [
+  settings: settings[] = [
     {
-      id: 1,
-      img: 'assets/images/profile/user-1.jpg',
-      title: 'Roman Joined the Team!',
-      subtitle: 'Congratulate him',
+      title: 'General Settings',
     },
     {
-      id: 2,
-      img: 'assets/images/profile/user-2.jpg',
-      title: 'New message received',
-      subtitle: 'Salma sent you new message',
+      title: 'Shop floor views',
     },
     {
-      id: 3,
-      img: 'assets/images/profile/user-3.jpg',
-      title: 'New Payment received',
-      subtitle: 'Check your earnings',
+      title: 'Machines',
     },
     {
-      id: 4,
-      img: 'assets/images/profile/user-4.jpg',
-      title: 'Jolly completed tasks',
-      subtitle: 'Assign her new tasks',
+      title: 'Workers',
     },
     {
-      id: 5,
-      img: 'assets/images/profile/user-5.jpg',
-      title: 'Roman Joined the Team!',
-      subtitle: 'Congratulate him',
+      title: 'Users',
+    },
+    {
+      title: 'Additional Fields',
+    },
+    {
+      title: 'Tags',
     },
   ];
 
