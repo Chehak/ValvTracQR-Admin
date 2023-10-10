@@ -18,63 +18,44 @@ import { AddComponent } from './add/add.component';
 export interface Roles {
   id: number;
   RoleName: string;
-  imagePath: string;
 }
 
 const roles = [
   {
     id: 1,
     RoleName: 'UI/UX Designer',
-    DateOfJoining: new Date('01-2-2020'),
-
-    imagePath: 'assets/images/profile/user-2.jpg',
   },
   {
     id: 2,
     RoleName: 'Web Designer',
-    imagePath: 'assets/images/profile/user-3.jpg',
   },
   {
     id: 3,
     RoleName: 'Content Writer',
-
-    imagePath: 'assets/images/profile/user-4.jpg',
   },
   {
     id: 4,
     RoleName: 'SEO Expert',
-
-    imagePath: 'assets/images/profile/user-5.jpg',
   },
   {
     id: 5,
     RoleName: 'Production Manager',
-
-    imagePath: 'assets/images/profile/user-6.jpg',
   },
   {
     id: 6,
     RoleName: 'Sales Head',
-
-    imagePath: 'assets/images/profile/user-7.jpg',
   },
   {
     id: 7,
     RoleName: 'Business Analyst',
-
-    imagePath: 'assets/images/profile/user-3.jpg',
   },
   {
     id: 8,
     RoleName: 'Head of department',
-
-    imagePath: 'assets/images/profile/user-6.jpg',
   },
   {
     id: 9,
     RoleName: 'System Analyst',
-
-    imagePath: 'assets/images/profile/user-5.jpg',
   },
 ];
 
@@ -123,7 +104,6 @@ export class RolesUsersComponent implements AfterViewInit {
     this.dataSource.data.unshift({
       id: roles.length + 1,
       RoleName: row_obj.RoleName,
-      imagePath: row_obj.imagePath,
     });
     this.dialog.open(AddComponent);
     this.table.renderRows();
@@ -134,7 +114,6 @@ export class RolesUsersComponent implements AfterViewInit {
     this.dataSource.data = this.dataSource.data.filter((value: any) => {
       if (value.id === row_obj.id) {
         value.RoleName = row_obj.RoleName;
-        value.imagePath = row_obj.imagePath;
       }
       return true;
     });
