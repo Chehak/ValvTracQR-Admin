@@ -8,7 +8,7 @@ import { filter, map, mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'app-breadcrumb',
   standalone: true,
-  imports: [RouterModule, NgIf],
+  imports: [RouterModule, NgIf, CommonModule],
   templateUrl: './breadcrumb.component.html',
   styleUrls: [],
 })

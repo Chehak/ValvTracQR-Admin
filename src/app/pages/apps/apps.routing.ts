@@ -186,10 +186,10 @@ export const AppsRoutes: Routes = [
         path: 'employee',
         component: AppEmployeeComponent,
         data: {
-          title: 'Employee',
+          title: 'Users',
           urls: [
             { title: 'Dashboard', url: '/dashboards/dashboard1' },
-            { title: 'Employee' },
+            { title: 'Users' },
           ],
         },
       },

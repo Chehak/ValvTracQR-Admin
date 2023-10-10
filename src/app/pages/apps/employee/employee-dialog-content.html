@@ -35,10 +35,10 @@
             type="text"
             matInput
             required
-            id="position"
-            name="position"
-            [(ngModel)]="local_data.Position"
-            placeholder="Position"
+            id="role"
+            name="role"
+            [(ngModel)]="local_data.Role"
+            placeholder="Role"
           />
         </mat-form-field>
       </div>
@@ -68,7 +68,7 @@
           />
         </mat-form-field>
       </div>
-      <div class="col-lg-4">
+      <!-- <div class="col-lg-4">
         <mat-form-field appearance="outline" class="w-100">
           <input
             type="date"
@@ -80,31 +80,72 @@
             [(ngModel)]="joiningDate"
           />
         </mat-form-field>
-      </div>
+      </div> -->
       <div class="col-lg-4">
         <mat-form-field appearance="outline" class="w-100">
-          <input
-            type="text"
-            matInput
-            required
-            id="salary"
-            name="salary"
-            [(ngModel)]="local_data.Salary"
-            placeholder="Salary"
-          />
+          <mat-select
+            [(ngModel)]="local_data.Active"
+            id="active"
+            name="active"
+            placeholder="Active"
+          >
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="col-lg-4">
         <mat-form-field appearance="outline" class="w-100">
-          <input
-            type="text"
-            matInput
-            required
-            id="projects"
-            name="projects"
-            [(ngModel)]="local_data.Projects"
-            placeholder="Projects"
-          />
+          <mat-select
+            [(ngModel)]="local_data.DefaultLanguage"
+            id="default language"
+            name="default language"
+            placeholder="Default Language"
+          >
+            <mat-option value="English">English</mat-option>
+            <mat-option value="Español">Español</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-select
+            [(ngModel)]="local_data.AccountType"
+            id="account type"
+            name="account type"
+            placeholder="Account Type"
+          >
+            <mat-option value="Worker">Worker</mat-option>
+            <mat-option value="Client">Client</mat-option>
+            <mat-option value="Admin (OV)">Admin (OV)</mat-option>
+            <mat-option value="Production plan view"
+              >Production plan view</mat-option
+            >
+            <mat-option value="Admin">Admin</mat-option>
+            <mat-option value="Office">Office</mat-option>
+            <mat-option value="Office">Foreman</mat-option>
+            <mat-option value="Constructor CAD/CAM"
+              >Constructor CAD/CAM</mat-option
+            >
+            <mat-option value="Sales Rep.">Sales Rep.</mat-option>
+            <mat-option value="Production Manager"
+              >Production Manager</mat-option
+            >
+            <mat-option value="Production Manager without TNA"
+              >Production Manager without TNA</mat-option
+            >
+            <mat-option value="Team Leader">Team Leader</mat-option>
+            <mat-option value="Warehouseman">Warehouseman</mat-option>
+            <mat-option value="Manager without TNA">
+              Manager without TNA</mat-option
+            >
+            <mat-option value="Manager"> Manager </mat-option>
+            <mat-option value="Orders view only"> Orders view only </mat-option>
+            <mat-option value="Technologer"> Technologer </mat-option>
+            <mat-option value="Production view only">
+              Production view only
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>
@@ -128,7 +169,7 @@
   </form>
 </mat-dialog-content>
 <ng-template #elseTemplate>
-  <div class="p-x-24 text-white">
+  <div class="p-x-24">
     <p>Sure to delete <span class="f-w-600">{{local_data.Name}}</span> ?</p>
   </div>
   <div mat-dialog-actions class="p-x-24 p-b-24">

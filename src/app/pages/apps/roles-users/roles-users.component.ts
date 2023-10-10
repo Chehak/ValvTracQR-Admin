@@ -17,111 +17,63 @@ import { AddComponent } from './add/add.component';
 
 export interface Roles {
   id: number;
-  Name: string;
-  Role: string;
-  Email: string;
-  Mobile: number;
-  DateOfJoining: Date;
+  RoleName: string;
   imagePath: string;
 }
 
 const roles = [
   {
     id: 1,
-    Name: 'Johnathan Deo',
-    Role: 'Seo Expert',
-    Email: 'r@gmail.com',
-    Mobile: 9786838,
+    RoleName: 'UI/UX Designer',
     DateOfJoining: new Date('01-2-2020'),
 
     imagePath: 'assets/images/profile/user-2.jpg',
   },
   {
     id: 2,
-    Name: 'Mark Zukerburg',
-    Role: 'Web Developer',
-    Email: 'mark@gmail.com',
-    Mobile: 8786838,
-    DateOfJoining: new Date('04-2-2020'),
-    Salary: 12000,
-    Projects: 10,
+    RoleName: 'Web Designer',
     imagePath: 'assets/images/profile/user-3.jpg',
   },
   {
     id: 3,
-    Name: 'Sam smith',
-    Role: 'Web Designer',
-    Email: 'sam@gmail.com',
-    Mobile: 7788838,
-    DateOfJoining: new Date('02-2-2020'),
-    Salary: 12000,
-    Projects: 10,
+    RoleName: 'Content Writer',
+
     imagePath: 'assets/images/profile/user-4.jpg',
   },
   {
     id: 4,
-    Name: 'John Deo',
-    Role: 'Tester',
-    Email: 'john@gmail.com',
-    Mobile: 8786838,
-    DateOfJoining: new Date('03-2-2020'),
-    Salary: 12000,
-    Projects: 11,
+    RoleName: 'SEO Expert',
+
     imagePath: 'assets/images/profile/user-5.jpg',
   },
   {
     id: 5,
-    Name: 'Genilia',
-    Role: 'Actor',
-    Email: 'genilia@gmail.com',
-    Mobile: 8786838,
-    DateOfJoining: new Date('05-2-2020'),
-    Salary: 12000,
-    Projects: 19,
+    RoleName: 'Production Manager',
+
     imagePath: 'assets/images/profile/user-6.jpg',
   },
   {
     id: 6,
-    Name: 'Jack Sparrow',
-    Role: 'Content Writer',
-    Email: 'jac@gmail.com',
-    Mobile: 8786838,
-    DateOfJoining: new Date('05-21-2020'),
-    Salary: 12000,
-    Projects: 5,
+    RoleName: 'Sales Head',
+
     imagePath: 'assets/images/profile/user-7.jpg',
   },
   {
     id: 7,
-    Name: 'Tom Cruise',
-    Role: 'Actor',
-    Email: 'tom@gmail.com',
-    Mobile: 8786838,
-    DateOfJoining: new Date('02-15-2019'),
-    Salary: 12000,
-    Projects: 9,
+    RoleName: 'Business Analyst',
+
     imagePath: 'assets/images/profile/user-3.jpg',
   },
   {
     id: 8,
-    Name: 'Hary Porter',
-    Role: 'Actor',
-    Email: 'hary@gmail.com',
-    Mobile: 8786838,
-    DateOfJoining: new Date('07-3-2019'),
-    Salary: 12000,
-    Projects: 7,
+    RoleName: 'Head of department',
+
     imagePath: 'assets/images/profile/user-6.jpg',
   },
   {
     id: 9,
-    Name: 'Kristen Ronaldo',
-    Role: 'Player',
-    Email: 'kristen@gmail.com',
-    Mobile: 8786838,
-    DateOfJoining: new Date('01-15-2019'),
-    Salary: 12000,
-    Projects: 1,
+    RoleName: 'System Analyst',
+
     imagePath: 'assets/images/profile/user-5.jpg',
   },
 ];
@@ -135,14 +87,7 @@ export class RolesUsersComponent implements AfterViewInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any> =
     Object.create(null);
   searchText: any;
-  displayedColumns: string[] = [
-    '#',
-    'name',
-    'email',
-    'mobile',
-    'role',
-    'action',
-  ];
+  displayedColumns: string[] = ['#', 'role name', 'action'];
   dataSource = new MatTableDataSource(roles);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
     Object.create(null);
@@ -177,14 +122,7 @@ export class RolesUsersComponent implements AfterViewInit {
   addRowData(row_obj: Roles): void {
     this.dataSource.data.unshift({
       id: roles.length + 1,
-      Name: row_obj.Name,
-      Role: row_obj.Role,
-      Email: row_obj.Email,
-      Mobile: row_obj.Mobile,
-
-      DateOfJoining: new Date(),
-      // Salary: row_obj.Salary,
-      // Projects: row_obj.Projects,
+      RoleName: row_obj.RoleName,
       imagePath: row_obj.imagePath,
     });
     this.dialog.open(AddComponent);
@@ -195,11 +133,7 @@ export class RolesUsersComponent implements AfterViewInit {
   updateRowData(row_obj: Roles): boolean | any {
     this.dataSource.data = this.dataSource.data.filter((value: any) => {
       if (value.id === row_obj.id) {
-        value.Name = row_obj.Name;
-        value.Role = row_obj.Role;
-        value.Email = row_obj.Email;
-        value.Mobile = row_obj.Mobile;
-        value.DateOfJoining = row_obj.DateOfJoining;
+        value.RoleName = row_obj.RoleName;
         value.imagePath = row_obj.imagePath;
       }
       return true;
@@ -235,12 +169,7 @@ export class AppRolesDialogComponent {
   ) {
     this.local_data = { ...data };
     this.action = this.local_data.action;
-    if (this.local_data.DateOfJoining !== undefined) {
-      this.joiningDate = this.datePipe.transform(
-        new Date(this.local_data.DateOfJoining),
-        'yyyy-MM-dd'
-      );
-    }
+
     if (this.local_data.imagePath === undefined) {
       this.local_data.imagePath = 'assets/images/profile/user-1.jpg';
     }
