@@ -8,7 +8,7 @@ import { CoreService } from 'src/app/services/core.service';
   imports: [NgIf],
   template: `
     <div class="branding">
-      <h1>JC Valves</h1>
+      <h2>JC Valves</h2>
     </div>
   `,
 })

@@ -10,3 +10,9 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+tr {
+    height: 40px !important;
+    /* padding: 10px !important; */
+    /* border-bottom: none; */
+}

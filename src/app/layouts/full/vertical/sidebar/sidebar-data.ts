@@ -2,9 +2,6 @@ import { NavItem } from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
   {
-    navCap: 'Home',
-  },
-  {
     displayName: 'Dashboard',
     iconName: 'aperture',
     route: '/dashboard/dashboard-view',
@@ -22,11 +19,11 @@ export const navItems: NavItem[] = [
   //   iconName: 'message-2',
   //   route: 'apps/chat',
   // },
-  {
-    displayName: 'Calendar',
-    iconName: 'calendar-event',
-    route: 'apps/calendar',
-  },
+  // {
+  //   displayName: 'Calendar',
+  //   iconName: 'calendar-event',
+  //   route: 'apps/calendar',
+  // },
   // {
   //   displayName: 'Email',
   //   iconName: 'mail',
@@ -57,26 +54,26 @@ export const navItems: NavItem[] = [
   //   iconName: 'note',
   //   route: 'apps/notes',
   // },
-  {
-    displayName: 'Tickets',
-    iconName: 'ticket',
-    route: 'apps/tickets',
-  },
+  // {
+  //   displayName: 'Tickets',
+  //   iconName: 'ticket',
+  //   route: 'apps/tickets',
+  // },
   // {
   //   displayName: 'Invoice',
   //   iconName: 'file-invoice',
   //   route: 'apps/invoice',
   // },
-  {
-    displayName: 'ToDo',
-    iconName: 'edit',
-    route: 'apps/todo',
-  },
-  {
-    displayName: 'Taskboard',
-    iconName: 'checklist',
-    route: 'apps/taskboard',
-  },
+  // {
+  //   displayName: 'ToDo',
+  //   iconName: 'edit',
+  //   route: 'apps/todo',
+  // },
+  // {
+  //   displayName: 'Taskboard',
+  //   iconName: 'checklist',
+  //   route: 'apps/taskboard',
+  // },
   // {
   //   displayName: 'Blog',
   //   iconName: 'chart-donut-3',
