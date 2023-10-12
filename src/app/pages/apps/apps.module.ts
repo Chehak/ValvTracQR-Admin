@@ -78,6 +78,7 @@ import { AppBlogDetailsComponent } from './blogs/details/details.component';
 import { RolesUsersComponent } from './roles-users/roles-users.component';
 import { AddComponent } from './roles-users/add/add.component';
 import { AppRolesDialogComponent } from './roles-users/roles-users.component';
+import { FilterDialogComponent } from './employee/filter-dialog/filter-dialog.component';
 
 @NgModule({
   imports: [
@@ -137,6 +138,7 @@ import { AppRolesDialogComponent } from './roles-users/roles-users.component';
     AppBlogDetailsComponent,
     RolesUsersComponent,
     AddComponent,
+    FilterDialogComponent,
   ],
   providers: [DatePipe],
 })

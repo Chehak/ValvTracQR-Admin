@@ -6,7 +6,7 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {
   MatDialog,
   MatDialogRef,
@@ -14,6 +14,7 @@ import {
 } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { AppAddEmployeeComponent } from './add/add.component';
+import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 
 export interface Employee {
   id: number;
@@ -143,19 +144,25 @@ const employees = [
   templateUrl: './employee.component.html',
 })
 export class AppEmployeeComponent implements AfterViewInit {
+  pageSize: number = 10;
   @ViewChild(MatTable, { static: true }) table: MatTable<any> =
     Object.create(null);
   searchText: any;
-  displayedColumns: string[] = [
-    '#',
-    'name',
-    'email',
-    'mobile',
-    'default language',
-    'active',
-    'account type',
-    'action',
+  dynamicColumns: string[] = [
+    'id',
+    'image',
+    'Name',
+    'Role',
+    'Email',
+    'Mobile',
+    'DefaultLanguage',
+    'Active',
+    'AccountType',
+    'Actions',
   ];
+
+  // dynamicColumns: string[] = ['firstname', 'lastname'];
+
   dataSource = new MatTableDataSource(employees);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
     Object.create(null);
@@ -188,6 +195,21 @@ export class AppEmployeeComponent implements AfterViewInit {
     });
   }
 
+  openFilterDialog() {
+    const dialogRef = this.dialog.open(FilterDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result, 'result');
+      let arr: any[] = [];
+      result.data.forEach((element: any) => {
+        arr.push(element.columnRef);
+      });
+      console.log(arr, 'arr');
+      this.dynamicColumns = arr;
+      this.paginator.pageSize = result.rows;
+      this.paginator.length = this.dataSource.data.length;
+    });
+  }
+
   // tslint:disable-next-line - Disables all
   addRowData(row_obj: Employee): void {
     console.log(row_obj);
@@ -205,6 +227,7 @@ export class AppEmployeeComponent implements AfterViewInit {
       imagePath: row_obj.imagePath,
     });
     this.dialog.open(AppAddEmployeeComponent);
+    // this.dialog.open(FilterDialogComponent);
     this.table.renderRows();
   }
 
@@ -230,6 +253,10 @@ export class AppEmployeeComponent implements AfterViewInit {
     this.dataSource.data = this.dataSource.data.filter((value: any) => {
       return value.id !== row_obj.id;
     });
+  }
+
+  getVal(element: any, dynamicColumn: any) {
+    console.log(element, 'element', dynamicColumn);
   }
 }
 
