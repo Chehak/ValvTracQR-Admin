@@ -1,4 +1,6 @@
-<h2 class="f-w-500 m-b-24" mat-dialog-title><strong>{{action}}</strong></h2>
+<h2 class="f-w-500 m-b-24" mat-dialog-title>
+  <strong>{{action}} Role</strong>
+</h2>
 <mat-dialog-content
   *ngIf="action !== 'Delete'; else elseTemplate"
   style="max-width: 600px"
@@ -28,8 +30,8 @@
             id="user type"
             name="user type"
           >
-            <mat-option value="Admin">Admin</mat-option>
-            <mat-option value="Worker">Worker</mat-option>
+            <mat-option value="1">Admin</mat-option>
+            <mat-option value="2">Worker</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

@@ -12,8 +12,14 @@
 
 <form [formGroup]="form">
   <div formArrayName="currencies">
+    <div class="row m-b-10">
+      <div class="col"><b>Delete</b></div>
+
+      <div class="col-10 text-center"><b>Currency</b></div>
+      <div class="col"><b>Default</b></div>
+    </div>
     <div *ngFor="let currency of currencies.controls; let i = index">
-      <div [formGroupName]="i" class="row m-b-10">
+      <div class="row m-b-10" [formGroupName]="i">
         <div class="col">
           <i-tabler
             name="trash-filled"
@@ -31,7 +37,7 @@
           />
         </div>
         <div class="col">
-          <button type="button" mat-flat-button color="primary"></button>
+          <button type="button" mat-flat-button color="primary">Add</button>
         </div>
       </div>
     </div>

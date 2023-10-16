@@ -25,47 +25,47 @@ const roles = [
   {
     id: 1,
     RoleName: 'UI/UX Designer',
-    userType: 'Worker',
+    userType: '2',
   },
   {
     id: 2,
     RoleName: 'Web Designer',
-    userType: 'Admin',
+    userType: '1',
   },
   {
     id: 3,
     RoleName: 'Content Writer',
-    userType: 'Admin',
+    userType: '1',
   },
   {
     id: 4,
     RoleName: 'SEO Expert',
-    userType: 'Worker',
+    userType: '2',
   },
   {
     id: 5,
     RoleName: 'Production Manager',
-    userType: 'Worker',
+    userType: '2',
   },
   {
     id: 6,
     RoleName: 'Sales Head',
-    userType: 'Worker',
+    userType: '2',
   },
   {
     id: 7,
     RoleName: 'Business Analyst',
-    userType: 'Admin',
+    userType: '1',
   },
   {
     id: 8,
     RoleName: 'Head of department',
-    userType: 'Worker',
+    userType: '2',
   },
   {
     id: 9,
     RoleName: 'System Analyst',
-    userType: 'Worker',
+    userType: '2',
   },
 ];
 

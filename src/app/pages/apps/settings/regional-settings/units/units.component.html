@@ -1,1 +1,45 @@
-<p>units works!</p>
+<!-- <h2 class="header">Currencies</h2>
+<p class="title">
+  Only the 3-letter ISO 4217 currency code indicating the currency to use ex.
+  PLN, USD.
+</p> -->
+
+<div class="text-right m-b-10">
+  <button mat-flat-button (click)="addUnit()" color="primary">
+    + Add Unit
+  </button>
+</div>
+
+<form [formGroup]="form">
+  <div formArrayName="units">
+    <div class="row m-b-10">
+      <div class="col"><b>Delete</b></div>
+
+      <div class="col-10 text-center"><b>Unit</b></div>
+      <div class="col"><b>Default</b></div>
+    </div>
+    <div *ngFor="let unit of units.controls; let i = index">
+      <div class="row m-b-10" [formGroupName]="i">
+        <div class="col">
+          <i-tabler
+            name="trash-filled"
+            style="color: #ff5733"
+            (click)="removeUnit(i)"
+          ></i-tabler>
+        </div>
+
+        <div class="col-10">
+          <input
+            matInput
+            class="text-white w-100 my-mat-input"
+            type="text"
+            formControlName="currency"
+          />
+        </div>
+        <div class="col">
+          <button type="button" mat-flat-button color="primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

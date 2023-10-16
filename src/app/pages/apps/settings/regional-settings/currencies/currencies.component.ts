@@ -16,17 +16,19 @@ export class CurrenciesComponent {
   }
 
   // Create a getter for the currencies FormArray
-  get currencies(): FormArray {
+  get currencies() {
     return this.form.get('currencies') as FormArray;
   }
 
   // Add a new currency control to the FormArray
   addCurrency() {
     this.currencies.push(this.fb.control(''));
+    console.log('FormArray length:', this.currencies.length);
   }
 
   // Remove a currency control from the FormArray
   removeCurrency(index: number) {
     this.currencies.removeAt(index);
+    console.log('FormArray length:', this.currencies.length);
   }
 }
