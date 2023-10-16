@@ -1,0 +1,39 @@
+<!-- <h2 class="header">Currencies</h2>
+<p class="title">
+  Only the 3-letter ISO 4217 currency code indicating the currency to use ex.
+  PLN, USD.
+</p> -->
+
+<div class="text-right m-b-10">
+  <button mat-flat-button (click)="addCurrency()" color="primary">
+    + Add Currency
+  </button>
+</div>
+
+<form [formGroup]="form">
+  <div formArrayName="currencies">
+    <div *ngFor="let currency of currencies.controls; let i = index">
+      <div [formGroupName]="i" class="row m-b-10">
+        <div class="col">
+          <i-tabler
+            name="trash-filled"
+            style="color: #ff5733"
+            (click)="removeCurrency(i)"
+          ></i-tabler>
+        </div>
+
+        <div class="col-10">
+          <input
+            matInput
+            class="text-white w-100 my-mat-input"
+            type="text"
+            formControlName="currency"
+          />
+        </div>
+        <div class="col">
+          <button type="button" mat-flat-button color="primary"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

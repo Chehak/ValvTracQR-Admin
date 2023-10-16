@@ -196,7 +196,9 @@ export class AppEmployeeComponent implements AfterViewInit {
   }
 
   openFilterDialog() {
-    const dialogRef = this.dialog.open(FilterDialogComponent);
+    const dialogRef = this.dialog.open(FilterDialogComponent, {
+      data: { data: this.dynamicColumns },
+    });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result, 'result');
       let arr: any[] = [];
@@ -206,7 +208,6 @@ export class AppEmployeeComponent implements AfterViewInit {
       console.log(arr, 'arr');
       this.dynamicColumns = arr;
       this.paginator.pageSize = result.rows;
-      this.paginator.length = this.dataSource.data.length;
     });
   }
 

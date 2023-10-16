@@ -17,20 +17,3 @@ export class BrandingComponent {
 
   constructor(private settings: CoreService) {}
 }
-
-//  <div class="branding">
-//       <a href="/" *ngIf="options.theme === 'light'">
-//         <img
-//           src=".assets/images/logos/dark-logo.svg"
-//           class="align-middle m-2"
-//           alt="logo"
-//         />
-//       </a>
-//       <a href="/" *ngIf="options.theme === 'dark'">
-//         <img
-//           src=".assets/images/logos/light-logo.svg"
-//           class="align-middle m-2"
-//           alt="logo"
-//         />
-//       </a>
-//     </div>

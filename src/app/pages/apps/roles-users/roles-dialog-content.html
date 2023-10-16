@@ -19,6 +19,21 @@
         </mat-form-field>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-select
+            [(ngModel)]="local_data.userType"
+            placeholder="Select User Type"
+            id="user type"
+            name="user type"
+          >
+            <mat-option value="Admin">Admin</mat-option>
+            <mat-option value="Worker">Worker</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
     <button
       mat-flat-button
       (click)="doAction()"

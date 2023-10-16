@@ -7,8 +7,11 @@
   }"
 >
   <i-tabler class="routeIcon icon-18" name="{{ item.iconName }}"></i-tabler>
-  {{ item.displayName }}
-  <span *ngIf="item.children && item.children.length" class="down-icon d-flex m-l-auto">
+  {{ item.displayName }}ss
+  <span
+    *ngIf="item.children && item.children.length"
+    class="down-icon d-flex m-l-auto"
+  >
     <mat-icon> expand_more </mat-icon>
   </span>
 </a>

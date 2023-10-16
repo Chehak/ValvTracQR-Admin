@@ -79,6 +79,9 @@ import { RolesUsersComponent } from './roles-users/roles-users.component';
 import { AddComponent } from './roles-users/add/add.component';
 import { AppRolesDialogComponent } from './roles-users/roles-users.component';
 import { FilterDialogComponent } from './employee/filter-dialog/filter-dialog.component';
+import { CurrenciesComponent } from './settings/regional-settings/currencies/currencies.component';
+import { VatRateComponent } from './settings/regional-settings/vat-rate/vat-rate.component';
+import { UnitsComponent } from './settings/regional-settings/units/units.component';
 
 @NgModule({
   imports: [
@@ -139,6 +142,9 @@ import { FilterDialogComponent } from './employee/filter-dialog/filter-dialog.co
     RolesUsersComponent,
     AddComponent,
     FilterDialogComponent,
+    CurrenciesComponent,
+    VatRateComponent,
+    UnitsComponent,
   ],
   providers: [DatePipe],
 })

@@ -20,6 +20,9 @@ import { AppEditInvoiceComponent } from './invoice/edit-invoice/edit-invoice.com
 import { AppBlogsComponent } from './blogs/blogs.component';
 import { AppBlogDetailsComponent } from './blogs/details/details.component';
 import { RolesUsersComponent } from './roles-users/roles-users.component';
+import { CurrenciesComponent } from './settings/regional-settings/currencies/currencies.component';
+import { VatRateComponent } from './settings/regional-settings/vat-rate/vat-rate.component';
+import { UnitsComponent } from './settings/regional-settings/units/units.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -201,6 +204,48 @@ export const AppsRoutes: Routes = [
           urls: [
             { title: 'Dashboard', url: '/dashboards/dashboard1' },
             { title: 'Roles ' },
+          ],
+        },
+      },
+      {
+        path: 'currencies',
+        component: CurrenciesComponent,
+        data: {
+          title: 'Currencies',
+          urls: [
+            {
+              title: 'Currencies',
+              url: '/settings/regional-settings/currencies',
+            },
+            { title: 'Currencies' },
+          ],
+        },
+      },
+      {
+        path: 'vat-rate',
+        component: VatRateComponent,
+        data: {
+          title: 'Vat Rate',
+          urls: [
+            {
+              title: 'Vat Rate',
+              url: '/settings/regional-settings/vat-rate',
+            },
+            { title: 'Vat Rate' },
+          ],
+        },
+      },
+      {
+        path: 'units',
+        component: UnitsComponent,
+        data: {
+          title: 'Units',
+          urls: [
+            {
+              title: 'Units',
+              url: '/settings/regional-settings/units',
+            },
+            { title: 'Units' },
           ],
         },
       },

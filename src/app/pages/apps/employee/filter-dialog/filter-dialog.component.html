@@ -30,11 +30,11 @@
         </div>
         <div
           class="taskboard-cards"
-          [cdkDropListData]="todos"
+          [cdkDropListData]="active"
           cdkDropList
           (cdkDropListDropped)="drop($event)"
         >
-          <div class="taskboard-task" cdkDrag *ngFor="let task of todos">
+          <div class="taskboard-task" cdkDrag *ngFor="let task of active">
             <div
               class="d-flex align-items-center f-s-15 m-b-4 f-w-400 text-white"
             >
@@ -68,11 +68,11 @@
         </div>
         <div
           class="taskboard-cards"
-          [cdkDropListData]="inprogress"
+          [cdkDropListData]="hidden"
           cdkDropList
           (cdkDropListDropped)="drop($event)"
         >
-          <div class="taskboard-task" cdkDrag *ngFor="let task of inprogress">
+          <div class="taskboard-task" cdkDrag *ngFor="let task of hidden">
             <div
               class="d-flex align-items-center f-s-15 m-b-4 f-w-400 text-white"
             >

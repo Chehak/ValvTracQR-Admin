@@ -18,44 +18,54 @@ import { AddComponent } from './add/add.component';
 export interface Roles {
   id: number;
   RoleName: string;
+  userType: string;
 }
 
 const roles = [
   {
     id: 1,
     RoleName: 'UI/UX Designer',
+    userType: 'Worker',
   },
   {
     id: 2,
     RoleName: 'Web Designer',
+    userType: 'Admin',
   },
   {
     id: 3,
     RoleName: 'Content Writer',
+    userType: 'Admin',
   },
   {
     id: 4,
     RoleName: 'SEO Expert',
+    userType: 'Worker',
   },
   {
     id: 5,
     RoleName: 'Production Manager',
+    userType: 'Worker',
   },
   {
     id: 6,
     RoleName: 'Sales Head',
+    userType: 'Worker',
   },
   {
     id: 7,
     RoleName: 'Business Analyst',
+    userType: 'Admin',
   },
   {
     id: 8,
     RoleName: 'Head of department',
+    userType: 'Worker',
   },
   {
     id: 9,
     RoleName: 'System Analyst',
+    userType: 'Worker',
   },
 ];
 
@@ -68,7 +78,7 @@ export class RolesUsersComponent implements AfterViewInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any> =
     Object.create(null);
   searchText: any;
-  displayedColumns: string[] = ['#', 'role name', 'action'];
+  displayedColumns: string[] = ['#', 'role name', 'user type', 'action'];
   dataSource = new MatTableDataSource(roles);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
     Object.create(null);
@@ -104,6 +114,7 @@ export class RolesUsersComponent implements AfterViewInit {
     this.dataSource.data.unshift({
       id: roles.length + 1,
       RoleName: row_obj.RoleName,
+      userType: row_obj.userType,
     });
     this.dialog.open(AddComponent);
     this.table.renderRows();
@@ -114,6 +125,7 @@ export class RolesUsersComponent implements AfterViewInit {
     this.dataSource.data = this.dataSource.data.filter((value: any) => {
       if (value.id === row_obj.id) {
         value.RoleName = row_obj.RoleName;
+        value.userType = row_obj.userType;
       }
       return true;
     });
@@ -148,36 +160,14 @@ export class AppRolesDialogComponent {
   ) {
     this.local_data = { ...data };
     this.action = this.local_data.action;
-
-    if (this.local_data.imagePath === undefined) {
-      this.local_data.imagePath = 'assets/images/profile/user-1.jpg';
-    }
   }
 
   doAction(): void {
+    console.log(this.local_data, 'local data');
+
     this.dialogRef.close({ event: this.action, data: this.local_data });
   }
   closeDialog(): void {
     this.dialogRef.close({ event: 'Cancel' });
-  }
-
-  selectFile(event: any): void {
-    if (!event.target.files[0] || event.target.files[0].length === 0) {
-      // this.msg = 'You must select an image';
-      return;
-    }
-    const mimeType = event.target.files[0].type;
-    if (mimeType.match(/image\/*/) == null) {
-      // this.msg = "Only images are supported";
-      return;
-    }
-    // tslint:disable-next-line - Disables all
-    const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    // tslint:disable-next-line - Disables all
-    reader.onload = (_event) => {
-      // tslint:disable-next-line - Disables all
-      this.local_data.imagePath = reader.result;
-    };
   }
 }

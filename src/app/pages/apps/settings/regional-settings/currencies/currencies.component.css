@@ -1,0 +1,16 @@
+.styled-div {
+    margin: 3px;
+    padding-top: 3px;
+    /* min-height: 300px; */
+    /* background-color: rgba(87, 82, 82, 0.758); */
+    text-align: center;
+    font-size: large;
+}
+
+.my-mat-input {
+    /* Copy the styles from MatFormField or customize as needed */
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 8px;
+    background: transparent;
+}

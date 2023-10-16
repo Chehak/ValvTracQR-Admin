@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -10,7 +10,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 
-interface todos {
+interface active {
   id: number;
   title: string;
   columnRef: string;
@@ -22,8 +22,13 @@ interface todos {
 })
 export class FilterDialogComponent {
   rows: number = 10;
-  constructor(public dialogRef: MatDialogRef<FilterDialogComponent>) {}
-  todos: todos[] = [
+  constructor(
+    public dialogRef: MatDialogRef<FilterDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    console.log(this.data.data, 'data');
+  }
+  active: active[] = [
     {
       id: 1,
       title: 'Account Type',
@@ -46,7 +51,7 @@ export class FilterDialogComponent {
     },
   ];
 
-  inprogress: todos[] = [
+  hidden: active[] = [
     {
       id: 201,
       title: 'Name',
@@ -82,8 +87,8 @@ export class FilterDialogComponent {
   }
 
   apply() {
-    this.dialogRef.close({ data: this.todos, rows: this.rows });
-    console.log(this.todos);
-    console.log(this.inprogress);
+    this.dialogRef.close({ data: this.active, rows: this.rows });
+    console.log(this.active);
+    console.log(this.hidden);
   }
 }
