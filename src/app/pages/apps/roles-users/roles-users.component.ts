@@ -14,6 +14,7 @@ import {
 } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { AddComponent } from './add/add.component';
+import { HttpServiceService } from 'src/app/services/http-service.service';
 
 export interface Roles {
   id: number;
@@ -83,7 +84,13 @@ export class RolesUsersComponent implements AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
     Object.create(null);
 
-  constructor(public dialog: MatDialog, public datePipe: DatePipe) {}
+  constructor(
+    public dialog: MatDialog,
+    public datePipe: DatePipe,
+    public service: HttpServiceService
+  ) {
+    this.getRoles();
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -135,6 +142,12 @@ export class RolesUsersComponent implements AfterViewInit {
   deleteRowData(row_obj: Roles): boolean | any {
     this.dataSource.data = this.dataSource.data.filter((value: any) => {
       return value.id !== row_obj.id;
+    });
+  }
+
+  getRoles() {
+    this.service.getRoles().subscribe((resp: any) => {
+      console.log(resp, 'resp');
     });
   }
 }
