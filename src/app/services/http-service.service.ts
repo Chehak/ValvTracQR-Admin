@@ -12,9 +12,36 @@ export class HttpServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getRoles(): Observable<any> {
-    const API_URL = `${this.baseURL}getAll`;
+  getRoles(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}getRoles?limit=${form.limit}&page=${form.page}`;
     return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  addRole(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}post`;
+    return this.http.post(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  updateRole(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}update/${form?._id}`;
+    return this.http.patch(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  deleteRole(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}delete/${form?._id}`;
+    return this.http.delete(API_URL).pipe(
       map((res) => {
         return res;
       })

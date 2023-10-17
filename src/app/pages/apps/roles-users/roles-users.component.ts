@@ -22,65 +22,22 @@ export interface Roles {
   userType: string;
 }
 
-const roles = [
-  {
-    id: 1,
-    RoleName: 'UI/UX Designer',
-    userType: '2',
-  },
-  {
-    id: 2,
-    RoleName: 'Web Designer',
-    userType: '1',
-  },
-  {
-    id: 3,
-    RoleName: 'Content Writer',
-    userType: '1',
-  },
-  {
-    id: 4,
-    RoleName: 'SEO Expert',
-    userType: '2',
-  },
-  {
-    id: 5,
-    RoleName: 'Production Manager',
-    userType: '2',
-  },
-  {
-    id: 6,
-    RoleName: 'Sales Head',
-    userType: '2',
-  },
-  {
-    id: 7,
-    RoleName: 'Business Analyst',
-    userType: '1',
-  },
-  {
-    id: 8,
-    RoleName: 'Head of department',
-    userType: '2',
-  },
-  {
-    id: 9,
-    RoleName: 'System Analyst',
-    userType: '2',
-  },
-];
-
 @Component({
   selector: 'app-roles-users',
   templateUrl: './roles-users.component.html',
   // styleUrls: ['./roles-users.component.css']
 })
 export class RolesUsersComponent implements AfterViewInit {
+  limit: number = 10;
+  page: number = 1;
+  topPage = 0;
+  roles: any[] = [];
+  totalRecords: number = 0;
   @ViewChild(MatTable, { static: true }) table: MatTable<any> =
     Object.create(null);
   searchText: any;
   displayedColumns: string[] = ['#', 'role name', 'user type', 'action'];
-  dataSource = new MatTableDataSource(roles);
+  dataSource = new MatTableDataSource(this.roles);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
     Object.create(null);
 
@@ -102,54 +59,91 @@ export class RolesUsersComponent implements AfterViewInit {
 
   openDialog(action: string, obj: any): void {
     obj.action = action;
+    console.log(obj, 'obj');
+
     const dialogRef = this.dialog.open(AppRolesDialogComponent, {
       data: obj,
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result.event === 'Add') {
-        this.addRowData(result.data);
+        this.addRole(result.data);
       } else if (result.event === 'Update') {
-        this.updateRowData(result.data);
+        this.updateRole(result.data);
       } else if (result.event === 'Delete') {
-        this.deleteRowData(result.data);
+        this.deleteRole();
       }
     });
   }
 
   // tslint:disable-next-line - Disables all
-  addRowData(row_obj: Roles): void {
-    this.dataSource.data.unshift({
-      id: roles.length + 1,
-      RoleName: row_obj.RoleName,
-      userType: row_obj.userType,
-    });
-    this.dialog.open(AddComponent);
-    this.table.renderRows();
-  }
+  // addRowData(row_obj: Roles): void {
+  //   this.dataSource.data.unshift({
+  //     id: roles.length + 1,
+  //     RoleName: row_obj.RoleName,
+  //     userType: row_obj.userType,
+  //   });
+  //   this.dialog.open(AddComponent);
+  //   this.table.renderRows();
+  // }
 
   // tslint:disable-next-line - Disables all
-  updateRowData(row_obj: Roles): boolean | any {
-    this.dataSource.data = this.dataSource.data.filter((value: any) => {
-      if (value.id === row_obj.id) {
-        value.RoleName = row_obj.RoleName;
-        value.userType = row_obj.userType;
-      }
-      return true;
-    });
-  }
+  // updateRowData(row_obj: Roles): boolean | any {
+  //   this.dataSource.data = this.dataSource.data.filter((value: any) => {
+  //     if (value.id === row_obj.id) {
+  //       value.RoleName = row_obj.RoleName;
+  //       value.userType = row_obj.userType;
+  //     }
+  //     return true;
+  //   });
+  // }
 
   // tslint:disable-next-line - Disables all
-  deleteRowData(row_obj: Roles): boolean | any {
-    this.dataSource.data = this.dataSource.data.filter((value: any) => {
-      return value.id !== row_obj.id;
-    });
+  // deleteRowData(row_obj: Roles): boolean | any {
+  //   this.dataSource.data = this.dataSource.data.filter((value: any) => {
+  //     return value.id !== row_obj.id;
+  //   });
+  // }
+
+  paginationOptionChange(e: any) {
+    this.limit = e.pageSize;
+    this.page = e.pageIndex * e.pageSize;
+    this.getRoles();
+  }
+
+  getPageSizeOptions() {
+    return [10, 20, 30, 40];
   }
 
   getRoles() {
-    this.service.getRoles().subscribe((resp: any) => {
+    const form: any = {
+      limit: this.limit,
+      page: this.page,
+    };
+    this.service.getRoles(form).subscribe((resp: any) => {
+      this.dataSource = resp.results;
+      this.totalRecords = resp.count;
       console.log(resp, 'resp');
     });
   }
+
+  addRole(form: any) {
+    this.service.addRole(form).subscribe((res: any) => {
+      if (res.code == 200) {
+        console.log('done');
+        this.getRoles();
+      }
+    });
+  }
+
+  updateRole(form: any) {
+    this.service.updateRole(form).subscribe((res: any) => {
+      if (res.code == 200) {
+        this.getRoles();
+      }
+    });
+  }
+
+  deleteRole() {}
 }
 
 @Component({
@@ -178,7 +172,10 @@ export class AppRolesDialogComponent {
   doAction(): void {
     console.log(this.local_data, 'local data');
 
-    this.dialogRef.close({ event: this.action, data: this.local_data });
+    this.dialogRef.close({
+      event: this.action,
+      data: this.local_data,
+    });
   }
   closeDialog(): void {
     this.dialogRef.close({ event: 'Cancel' });

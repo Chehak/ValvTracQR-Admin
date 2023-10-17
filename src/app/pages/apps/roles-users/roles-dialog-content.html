@@ -15,7 +15,7 @@
             required
             id="role name"
             name="role name"
-            [(ngModel)]="local_data.RoleName"
+            [(ngModel)]="local_data.name"
             placeholder="Enter Role Name"
           />
         </mat-form-field>
@@ -25,7 +25,7 @@
       <div class="col-sm-12">
         <mat-form-field appearance="outline" class="w-100">
           <mat-select
-            [(ngModel)]="local_data.userType"
+            [(ngModel)]="local_data.role"
             placeholder="Select User Type"
             id="user type"
             name="user type"
