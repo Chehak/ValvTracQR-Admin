@@ -337,6 +337,9 @@ MIT
 ngx-scrollbar
 MIT
 
+ngx-ui-loader
+MIT
+
 positioning
 MIT
 MIT License
