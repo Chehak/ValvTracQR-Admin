@@ -54,7 +54,11 @@ export class RolesUsersComponent implements AfterViewInit {
   }
 
   applyFilter(filterValue: string): void {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    setTimeout(() => {
+      this.service.searhRole(filterValue).subscribe((res: any) => {
+        this.dataSource = res;
+      });
+    }, 1000);
   }
 
   openDialog(action: string, obj: any): void {
@@ -70,7 +74,7 @@ export class RolesUsersComponent implements AfterViewInit {
       } else if (result.event === 'Update') {
         this.updateRole(result.data);
       } else if (result.event === 'Delete') {
-        this.deleteRole();
+        this.deleteRole(result.data);
       }
     });
   }
@@ -127,23 +131,43 @@ export class RolesUsersComponent implements AfterViewInit {
   }
 
   addRole(form: any) {
-    this.service.addRole(form).subscribe((res: any) => {
-      if (res.code == 200) {
-        console.log('done');
+    this.service.addRole(form).subscribe(
+      (res: any) => {
+        this.service.openSnackBar('Role Added Sucessfully', 'Close');
         this.getRoles();
+      },
+      (error) => {
+        console.error('Error:', error);
+        this.service.openSnackBar(error.message, 'Close');
       }
-    });
+    );
   }
 
   updateRole(form: any) {
-    this.service.updateRole(form).subscribe((res: any) => {
-      if (res.code == 200) {
+    this.service.updateRole(form).subscribe(
+      (res: any) => {
+        this.service.openSnackBar('Role Updated Successfully', 'Close');
         this.getRoles();
+      },
+      (error) => {
+        console.log(error);
+        this.service.openSnackBar(error.message, 'Close');
       }
-    });
+    );
   }
 
-  deleteRole() {}
+  deleteRole(form: any) {
+    this.service.deleteRole(form).subscribe(
+      (res: any) => {
+        this.service.openSnackBar('Role Deleted Sucessfully', 'Close');
+        this.getRoles();
+      },
+      (error) => {
+        console.log(error);
+        this.service.openSnackBar(error.message, 'close');
+      }
+    );
+  }
 }
 
 @Component({
@@ -171,7 +195,6 @@ export class AppRolesDialogComponent {
 
   doAction(): void {
     console.log(this.local_data, 'local data');
-
     this.dialogRef.close({
       event: this.action,
       data: this.local_data,
@@ -179,5 +202,12 @@ export class AppRolesDialogComponent {
   }
   closeDialog(): void {
     this.dialogRef.close({ event: 'Cancel' });
+  }
+
+  alphabetOnly(event: any) {
+    const charCode = event.which ? event.which : event.keyCode;
+    if ((charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 122)) {
+      event.preventDefault();
+    }
   }
 }

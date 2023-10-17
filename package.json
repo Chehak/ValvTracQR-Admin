@@ -28,6 +28,7 @@
     "date-fns": "^2.30.0",
     "font-awesome": "^4.7.0",
     "ng-apexcharts": "^1.8.0",
+    "ngx-cookie-service": "^16.0.1",
     "ngx-pagination": "^6.0.3",
     "ngx-permissions": "^15.0.1",
     "ngx-scrollbar": "^13.0.3",

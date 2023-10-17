@@ -17,6 +17,7 @@
             name="role name"
             [(ngModel)]="local_data.name"
             placeholder="Enter Role Name"
+            (keypress)="alphabetOnly($event)"
           />
         </mat-form-field>
       </div>
