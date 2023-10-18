@@ -60,13 +60,11 @@ export class RolesUsersComponent implements AfterViewInit {
           this.dataSource = res;
         },
         (error) => {
-          console.log(error, 'error');
-
-          this.service.openSnackBar(error.text, 'Close');
+          this.service.openSnackBar(error.error.error, 'Close');
           this.dataSource = new MatTableDataSource(this.roles);
         }
       );
-    }, 1000);
+    }, 2000);
   }
 
   openDialog(action: string, obj: any): void {
