@@ -55,9 +55,17 @@ export class RolesUsersComponent implements AfterViewInit {
 
   applyFilter(filterValue: string): void {
     setTimeout(() => {
-      this.service.searhRole(filterValue).subscribe((res: any) => {
-        this.dataSource = res;
-      });
+      this.service.searhRole(filterValue).subscribe(
+        (res: any) => {
+          this.dataSource = res;
+        },
+        (error) => {
+          console.log(error, 'error');
+
+          this.service.openSnackBar(error.text, 'Close');
+          this.dataSource = new MatTableDataSource(this.roles);
+        }
+      );
     }, 1000);
   }
 
