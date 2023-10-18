@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-vat-rate',
@@ -11,24 +11,30 @@ export class VatRateComponent {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      vatRate: this.fb.array([]),
+      vatRate: this.fb.array([
+        this.fb.group({
+          name: ['', Validators.required],
+        }),
+      ]),
     });
   }
 
   // Create a getter for the currencies FormArray
-  get vatRate() {
-    return this.form.get('vatRate') as FormArray;
+  get vat() {
+    return this.form.controls['vatRate'] as FormArray;
   }
 
   // Add a new currency control to the FormArray
-  addVatRate() {
-    this.vatRate.push(this.fb.control(''));
-    console.log('FormArray length:', this.vatRate.length);
+  addVatRate(): void {
+    const vatForm = this.fb.group({
+      name: ['', Validators.required],
+    });
+    this.vat.push(vatForm);
   }
 
   // Remove a currency control from the FormArray
-  removeVatRate(index: number) {
-    this.vatRate.removeAt(index);
-    console.log('FormArray length:', this.vatRate.length);
+  removeVatRate(index: number): void {
+    this.vat.removeAt(index);
+    console.log('FormArray length:', this.vat.length);
   }
 }

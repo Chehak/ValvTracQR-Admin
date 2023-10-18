@@ -13,7 +13,6 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
-import { AddComponent } from './add/add.component';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 
 export interface Roles {
@@ -85,45 +84,23 @@ export class RolesUsersComponent implements AfterViewInit {
     });
   }
 
-  // tslint:disable-next-line - Disables all
-  // addRowData(row_obj: Roles): void {
-  //   this.dataSource.data.unshift({
-  //     id: roles.length + 1,
-  //     RoleName: row_obj.RoleName,
-  //     userType: row_obj.userType,
-  //   });
-  //   this.dialog.open(AddComponent);
-  //   this.table.renderRows();
-  // }
-
-  // tslint:disable-next-line - Disables all
-  // updateRowData(row_obj: Roles): boolean | any {
-  //   this.dataSource.data = this.dataSource.data.filter((value: any) => {
-  //     if (value.id === row_obj.id) {
-  //       value.RoleName = row_obj.RoleName;
-  //       value.userType = row_obj.userType;
-  //     }
-  //     return true;
-  //   });
-  // }
-
-  // tslint:disable-next-line - Disables all
-  // deleteRowData(row_obj: Roles): boolean | any {
-  //   this.dataSource.data = this.dataSource.data.filter((value: any) => {
-  //     return value.id !== row_obj.id;
-  //   });
-  // }
-
-  paginationOptionChange(e: any) {
-    this.limit = e.pageSize;
-    this.page = e.pageIndex * e.pageSize;
-    this.getRoles();
+  paginationOptionChange(event: any) {
+    if (event.previousPageIndex < event.pageIndex) {
+      this.limit = event.pageSize;
+      this.page += 1;
+      this.getRoles();
+      // console.log('Next button clicked');
+    } else if (event.previousPageIndex > event.pageIndex) {
+      this.page -= 1;
+      this.getRoles();
+      // console.log('Previous button clicked');
+    }
   }
 
   getPageSizeOptions() {
     return [10, 20, 30, 40];
   }
-
+  // Get Roles
   getRoles() {
     const form: any = {
       limit: this.limit,
@@ -136,6 +113,7 @@ export class RolesUsersComponent implements AfterViewInit {
     });
   }
 
+  // Add Role
   addRole(form: any) {
     this.service.addRole(form).subscribe(
       (res: any) => {
@@ -149,6 +127,7 @@ export class RolesUsersComponent implements AfterViewInit {
     );
   }
 
+  // Update Role
   updateRole(form: any) {
     this.service.updateRole(form).subscribe(
       (res: any) => {
@@ -162,6 +141,7 @@ export class RolesUsersComponent implements AfterViewInit {
     );
   }
 
+  // Delete Role
   deleteRole(form: any) {
     this.service.deleteRole(form).subscribe(
       (res: any) => {
@@ -186,10 +166,7 @@ export class RolesUsersComponent implements AfterViewInit {
 // tslint:disable-next-line: component-class-suffix
 export class AppRolesDialogComponent {
   action: string;
-  // tslint:disable-next-line - Disables all
   local_data: any;
-  selectedImage: any = '';
-  joiningDate: any = '';
 
   constructor(
     public datePipe: DatePipe,
@@ -211,15 +188,4 @@ export class AppRolesDialogComponent {
   closeDialog(): void {
     this.dialogRef.close({ event: 'Cancel' });
   }
-
-  // alphabetOnly(event: any) {
-  //   const charCode = event.which ? event.which : event.keyCode;
-  //   if (
-  //     (event.charCode > 64 && event.charCode < 91) ||
-  //     (event.charCode > 96 && event.charCode < 123) ||
-  //     event.charCode == 32
-  //   ) {
-  //     event.preventDefault();
-  //   }
-  // }
 }

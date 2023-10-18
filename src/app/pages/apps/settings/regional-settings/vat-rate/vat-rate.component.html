@@ -18,7 +18,7 @@
       <div class="col-10 text-center"><b>Vat Rate</b></div>
       <div class="col"><b>Default</b></div>
     </div>
-    <div *ngFor="let rate of vatRate.controls; let i = index">
+    <div *ngFor="let rate of vat.controls; let i = index">
       <div class="row m-b-10" [formGroupName]="i">
         <div class="col">
           <i-tabler
@@ -33,7 +33,7 @@
             matInput
             class="text-white w-100 my-mat-input"
             type="text"
-            formControlName="vatRate"
+            formControlName="name"
           />
         </div>
         <div class="col">

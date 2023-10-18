@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-units',
@@ -11,24 +11,30 @@ export class UnitsComponent {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      units: this.fb.array([]),
+      units: this.fb.array([
+        this.fb.group({
+          name: ['', Validators.required],
+        }),
+      ]),
     });
   }
 
   // Create a getter for the currencies FormArray
-  get units() {
-    return this.form.get('units') as FormArray;
+  get unit() {
+    return this.form.controls['units'] as FormArray;
   }
 
   // Add a new currency control to the FormArray
-  addUnit() {
-    this.units.push(this.fb.control(''));
-    console.log('FormArray length:', this.units.length);
+  addUnit(): void {
+    const unitForm = this.fb.group({
+      name: ['', Validators.required],
+    });
+    this.unit.push(unitForm);
   }
 
   // Remove a currency control from the FormArray
-  removeUnit(index: number) {
-    this.units.removeAt(index);
-    console.log('FormArray length:', this.units.length);
+  removeUnit(index: number): void {
+    this.unit.removeAt(index);
+    console.log('FormArray length:', this.unit.length);
   }
 }

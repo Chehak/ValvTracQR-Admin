@@ -18,7 +18,7 @@
       <div class="col-10 text-center"><b>Unit</b></div>
       <div class="col"><b>Default</b></div>
     </div>
-    <div *ngFor="let unit of units.controls; let i = index">
+    <div *ngFor="let unit of unit.controls; let i = index">
       <div class="row m-b-10" [formGroupName]="i">
         <div class="col">
           <i-tabler
@@ -33,11 +33,13 @@
             matInput
             class="text-white w-100 my-mat-input"
             type="text"
-            formControlName="currency"
+            formControlName="name"
           />
         </div>
         <div class="col">
-          <button type="button" mat-flat-button color="primary">Add</button>
+          <button type="button" mat-flat-button color="primary">
+            <i-tabler name="check"></i-tabler>
+          </button>
         </div>
       </div>
     </div>
