@@ -159,7 +159,9 @@ export class RolesUsersComponent implements AfterViewInit {
   deleteRole(form: any) {
     this.service.deleteRole(form).subscribe(
       (res: any) => {
-        this.service.openSnackBar('Role Deleted Sucessfully', 'Close');
+        console.log(res, 'del res');
+
+        this.service.openSnackBar(res, 'Close');
         this.getRoles();
       },
       (error) => {
@@ -204,10 +206,14 @@ export class AppRolesDialogComponent {
     this.dialogRef.close({ event: 'Cancel' });
   }
 
-  alphabetOnly(event: any) {
-    const charCode = event.which ? event.which : event.keyCode;
-    if ((charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 122)) {
-      event.preventDefault();
-    }
-  }
+  // alphabetOnly(event: any) {
+  //   const charCode = event.which ? event.which : event.keyCode;
+  //   if (
+  //     (event.charCode > 64 && event.charCode < 91) ||
+  //     (event.charCode > 96 && event.charCode < 123) ||
+  //     event.charCode == 32
+  //   ) {
+  //     event.preventDefault();
+  //   }
+  // }
 }

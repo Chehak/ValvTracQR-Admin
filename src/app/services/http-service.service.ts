@@ -15,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root',
 })
 export class HttpServiceService {
+  durationInSeconds: number = 3;
   baseURL: string = 'https://vtrack-api.onrender.com/api/';
 
   intercept(
@@ -43,9 +44,9 @@ export class HttpServiceService {
   }
 
   openSnackBar(message: string, action: string) {
-    console.log('control comes here');
-
-    this._snackBar.open(message, action);
+    this._snackBar.open(message, action, {
+      duration: this.durationInSeconds * 1000,
+    });
   }
 
   constructor(
@@ -64,7 +65,7 @@ export class HttpServiceService {
   }
 
   addRole(form: any): Observable<any> {
-    const API_URL = `${this.baseURL}post`;
+    const API_URL = `${this.baseURL}addRole`;
     return this.http.post(API_URL, form).pipe(
       map((res) => {
         return res;
@@ -82,7 +83,7 @@ export class HttpServiceService {
   }
 
   updateRole(form: any): Observable<any> {
-    const API_URL = `${this.baseURL}update/${form?._id}`;
+    const API_URL = `${this.baseURL}updateRole/${form?._id}`;
     return this.http.patch(API_URL, form).pipe(
       map((res) => {
         return res;
@@ -91,7 +92,7 @@ export class HttpServiceService {
   }
 
   deleteRole(form: any): Observable<any> {
-    const API_URL = `${this.baseURL}delete/${form?._id}`;
+    const API_URL = `${this.baseURL}deleteRole/${form?._id}`;
     return this.http.delete(API_URL, { responseType: 'text' }).pipe(
       map((res) => {
         return res;

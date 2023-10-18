@@ -6,6 +6,7 @@
           <input
             matInput
             placeholder="Search Name"
+            onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)"
             (keyup)="applyFilter($any($event.target).value)"
           />
           <mat-icon matSuffix style="height: 29px !important; padding: 6px">
