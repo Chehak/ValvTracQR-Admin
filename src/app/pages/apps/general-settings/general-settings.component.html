@@ -1,0 +1,534 @@
+<div class="col-lg-12">
+  <mat-card class="b-1 shadow-none">
+    <mat-card-header>
+      <!-- <mat-card-title>Icon</mat-card-title> -->
+    </mat-card-header>
+    <mat-card-content class="b-t-1 text-white">
+      <mat-tab-group>
+        <!-- orders -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="d-flex align-items-center text-white">
+              <i class="fa fa-tasks fa-lg"></i
+              ><span class="m-l-4"> ORDERS</span>
+            </div>
+          </ng-template>
+          <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
+            <ul class="text-white">
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Check to display cancelled and close orders</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Check to display files attached to orders on shop
+                  floor</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Disable automatic product creation while adding new order,
+                  when product of the same name doesn't exist</mat-slide-toggle
+                >
+              </li>
+            </ul>
+          </div>
+        </mat-tab>
+        <!-- production schedule -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="d-flex align-items-center text-white">
+              <i class="fa fa-cogs fa-lg"></i
+              ><span class="m-l-4"> PRODUCTION SCHEDULE</span>
+            </div>
+          </ng-template>
+          <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
+            <ul class="text-white">
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Check to display inactive tasks</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Check to hide done tasks
+                </mat-slide-toggle>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Check to display date when manufacturing tasks was
+                  added</mat-slide-toggle
+                >
+              </li>
+
+              <li>
+                <mat-slide-toggle color="primary">
+                  Check to display who added manufacturing
+                  tasks</mat-slide-toggle
+                >
+              </li>
+
+              <li>
+                <mat-slide-toggle color="primary">
+                  Check to display client info on the production
+                  schedule</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Check to display client's phone number and e-mail on the
+                  production schedule</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Check to display external order ID on production schedule and
+                  dashboard</mat-slide-toggle
+                >
+              </li>
+
+              <li>
+                <mat-slide-toggle color="primary">
+                  Check manufacturing tasks waiting for their
+                  predecessor</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Disallow workers to start any tasks before they clock in
+                </mat-slide-toggle>
+                <div class="dot m-t-4">
+                  <i-tabler
+                    name="question-mark"
+                    class="iconStyle text-white text-align-center"
+                    #tooltip="matTooltip"
+                    matTooltip="If this option is enabled,a worker who does not clock in,while clicking any production order,they will appear on the workers list as inactive with a comment that they must first clock in before starting any task."
+                    matTooltipPosition="right"
+                    matTooltipHideDelay="100000"
+                  ></i-tabler>
+                </div>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Hide efficiency on production schedule for workers
+                </mat-slide-toggle>
+                <div class="dot m-t-4">
+                  <i-tabler
+                    name="question-mark"
+                    class="iconStyle text-white text-align-center"
+                    #tooltip="matTooltip"
+                    matTooltip="Hides on the task's details view, information about the estimated production time, information on how much time is left until the planned estimated time, and how long it should take to produce 1 pc. of product"
+                    matTooltipPosition="right"
+                    matTooltipHideDelay="100000"
+                  ></i-tabler>
+                </div>
+              </li>
+
+              <li>
+                <mat-slide-toggle
+                  >Mark red overdue manufacturing tasks</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle
+                  >Hide from production schedule machine/operation without
+                  manufacturing tasks</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle
+                  >Hide barcode/RFID from production schedule</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Allow workers to work on one task only at the same time
+                </mat-slide-toggle>
+                <div class="dot m-t-4">
+                  <i-tabler
+                    name="question-mark"
+                    class="iconStyle text-white text-align-center"
+                    #tooltip="matTooltip"
+                    matTooltip="If the worker start working on the one order and does not finish it, they will get a message that they cannot start working on another other without finishing the previous one."
+                    matTooltipPosition="right"
+                    matTooltipHideDelay="100000"
+                  ></i-tabler>
+                </div>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Show the sum of all products on each machine/operation
+                </mat-slide-toggle>
+                <span class="background m-l-4"><b>new</b></span>
+                <div class="dot m-t-4">
+                  <i-tabler
+                    name="question-mark"
+                    class="iconStyle text-white text-align-center"
+                    #tooltip="matTooltip"
+                    matTooltip="If enabled , at the top of each machine/operation you see a total number of items"
+                    matTooltipPosition="right"
+                    matTooltipHideDelay="100000"
+                  ></i-tabler>
+                </div>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Let the external order ID be used for barcodes
+                </mat-slide-toggle>
+                <span class="background m-l-4"><b>new</b></span>
+                <div class="dot m-t-4">
+                  <i-tabler
+                    name="question-mark"
+                    class="iconStyle text-white text-align-center"
+                    #tooltip="matTooltip"
+                    matTooltip="If enabled, if you scan a barcode including your external order ID and when on your current production schedule there is only one task with this number - it will automatically open task's details, allowing you to start or finish working on it"
+                    matTooltipPosition="right"
+                    matTooltipHideDelay="100000"
+                  ></i-tabler>
+                </div>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Show "Add pieces" button while working on manufacturing tasks
+                </mat-slide-toggle>
+                <span class="background m-l-4"><b>new</b></span>
+                <div class="dot m-t-4">
+                  <i-tabler
+                    name="question-mark"
+                    class="iconStyle text-white text-align-center"
+                    #tooltip="matTooltip"
+                    matTooltip="If enabled, an additional button will appear on screen with the STOP button (when somebody is working on task). It allow workers to add finished pieces to task without ending taks, so manager can monitor in real time working progress on that task."
+                    matTooltipPosition="right"
+                    matTooltipHideDelay="100000"
+                  ></i-tabler>
+                </div>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Enable use of QR code
+                </mat-slide-toggle>
+                <span class="background m-l-4"><b>new</b></span>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Enable the ability to add photos from production by workers
+                </mat-slide-toggle>
+                <span class="background m-l-4"><b>new</b></span>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Prompt the amount of used raw material
+                </mat-slide-toggle>
+                <span class="background m-l-4"><b>new</b></span>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Hide "Finished product" checkbox from plan
+                </mat-slide-toggle>
+                <span class="background m-l-4"><b>new</b></span>
+                <div class="dot m-t-4">
+                  <i-tabler
+                    name="question-mark"
+                    class="iconStyle text-white text-align-center"
+                    #tooltip="matTooltip"
+                    matTooltip="If enabled, your workers will not be able to change this setting and it will be checked/unchecked depending on of manufacturing technology or machine settings"
+                    matTooltipPosition="right"
+                    matTooltipHideDelay="100000"
+                  ></i-tabler>
+                </div>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Show scheduler on the shop floor views
+                </mat-slide-toggle>
+                <span class="background m-l-4"><b>new</b></span>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Hide buttons for clock-in/clock out and pause from shop floor
+                  view
+                </mat-slide-toggle>
+                <span class="background m-l-4"><b>new</b></span>
+              </li>
+            </ul>
+          </div>
+        </mat-tab>
+        <!-- produts -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="d-flex align-items-center text-white">
+              <i class="fa fa-cubes fa-lg"></i
+              ><span class="m-l-4">PRODUCTS</span>
+            </div>
+          </ng-template>
+          <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
+            <ul class="text-white">
+              <li>
+                <mat-slide-toggle color="primary">
+                  Disable the ability to add new products after pressing enter
+                  in the product field
+                </mat-slide-toggle>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Enable to add price for products and orders (additional
+                  fields: price, tax and currency)</mat-slide-toggle
+                >
+                <div class="dot m-t-4">
+                  <i-tabler
+                    name="question-mark"
+                    class="iconStyle text-white text-align-center"
+                    #tooltip="matTooltip"
+                    matTooltip="If enabled, you will get additional fields (VAT rate, price, currency) when you edit products or add a new order. Values of these fields (from product) will be auto completed when you add a new order and select this product from a dropdown list"
+                    matTooltipPosition="right"
+                    matTooltipHideDelay="100000"
+                  ></i-tabler>
+                </div>
+                <div>
+                  <h5>Default efficiency unit</h5>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <mat-slide-toggle> Products per hour </mat-slide-toggle>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-slide-toggle> Norm in seconds </mat-slide-toggle>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-slide-toggle> Norm in minutes </mat-slide-toggle>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-slide-toggle> Norm in hours </mat-slide-toggle>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </mat-tab>
+        <!-- prints -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="d-flex align-items-center text-white">
+              <i class="fa fa-print fa-lg"></i>
+              <span class="m-l-4">PRINTS</span>
+            </div>
+          </ng-template>
+          <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
+            <ul class="text-white">
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Disable printing of manufacturing task from shop
+                  floor</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Disable printing of pallet card from shop
+                  floor</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Disable printing of label from shop floor</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  Hide name and last name of worker, from pallet cards and
+                  labels</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <h5>Choose template for printing order and tasks</h5>
+                <mat-slide-toggle color="primary">
+                  Enable showing planned and confirmed dates on PDF print with
+                  order</mat-slide-toggle
+                >
+                <span class="background m-l-4"><b>new</b></span>
+                <div class="dot m-t-4">
+                  <i-tabler
+                    name="question-mark"
+                    class="iconStyle text-white text-align-center"
+                    #tooltip="matTooltip"
+                    matTooltip="If enabled, you will see additional fields when you print PDF with order"
+                    matTooltipPosition="right"
+                    matTooltipHideDelay="100000"
+                  ></i-tabler>
+                </div>
+
+                <div class="row m-t-8">
+                  <div class="col-md-2">
+                    <mat-slide-toggle>Default</mat-slide-toggle>
+                  </div>
+                  <div class="col-md-2">
+                    <mat-slide-toggle>Custom 1</mat-slide-toggle>
+                  </div>
+                  <div class="col-md-2">
+                    <mat-slide-toggle>Custom 2</mat-slide-toggle>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-slide-toggle>Custom 6 - By Desktops</mat-slide-toggle>
+                  </div>
+                </div>
+
+                <div>
+                  <div>
+                    <h5>
+                      Information attached to the order confirmation
+                      <span>
+                        <div class="dot">
+                          <i-tabler
+                            name="question-mark"
+                            class="iconStyle text-white"
+                            #tooltip="matTooltip"
+                            matTooltip="If enabled, you will see additional fields when you print PDF with order"
+                            matTooltipPosition="right"
+                            matTooltipHideDelay="100000"
+                          ></i-tabler>
+                        </div>
+                      </span>
+                    </h5>
+
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <textarea matInput rows="5"></textarea>
+                    </mat-form-field>
+
+                    <h5>Information used for your inventory prints</h5>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-label
+                          class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
+                          >Information attached to the inventory receipts<span>
+                            <div class="dot">
+                              <i-tabler
+                                name="question-mark"
+                                class="iconStyle text-white"
+                                #tooltip="matTooltip"
+                                matTooltip="You can enter some custom text which will be attached to inventory receipt PDF in footer"
+                                matTooltipPosition="right"
+                                matTooltipHideDelay="100000"
+                              ></i-tabler>
+                            </div>
+                          </span>
+                        </mat-label>
+                        <mat-form-field
+                          appearance="outline"
+                          class="w-100"
+                          color="primary"
+                        >
+                          <textarea matInput rows="5"></textarea>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-label
+                          class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
+                          >Information attached to the inventory releases<span>
+                            <div class="dot">
+                              <i-tabler
+                                name="question-mark"
+                                class="iconStyle text-white"
+                                #tooltip="matTooltip"
+                                matTooltip="You can enter some custom text which will be attached to inventory releases PDF in footer"
+                                matTooltipPosition="right"
+                                matTooltipHideDelay="100000"
+                              ></i-tabler>
+                            </div>
+                          </span>
+                        </mat-label>
+                        <mat-form-field
+                          appearance="outline"
+                          class="w-100"
+                          color="primary"
+                        >
+                          <textarea matInput rows="5"></textarea>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-label
+                          class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
+                          >Information attached to the supplier order<span>
+                            <div class="dot">
+                              <i-tabler
+                                name="question-mark"
+                                class="iconStyle text-white"
+                                #tooltip="matTooltip"
+                                matTooltip="You can enter some custom text which will be attached to supplier order PDF in footer"
+                                matTooltipPosition="right"
+                                matTooltipHideDelay="100000"
+                              ></i-tabler>
+                            </div>
+                          </span>
+                        </mat-label>
+                        <mat-form-field
+                          appearance="outline"
+                          class="w-100"
+                          color="primary"
+                        >
+                          <textarea matInput rows="5"></textarea>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </mat-tab>
+        <!-- others -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="d-flex align-items-center text-white">
+              <i class="fa fa-print fa-lg"></i>
+              <span class="m-l-4">OTHERS</span>
+            </div>
+          </ng-template>
+          <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
+            <ul class="text-white">
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Hide eye icon (for seeing typed password) on login
+                  page</mat-slide-toggle
+                >
+              </li>
+            </ul>
+          </div>
+        </mat-tab>
+        <!-- inventory -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="d-flex align-items-center text-white">
+              <i class="fa fa-truck fa-lg"></i>
+              <span class="m-l-4">INVENTORY</span>
+            </div>
+          </ng-template>
+          <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
+            <ul class="text-white">
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Enable multiple inventory</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Stop counting the usage of raw materials in stock
+                  level</mat-slide-toggle
+                >
+              </li>
+              <li>
+                <mat-slide-toggle color="primary"
+                  >Enable your finished product inventory</mat-slide-toggle
+                >
+              </li>
+            </ul>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>

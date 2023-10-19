@@ -82,6 +82,8 @@ import { FilterDialogComponent } from './employee/filter-dialog/filter-dialog.co
 import { CurrenciesComponent } from './settings/regional-settings/currencies/currencies.component';
 import { VatRateComponent } from './settings/regional-settings/vat-rate/vat-rate.component';
 import { UnitsComponent } from './settings/regional-settings/units/units.component';
+import { GeneralSettingsComponent } from './general-settings/general-settings.component';
+import { MachinesOperationsComponent } from './machines-operations/machines-operations.component';
 
 @NgModule({
   imports: [
@@ -145,6 +147,8 @@ import { UnitsComponent } from './settings/regional-settings/units/units.compone
     CurrenciesComponent,
     VatRateComponent,
     UnitsComponent,
+    GeneralSettingsComponent,
+    MachinesOperationsComponent,
   ],
   providers: [DatePipe],
 })

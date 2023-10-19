@@ -1,0 +1,38 @@
+li {
+    padding-bottom: 14px;
+    font-size: 16px;
+}
+
+ul {
+    list-style: none;
+}
+
+span {
+    padding-right: 5px;
+}
+
+.dot {
+
+    height: 18px;
+    width: 18px;
+    background-color: #000000;
+    border-radius: 50%;
+    display: inline-block;
+
+}
+
+.iconStyle {
+    height: 16px;
+    width: 16px;
+    font-weight: bold;
+}
+
+.background {
+    color: white;
+    background-color: #4caf50;
+    padding: 3px 6px;
+    margin-right: 4px;
+    border-radius: 20%;
+    font-size: 11px;
+    font-weight: 400;
+}
