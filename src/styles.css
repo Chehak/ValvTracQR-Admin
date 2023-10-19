@@ -16,3 +16,15 @@ tr {
     /* padding: 10px !important; */
     /* border-bottom: none; */
 }
+
+.mat-mdc-slide-toggle .mdc-switch:enabled .mdc-switch__track::after {
+    background: #6ccca5 !important;
+}
+
+svg.mdc-switch__icon.mdc-switch__icon--on {
+    fill: black !important;
+}
+
+.mdc-switch__shadow {
+    background: white !important;
+}
