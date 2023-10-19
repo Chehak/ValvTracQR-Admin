@@ -41,6 +41,16 @@ export const navItems: NavItem[] = [
           },
         ],
       },
+      {
+        displayName: 'General Settings',
+
+        route: 'apps/general-settings',
+      },
+      {
+        displayName: 'Machines/Operations',
+
+        route: 'apps/machines-operations',
+      },
     ],
   },
 ];
