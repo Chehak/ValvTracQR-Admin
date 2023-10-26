@@ -6,6 +6,8 @@ import { VatRateComponent } from './settings/regional-settings/vat-rate/vat-rate
 import { UnitsComponent } from './settings/regional-settings/units/units.component';
 import { GeneralSettingsComponent } from './general-settings/general-settings.component';
 import { MachinesOperationsComponent } from './machines-operations/machines-operations.component';
+import { MachineUpdateComponent } from './machine-update/machine-update.component';
+import { MachineAddComponent } from './machine-add/machine-add.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -90,6 +92,26 @@ export const AppsRoutes: Routes = [
         component: MachinesOperationsComponent,
         data: {
           title: 'Machines/Operations',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'add-machines-operations',
+        component: MachineAddComponent,
+        data: {
+          title: 'Add Machines/Operations',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'update-machines-operations',
+        component: MachineUpdateComponent,
+        data: {
+          title: 'Update Machines/Operations',
           urls: [
             // { title: 'General Settings', url: '/settings/general-settings' },
           ],

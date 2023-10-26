@@ -1,0 +1,27 @@
+.popover-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+.popover-trigger {
+    cursor: pointer;
+}
+
+.popover {
+    display: none;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    height: auto;
+
+}
+
+
+/* Close other popovers when one is opened */
+.popover-trigger:focus+.popover {
+    display: block;
+}

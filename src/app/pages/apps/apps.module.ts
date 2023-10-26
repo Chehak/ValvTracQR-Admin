@@ -4,6 +4,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { PopoverModule } from '@coreui/angular';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -11,6 +12,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
 
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -28,7 +30,7 @@ import { AppCourseDetailComponent } from './courses/course-detail/course-detail.
 //Notes
 // import { AppNotesComponent } from './notes/notes.component';
 //Todo
-import { AppTodoComponent } from './todo/todo.component';
+// import { AppTodoComponent } from './todo/todo.component';
 // Permission
 import { AppPermissionComponent } from './permission/permission.component';
 //Mailbox
@@ -59,10 +61,10 @@ import { AppAddEmployeeComponent } from './employee/add/add.component';
 
 import { AppsRoutes } from './apps.routing';
 import { MatNativeDateModule } from '@angular/material/core';
-import {
-  AppTicketlistComponent,
-  AppTicketDialogContentComponent,
-} from './ticketlist/ticketlist.component';
+// import {
+//   AppTicketlistComponent,
+//   AppTicketDialogContentComponent,
+// } from './ticketlist/ticketlist.component';
 
 //Invoice
 import { AppInvoiceListComponent } from './invoice/invoice-list/invoice-list.component';
@@ -84,7 +86,8 @@ import { VatRateComponent } from './settings/regional-settings/vat-rate/vat-rate
 import { UnitsComponent } from './settings/regional-settings/units/units.component';
 import { GeneralSettingsComponent } from './general-settings/general-settings.component';
 import { MachinesOperationsComponent } from './machines-operations/machines-operations.component';
-
+import { MachineAddComponent } from './machine-add/machine-add.component';
+import { MachineUpdateComponent } from './machine-update/machine-update.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -94,9 +97,11 @@ import { MachinesOperationsComponent } from './machines-operations/machines-oper
     ReactiveFormsModule,
     NgxPermissionsModule.forRoot(),
     NgApexchartsModule,
+    PopoverModule,
     TablerIconsModule.pick(TablerIcons),
     DragDropModule,
     NgxPaginationModule,
+    MdbPopoverModule,
     HttpClientModule,
     AngularEditorModule,
     CalendarModule.forRoot({
@@ -111,7 +116,7 @@ import { MachinesOperationsComponent } from './machines-operations/machines-oper
     // AppChatComponent,
     AppPermissionComponent,
     // AppNotesComponent,
-    AppTodoComponent,
+    // AppTodoComponent,
     AppTaskboardComponent,
     TaskDialogComponent,
     OkAppTaskComponent,
@@ -124,8 +129,8 @@ import { MachinesOperationsComponent } from './machines-operations/machines-oper
     AppFullcalendarComponent,
     CalendarDialogComponent,
     CalendarFormDialogComponent,
-    AppTicketlistComponent,
-    AppTicketDialogContentComponent,
+    // AppTicketlistComponent,
+    // AppTicketDialogContentComponent,
     // AppContactComponent,
     // AppContactDialogContentComponent,
     AppCoursesComponent,
@@ -149,6 +154,8 @@ import { MachinesOperationsComponent } from './machines-operations/machines-oper
     UnitsComponent,
     GeneralSettingsComponent,
     MachinesOperationsComponent,
+    MachineAddComponent,
+    MachineUpdateComponent,
   ],
   providers: [DatePipe],
 })

@@ -1,8 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { Observable, map, startWith } from 'rxjs';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 
 export interface Machines {
@@ -16,6 +19,9 @@ export interface Machines {
   styleUrls: ['./machines-operations.component.css'],
 })
 export class MachinesOperationsComponent {
+  filterControl = new FormControl('');
+  searchoption: string[] = ['One', 'Two', 'Three'];
+  searchfilteredOptions!: Observable<string[]>;
   limit: number = 10;
   page: number = 1;
   topPage = 0;
@@ -33,6 +39,7 @@ export class MachinesOperationsComponent {
     'work hour price',
     'currency',
     'active',
+    'action',
   ];
   dataSource = new MatTableDataSource(this.roles);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
@@ -41,46 +48,19 @@ export class MachinesOperationsComponent {
   constructor(
     public dialog: MatDialog,
     public datePipe: DatePipe,
-    public service: HttpServiceService
+    public service: HttpServiceService,
+    private route: Router
   ) {
     this.getRoles();
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.searchfilteredOptions = this.filterControl.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._searchfilter(value || ''))
+    );
   }
-
-  // applyFilter(filterValue: string): void {
-  //   setTimeout(() => {
-  //     this.service.searhRole(filterValue).subscribe(
-  //       (res: any) => {
-  //         this.dataSource = res;
-  //       },
-  //       (error) => {
-  //         this.service.openSnackBar(error.error.error, 'Close');
-  //         this.dataSource = new MatTableDataSource(this.roles);
-  //       }
-  //     );
-  //   }, 2000);
-  // }
-
-  // openDialog(action: string, obj: any): void {
-  //   obj.action = action;
-  //   console.log(obj, 'obj');
-
-  //   const dialogRef = this.dialog.open(AppRolesDialogComponent, {
-  //     data: obj,
-  //   });
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     if (result.event === 'Add') {
-  //       this.addRole(result.data);
-  //     } else if (result.event === 'Update') {
-  //       this.updateRole(result.data);
-  //     } else if (result.event === 'Delete') {
-  //       this.deleteRole(result.data);
-  //     }
-  //   });
-  // }
 
   paginationOptionChange(event: any) {
     if (event.previousPageIndex < event.pageIndex) {
@@ -97,6 +77,12 @@ export class MachinesOperationsComponent {
 
   getPageSizeOptions() {
     return [10, 20, 30, 40];
+  }
+  redirect() {
+    this.route.navigate(['/apps/add-machines-operations']);
+  }
+  redirectUpdate() {
+    this.route.navigate(['/apps/update-machines-operations']);
   }
   // Get Roles
   getRoles() {
@@ -139,19 +125,11 @@ export class MachinesOperationsComponent {
     );
   }
 
-  // Delete Role
-  // deleteRole(form: any) {
-  //   this.service.deleteRole(form).subscribe(
-  //     (res: any) => {
-  //       console.log(res, 'del res');
+  private _searchfilter(value: string): string[] {
+    const searchfilterValue = value.toLowerCase();
 
-  //       this.service.openSnackBar(res, 'Close');
-  //       this.getRoles();
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //       this.service.openSnackBar(error.message, 'close');
-  //     }
-  //   );
-  // }
+    return this.searchoption.filter((searchoption) =>
+      searchoption.toLowerCase().includes(searchfilterValue)
+    );
+  }
 }

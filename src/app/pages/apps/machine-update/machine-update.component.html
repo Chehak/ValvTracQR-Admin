@@ -1,0 +1,146 @@
+<div class="col-lg-12">
+  <mat-card class="b-1 shadow-none">
+    <mat-card-content class="b-t-1">
+      <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="d-flex align-items-center">BASIC</div>
+          </ng-template>
+          <div class="mat-body-1 p-16 rounded m-t-12">
+            <div class="d-flex row">
+              <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                  >Name
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input matInput placeholder="Jackson" />
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                  >Active
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-select value="1">
+                    <mat-option value="1">Yes</mat-option>
+                    <mat-option value="0">No</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                  >End Machine
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-select value="1">
+                    <mat-option value="1">Yes</mat-option>
+                    <mat-option value="0">No</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row d-flex">
+              <div class="col-lg-12">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"
+                  >Notes</mat-label
+                >
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100"
+                  color="primary"
+                >
+                  <textarea
+                    matInput
+                    rows="5"
+                    placeholder="This text will be shown on the production schedule to all workers"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="m-t-12 d-flex">
+              <button mat-flat-button color="primary" class="m-r-10">
+                Save
+              </button>
+              <button mat-flat-button color="accent">
+                Save and add similar
+              </button>
+            </div>
+          </div>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="d-flex align-items-center">ADVANCED (OPTIONAL)</div>
+          </ng-template>
+          <div class="mat-body-1 p-16 rounded m-t-12">
+            <div class="d-flex row">
+              <div class="col-lg-3">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                  >Work hour price
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input matInput placeholder="" />
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                  >Currency
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-select value="1">
+                    <mat-option value="1">PLN</mat-option>
+                    <mat-option value="0">USD</mat-option>
+                    <mat-option value="0">EUR</mat-option>
+                    <mat-option value="0">GBP</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                  >Number of shifts
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-select value="1">
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="0">2</mat-option>
+                    <mat-option value="0">3</mat-option>
+                    <mat-option value="0">4</mat-option>
+                    <mat-option value="0">5</mat-option>
+                    <mat-option value="0">6</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                  >Hours per day
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-select value="1">
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="0">2</mat-option>
+                    <mat-option value="0">3</mat-option>
+                    <mat-option value="0">4</mat-option>
+                    <mat-option value="0">5</mat-option>
+                    <mat-option value="0">6</mat-option>
+                    <mat-option value="0">7</mat-option>
+                    <mat-option value="0">8</mat-option>
+                    <mat-option value="0">9</mat-option>
+                    <mat-option value="0">10</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="m-t-12 d-flex">
+              <button mat-flat-button color="primary" class="m-r-10">
+                Save
+              </button>
+              <button mat-flat-button color="accent">
+                Save and add similar
+              </button>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
