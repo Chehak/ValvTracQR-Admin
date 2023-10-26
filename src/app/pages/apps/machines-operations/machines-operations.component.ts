@@ -7,29 +7,77 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Observable, map, startWith } from 'rxjs';
 import { HttpServiceService } from 'src/app/services/http-service.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
-export interface Machines {
-  id: number;
-  RoleName: string;
-  userType: string;
+export interface PeriodicElement {
+  orderOnSchedule: number;
+  shopFloorView: string;
+  name: string;
+  active: string;
+  endMachine: string;
+  workHourPrice: number;
+  currency: string;
 }
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {
+    orderOnSchedule: 1,
+    shopFloorView: 'Default',
+    name: 'Hydrogen',
+    active: 'yes',
+    endMachine: 'yes',
+    workHourPrice: 2,
+    currency: 'INR',
+  },
+
+  {
+    orderOnSchedule: 1,
+    shopFloorView: 'Default shop floor view ',
+    name: 'Helium',
+    active: 'yes',
+    endMachine: 'yes',
+    workHourPrice: 2,
+    currency: 'INR',
+  },
+  {
+    orderOnSchedule: 1,
+    shopFloorView: 'Default shop floor view ',
+    name: 'Lithium',
+    active: 'yes',
+    endMachine: 'yes',
+    workHourPrice: 2,
+    currency: 'INR',
+  },
+  {
+    orderOnSchedule: 1,
+    shopFloorView: 'Default shop floor view ',
+    name: 'Beryllium',
+    active: 'yes',
+    endMachine: 'yes',
+    workHourPrice: 2,
+    currency: 'INR',
+  },
+  {
+    orderOnSchedule: 1,
+    shopFloorView: 'Default shop floor view ',
+    name: 'Boron',
+    active: 'yes',
+    endMachine: 'yes',
+    workHourPrice: 2,
+    currency: 'INR',
+  },
+];
+
 @Component({
   selector: 'app-machines-operations',
   templateUrl: './machines-operations.component.html',
   styleUrls: ['./machines-operations.component.css'],
 })
 export class MachinesOperationsComponent {
-  filterControl = new FormControl('');
-  searchoption: string[] = ['One', 'Two', 'Three'];
-  searchfilteredOptions!: Observable<string[]>;
-  limit: number = 10;
-  page: number = 1;
-  topPage = 0;
-  roles: any[] = [];
-  totalRecords: number = 0;
-  @ViewChild(MatTable, { static: true }) table: MatTable<any> =
-    Object.create(null);
-  searchText: any;
+  context = {
+    message: 'Hello there!',
+  };
+  @ViewChild('table') table!: MatTable<PeriodicElement>;
   displayedColumns: string[] = [
     'order on schedule',
     'shop floor view',
@@ -38,41 +86,33 @@ export class MachinesOperationsComponent {
     'end machine',
     'work hour price',
     'currency',
-    'active',
     'action',
   ];
-  dataSource = new MatTableDataSource(this.roles);
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
-    Object.create(null);
+  dataSource = ELEMENT_DATA;
+  dragDisabled = true;
+
+  filterControl = new FormControl('');
+  searchoption: string[] = ['One', 'Two', 'Three'];
+  searchfilteredOptions!: Observable<string[]>;
 
   constructor(
     public dialog: MatDialog,
     public datePipe: DatePipe,
     public service: HttpServiceService,
     private route: Router
-  ) {
-    this.getRoles();
-  }
+  ) {}
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
     this.searchfilteredOptions = this.filterControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._searchfilter(value || ''))
     );
   }
 
-  paginationOptionChange(event: any) {
-    if (event.previousPageIndex < event.pageIndex) {
-      this.limit = event.pageSize;
-      this.page += 1;
-      this.getRoles();
-      // console.log('Next button clicked');
-    } else if (event.previousPageIndex > event.pageIndex) {
-      this.page -= 1;
-      this.getRoles();
-      // console.log('Previous button clicked');
-    }
+  dropTable(event: CdkDragDrop<PeriodicElement[]>) {
+    const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
+    moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
+    this.table.renderRows();
   }
 
   getPageSizeOptions() {
@@ -83,46 +123,6 @@ export class MachinesOperationsComponent {
   }
   redirectUpdate() {
     this.route.navigate(['/apps/update-machines-operations']);
-  }
-  // Get Roles
-  getRoles() {
-    const form: any = {
-      limit: this.limit,
-      page: this.page,
-    };
-    this.service.getRoles(form).subscribe((resp: any) => {
-      this.dataSource = resp.results;
-      this.totalRecords = resp.count;
-      console.log(resp, 'resp');
-    });
-  }
-
-  // Add Role
-  addRole(form: any) {
-    this.service.addRole(form).subscribe(
-      (res: any) => {
-        this.service.openSnackBar('Role Added Sucessfully', 'Close');
-        this.getRoles();
-      },
-      (error) => {
-        console.error('Error:', error);
-        this.service.openSnackBar(error.message, 'Close');
-      }
-    );
-  }
-
-  // Update Role
-  updateRole(form: any) {
-    this.service.updateRole(form).subscribe(
-      (res: any) => {
-        this.service.openSnackBar('Role Updated Successfully', 'Close');
-        this.getRoles();
-      },
-      (error) => {
-        console.log(error);
-        this.service.openSnackBar(error.message, 'Close');
-      }
-    );
   }
 
   private _searchfilter(value: string): string[] {
