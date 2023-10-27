@@ -10,78 +10,57 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 export interface PeriodicElement {
   orderOnSchedule: number;
-  shopFloorView: string;
-  name: string;
-  active: string;
-  endMachine: string;
-  workHourPrice: number;
-  currency: string;
+  assignedTo: string;
+  group: string;
+  field: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
     orderOnSchedule: 1,
-    shopFloorView: 'Default',
-    name: 'Hydrogen',
-    active: 'yes',
-    endMachine: 'yes',
-    workHourPrice: 2,
-    currency: 'INR',
+    assignedTo: 'Products',
+    group: 'Hydrogen',
+    field: 'yes',
   },
 
   {
     orderOnSchedule: 1,
-    shopFloorView: 'Default shop floor view ',
-    name: 'Helium',
-    active: 'yes',
-    endMachine: 'yes',
-    workHourPrice: 2,
-    currency: 'INR',
+    assignedTo: 'Orders ',
+    group: 'Helium',
+    field: 'yes',
   },
   {
     orderOnSchedule: 1,
-    shopFloorView: 'Default shop floor view ',
-    name: 'Lithium',
-    active: 'yes',
-    endMachine: 'yes',
-    workHourPrice: 2,
-    currency: 'INR',
+    assignedTo: 'Orders ',
+    group: 'Lithium',
+    field: 'yes',
   },
   {
     orderOnSchedule: 1,
-    shopFloorView: 'Default shop floor view ',
-    name: 'Beryllium',
-    active: 'yes',
-    endMachine: 'yes',
-    workHourPrice: 2,
-    currency: 'INR',
+    assignedTo: 'Orders ',
+    group: 'Beryllium',
+    field: 'yes',
   },
   {
     orderOnSchedule: 1,
-    shopFloorView: 'Default shop floor view ',
-    name: 'Boron',
-    active: 'yes',
-    endMachine: 'yes',
-    workHourPrice: 2,
-    currency: 'INR',
+    assignedTo: 'Orders ',
+    group: 'Boron',
+    field: 'yes',
   },
 ];
 
 @Component({
-  selector: 'app-machines-operations',
-  templateUrl: './machines-operations.component.html',
-  styleUrls: ['./machines-operations.component.css'],
+  selector: 'app-additional-fields',
+  templateUrl: './additional-fields.component.html',
+  styleUrls: ['./additional-fields.component.css'],
 })
-export class MachinesOperationsComponent {
+export class AdditionalFieldsComponent {
   @ViewChild('table') table!: MatTable<PeriodicElement>;
   displayedColumns: string[] = [
     'order on schedule',
-    'shop floor view',
-    'name',
-    'active',
-    'end machine',
-    'work hour price',
-    'currency',
+    'assigned to',
+    'group',
+    'field',
     'action',
   ];
   dataSource = ELEMENT_DATA;
@@ -114,10 +93,10 @@ export class MachinesOperationsComponent {
     return [10, 20, 30, 40];
   }
   redirect() {
-    this.route.navigate(['/apps/add-machines-operations']);
+    this.route.navigate(['/apps/add-additional-fields']);
   }
   redirectUpdate() {
-    this.route.navigate(['/apps/update-machines-operations']);
+    this.route.navigate(['/apps/update-additional-fields']);
   }
 
   private _searchfilter(value: string): string[] {

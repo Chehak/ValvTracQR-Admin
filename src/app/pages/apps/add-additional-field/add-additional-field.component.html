@@ -1,0 +1,50 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-content class="b-t-1">
+    <form>
+      <!-- input -->
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"
+        >Assigned to</mat-label
+      >
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-select value="in">
+          <mat-option value="in">India</mat-option>
+          <mat-option value="us">United States</mat-option>
+          <mat-option value="uk">United Kingdom</mat-option>
+          <mat-option value="ru">Russia</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Group</mat-label>
+      <mat-form-field class="w-100" appearance="outline">
+        <input
+          type="text"
+          placeholder="Choose group"
+          aria-label="Number"
+          matInput
+          [formControl]="filterControl"
+          [matAutocomplete]="auto3"
+        />
+        <mat-autocomplete #auto3="matAutocomplete">
+          <mat-option
+            *ngFor="let searchoption of searchfilteredOptions | async"
+            [value]="searchoption"
+          >
+            {{ searchoption }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Field</mat-label>
+      <mat-form-field appearance="outline" class="w-100" color="primary">
+        <input matInput />
+        <!-- <mat-hint> We'll never share your email with anyone else.</mat-hint> -->
+      </mat-form-field>
+      <!-- input -->
+
+      <!-- input -->
+      <div class="m-t-12">
+        <button mat-flat-button color="primary">Submit</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

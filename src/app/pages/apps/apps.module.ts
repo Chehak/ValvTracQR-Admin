@@ -61,6 +61,8 @@ import { AppAddEmployeeComponent } from './employee/add/add.component';
 
 import { AppsRoutes } from './apps.routing';
 import { MatNativeDateModule } from '@angular/material/core';
+// import { PopoverModule } from 'ngx-bootstrap/popover';
+
 // import {
 //   AppTicketlistComponent,
 //   AppTicketDialogContentComponent,
@@ -88,6 +90,9 @@ import { GeneralSettingsComponent } from './general-settings/general-settings.co
 import { MachinesOperationsComponent } from './machines-operations/machines-operations.component';
 import { MachineAddComponent } from './machine-add/machine-add.component';
 import { MachineUpdateComponent } from './machine-update/machine-update.component';
+import { AdditionalFieldsComponent } from './additional-fields/additional-fields.component';
+import { UpdateAdditionalFieldsComponent } from './update-additional-fields/update-additional-fields.component';
+import { AddAdditionalFieldComponent } from './add-additional-field/add-additional-field.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -156,6 +161,9 @@ import { MachineUpdateComponent } from './machine-update/machine-update.componen
     MachinesOperationsComponent,
     MachineAddComponent,
     MachineUpdateComponent,
+    AdditionalFieldsComponent,
+    UpdateAdditionalFieldsComponent,
+    AddAdditionalFieldComponent,
   ],
   providers: [DatePipe],
 })

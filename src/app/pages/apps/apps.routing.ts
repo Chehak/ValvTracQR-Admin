@@ -8,6 +8,9 @@ import { GeneralSettingsComponent } from './general-settings/general-settings.co
 import { MachinesOperationsComponent } from './machines-operations/machines-operations.component';
 import { MachineUpdateComponent } from './machine-update/machine-update.component';
 import { MachineAddComponent } from './machine-add/machine-add.component';
+import { AdditionalFieldsComponent } from './additional-fields/additional-fields.component';
+import { UpdateAdditionalFieldsComponent } from './update-additional-fields/update-additional-fields.component';
+import { AddAdditionalFieldComponent } from './add-additional-field/add-additional-field.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -112,6 +115,36 @@ export const AppsRoutes: Routes = [
         component: MachineUpdateComponent,
         data: {
           title: 'Update Machines/Operations',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'additional-fields',
+        component: AdditionalFieldsComponent,
+        data: {
+          title: 'Additional Fields',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'update-additional-fields',
+        component: UpdateAdditionalFieldsComponent,
+        data: {
+          title: 'Update Additional Fields',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'add-additional-fields',
+        component: AddAdditionalFieldComponent,
+        data: {
+          title: 'Add Additional Fields',
           urls: [
             // { title: 'General Settings', url: '/settings/general-settings' },
           ],
