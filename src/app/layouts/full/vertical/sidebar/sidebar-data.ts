@@ -51,6 +51,11 @@ export const navItems: NavItem[] = [
 
         route: 'apps/machines-operations',
       },
+      {
+        displayName: 'Additional Fields',
+
+        route: 'apps/additional-fields',
+      },
     ],
   },
 ];

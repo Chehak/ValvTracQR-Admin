@@ -5,9 +5,7 @@
   "projects": {
     "ValvTracAdmin": {
       "projectType": "application",
-      "schematics": {
-        
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -15,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-             "allowedCommonJsDependencies": [
+            "allowedCommonJsDependencies": [
               "apexcharts",
               "bezier-easing"
             ],
@@ -26,14 +24,16 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
-             "inlineStyleLanguage": "scss",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-                           "src/styles.css",
-               "src/assets/scss/style.scss"
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css",
+              "src/assets/scss/style.scss"
             ],
             "scripts": []
           },
