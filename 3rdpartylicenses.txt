@@ -430,6 +430,9 @@ MIT
 ngx-bootstrap/datepicker
 MIT
 
+ngx-color-picker
+MIT
+
 ngx-pagination
 MIT
 
