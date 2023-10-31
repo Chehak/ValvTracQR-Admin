@@ -56,6 +56,11 @@ export const navItems: NavItem[] = [
 
         route: 'apps/additional-fields',
       },
+      {
+        displayName: 'Tags',
+
+        route: 'apps/tags',
+      },
     ],
   },
 ];

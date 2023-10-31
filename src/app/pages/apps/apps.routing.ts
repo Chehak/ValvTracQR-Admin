@@ -11,6 +11,9 @@ import { MachineAddComponent } from './machine-add/machine-add.component';
 import { AdditionalFieldsComponent } from './additional-fields/additional-fields.component';
 import { UpdateAdditionalFieldsComponent } from './update-additional-fields/update-additional-fields.component';
 import { AddAdditionalFieldComponent } from './add-additional-field/add-additional-field.component';
+import { TagsComponent } from './tags/tags.component';
+import { EditTagComponent } from './edit-tag/edit-tag.component';
+import { AddTagComponent } from './add-tag/add-tag.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -145,6 +148,36 @@ export const AppsRoutes: Routes = [
         component: AddAdditionalFieldComponent,
         data: {
           title: 'Add Additional Fields',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'tags',
+        component: TagsComponent,
+        data: {
+          title: 'Tags',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'update-tags',
+        component: EditTagComponent,
+        data: {
+          title: 'Update Tag',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'add-tags',
+        component: AddTagComponent,
+        data: {
+          title: 'Add Tag',
           urls: [
             // { title: 'General Settings', url: '/settings/general-settings' },
           ],

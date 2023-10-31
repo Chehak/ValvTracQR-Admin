@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -93,6 +94,9 @@ import { MachineUpdateComponent } from './machine-update/machine-update.componen
 import { AdditionalFieldsComponent } from './additional-fields/additional-fields.component';
 import { UpdateAdditionalFieldsComponent } from './update-additional-fields/update-additional-fields.component';
 import { AddAdditionalFieldComponent } from './add-additional-field/add-additional-field.component';
+import { TagsComponent } from './tags/tags.component';
+import { EditTagComponent } from './edit-tag/edit-tag.component';
+import { AddTagComponent } from './add-tag/add-tag.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -107,6 +111,7 @@ import { AddAdditionalFieldComponent } from './add-additional-field/add-addition
     DragDropModule,
     NgxPaginationModule,
     MdbPopoverModule,
+    ColorPickerModule,
     HttpClientModule,
     AngularEditorModule,
     CalendarModule.forRoot({
@@ -164,6 +169,9 @@ import { AddAdditionalFieldComponent } from './add-additional-field/add-addition
     AdditionalFieldsComponent,
     UpdateAdditionalFieldsComponent,
     AddAdditionalFieldComponent,
+    TagsComponent,
+    EditTagComponent,
+    AddTagComponent,
   ],
   providers: [DatePipe],
 })
