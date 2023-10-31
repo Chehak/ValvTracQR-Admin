@@ -61,6 +61,11 @@ export const navItems: NavItem[] = [
 
         route: 'apps/tags',
       },
+      {
+        displayName: 'API Key',
+
+        route: 'apps/api-keys',
+      },
     ],
   },
 ];

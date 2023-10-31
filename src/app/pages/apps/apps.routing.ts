@@ -14,6 +14,9 @@ import { AddAdditionalFieldComponent } from './add-additional-field/add-addition
 import { TagsComponent } from './tags/tags.component';
 import { EditTagComponent } from './edit-tag/edit-tag.component';
 import { AddTagComponent } from './add-tag/add-tag.component';
+import { ApiComponent } from 'src/app/api/api.component';
+import { AddApiKeyComponent } from 'src/app/add-api-key/add-api-key.component';
+import { UpdateApiKeyComponent } from 'src/app/update-api-key/update-api-key.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -178,6 +181,36 @@ export const AppsRoutes: Routes = [
         component: AddTagComponent,
         data: {
           title: 'Add Tag',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'api-keys',
+        component: ApiComponent,
+        data: {
+          title: 'API Keys',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'add-api-keys',
+        component: AddApiKeyComponent,
+        data: {
+          title: 'Add API Keys',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'update-api-keys',
+        component: UpdateApiKeyComponent,
+        data: {
+          title: ' Update API Keys',
           urls: [
             // { title: 'General Settings', url: '/settings/general-settings' },
           ],

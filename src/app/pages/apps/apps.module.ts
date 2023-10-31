@@ -97,6 +97,10 @@ import { AddAdditionalFieldComponent } from './add-additional-field/add-addition
 import { TagsComponent } from './tags/tags.component';
 import { EditTagComponent } from './edit-tag/edit-tag.component';
 import { AddTagComponent } from './add-tag/add-tag.component';
+import { ApiComponent } from 'src/app/api/api.component';
+import { AddApiKeyComponent } from 'src/app/add-api-key/add-api-key.component';
+import { UpdateApiKeyComponent } from 'src/app/update-api-key/update-api-key.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -172,6 +176,9 @@ import { AddTagComponent } from './add-tag/add-tag.component';
     TagsComponent,
     EditTagComponent,
     AddTagComponent,
+    ApiComponent,
+    AddApiKeyComponent,
+    UpdateApiKeyComponent,
   ],
   providers: [DatePipe],
 })

@@ -1,0 +1,195 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="row justify-content-between">
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline" class="w-100 hide-hint">
+          <input
+            matInput
+            placeholder="Search Name"
+            (keyup)="applyFilter($any($event.target).value)"
+          />
+          <mat-icon matSuffix style="height: 29px !important; padding: 6px">
+            <i-tabler name="search" class="icon-20"></i-tabler>
+          </mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4 d-flex align-items-center justify-content-end">
+        <button
+          mat-flat-button
+          color="primary"
+          style="margin-right: 9px"
+          (click)="redirectAdd()"
+        >
+          Add API Key
+        </button>
+
+        <button mat-flat-button color="primary">
+          <i-tabler
+            class="d-flex"
+            name="tool"
+            matBadgeColor="primary"
+          ></i-tabler>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" class="w-100">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="f-s-14 f-w-600">#</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{ i + 1 }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Key">
+          <th mat-header-cell *matHeaderCellDef class="f-s-14 f-w-600 m-l-2">
+            API Key
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex align-items-center">
+              <div class="">
+                <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
+                  {{ element.Key }}
+                </p>
+                <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Products">
+          <th mat-header-cell *matHeaderCellDef class="f-s-14 f-w-600">
+            Products
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex align-items-center">
+              <div class="">
+                <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
+                  <ng-container *ngIf="element.Products == true">
+                    <i-tabler name="check" style="color: #4caf50"></i-tabler>
+                  </ng-container>
+                  <ng-container *ngIf="element.Products == false">
+                    <i-tabler name="X" style="color: #f44336"></i-tabler>
+                  </ng-container>
+                </p>
+                <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Orders">
+          <th mat-header-cell *matHeaderCellDef class="f-s-14 f-w-600">
+            Orders
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex align-items-center">
+              <div class="">
+                <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
+                  <ng-container *ngIf="element.Orders == true">
+                    <i-tabler name="check" style="color: #4caf50"></i-tabler>
+                  </ng-container>
+                  <ng-container *ngIf="element.Orders == false">
+                    <i-tabler name="X" style="color: #f44336"></i-tabler>
+                  </ng-container>
+                </p>
+                <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Files">
+          <th mat-header-cell *matHeaderCellDef class="f-s-14 f-w-600">
+            Files
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex align-items-center">
+              <div class="">
+                <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
+                  <ng-container *ngIf="element.Files == true">
+                    <i-tabler name="check" style="color: #4caf50"></i-tabler>
+                  </ng-container>
+                  <ng-container *ngIf="element.Files == false">
+                    <i-tabler name="X" style="color: #f44336"></i-tabler>
+                  </ng-container>
+                </p>
+                <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Client">
+          <th mat-header-cell *matHeaderCellDef class="f-s-14 f-w-600">
+            Clients
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex align-items-center">
+              <div class="">
+                <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
+                  <ng-container *ngIf="element.Client == true">
+                    <i-tabler name="check" style="color: #4caf50"></i-tabler>
+                  </ng-container>
+                  <ng-container *ngIf="element.Client == false">
+                    <i-tabler name="X" style="color: #f44336"></i-tabler>
+                  </ng-container>
+                </p>
+                <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef class="f-s-14 f-w-600">
+            Status
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex align-items-center">
+              <div class="">
+                <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
+                  {{ element.Status }}
+                </p>
+                <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Actions">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            class="f-s-14 f-w-600 text-white"
+          >
+            Action
+          </th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a
+              class="m-r-10 cursor-pointer text-white"
+              style="margin-right: 9px"
+              (click)="redirectUpdate()"
+              ><i-tabler name="edit" class="icon-18"></i-tabler
+            ></a>
+            <a class="m-r-10 cursor-pointer text-white">
+              <i-tabler name="trash" class="icon-18"></i-tabler>
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="dynamicColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: dynamicColumns"></tr>
+      </table>
+      <mat-paginator
+        [length]="dataSource.data.length"
+        [pageSize]="paginator.pageSize"
+        [pageSizeOptions]="[10, 20]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
