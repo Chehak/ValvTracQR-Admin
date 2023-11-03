@@ -28,3 +28,11 @@ svg.mdc-switch__icon.mdc-switch__icon--on {
 .mdc-switch__shadow {
     background: white !important;
 }
+
+.backButton {
+    background-color: gray;
+    color: white;
+    border-radius: 6px;
+    border: 1px solid black;
+    font-weight: 600;
+}

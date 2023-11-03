@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { Router, NavigationEnd, ActivatedRoute, Data } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -18,7 +19,8 @@ export class AppBreadcrumbComponent {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private titleService: Title
+    private titleService: Title,
+    private location: Location
   ) {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -39,5 +41,9 @@ export class AppBreadcrumbComponent {
         this.titleService.setTitle(event['title']);
         this.pageInfo = event;
       });
+  }
+
+  backClicked() {
+    this.location.back();
   }
 }

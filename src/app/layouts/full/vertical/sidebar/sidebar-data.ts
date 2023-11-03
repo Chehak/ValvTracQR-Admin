@@ -66,6 +66,11 @@ export const navItems: NavItem[] = [
 
         route: 'apps/api-keys',
       },
+      {
+        displayName: 'Work Time',
+
+        route: 'apps/work-time',
+      },
     ],
   },
 ];

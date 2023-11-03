@@ -17,6 +17,8 @@ import { AddTagComponent } from './add-tag/add-tag.component';
 import { ApiComponent } from 'src/app/api/api.component';
 import { AddApiKeyComponent } from 'src/app/add-api-key/add-api-key.component';
 import { UpdateApiKeyComponent } from 'src/app/update-api-key/update-api-key.component';
+import { WorkTimeComponent } from 'src/app/work-time/work-time.component';
+import { AddWorkTimeComponent } from 'src/app/add-work-time/add-work-time.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -214,6 +216,40 @@ export const AppsRoutes: Routes = [
           urls: [
             // { title: 'General Settings', url: '/settings/general-settings' },
           ],
+        },
+      },
+      {
+        path: 'work-time',
+        component: WorkTimeComponent,
+        data: {
+          title: 'Clock-in/Clock-out history',
+          urls: [
+            {
+              title:
+                'Here you can edit your workers clock in and clock out time',
+            },
+          ],
+        },
+      },
+      {
+        path: 'add-work-time',
+        component: AddWorkTimeComponent,
+        data: {
+          title: 'Add Work Time',
+          // urls: [
+          //   {
+          //     title:
+          //       'Here you can edit your workers clock in and clock out time',
+          //   },
+          // ],
+        },
+      },
+
+      {
+        path: 'add-work-time',
+        component: AddWorkTimeComponent,
+        data: {
+          title: 'Add Work Time',
         },
       },
     ],

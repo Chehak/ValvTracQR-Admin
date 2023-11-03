@@ -1,0 +1,67 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-content class="b-t-1">
+    <form>
+      <!-- input -->
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
+        >Select Worker</mat-label
+      >
+      <mat-form-field class="w-100" appearance="outline">
+        <input
+          type="text"
+          placeholder="Choose worker"
+          aria-label="Number"
+          matInput
+          [formControl]="filterControl"
+          [matAutocomplete]="auto3"
+        />
+        <mat-autocomplete #auto3="matAutocomplete">
+          <mat-option
+            *ngFor="let searchoption of searchfilteredOptions | async"
+            [value]="searchoption"
+          >
+            {{ searchoption }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
+        >Clock in
+      </mat-label>
+      <mat-form-field appearance="outline" class="w-100">
+        <input
+          matInput
+          [matDatepicker]="startDateDP"
+          placeholder="Clock in"
+          name="startDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="startDateDP"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #startDateDP></mat-datepicker>
+      </mat-form-field>
+
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
+        >Clock out</mat-label
+      >
+      <mat-form-field appearance="outline" class="w-100">
+        <input
+          matInput
+          [matDatepicker]="startDateDP"
+          placeholder="Clock out"
+          name="startDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="startDateDP"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #startDateDP></mat-datepicker>
+      </mat-form-field>
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
+        >Comment</mat-label
+      >
+      <mat-form-field appearance="outline" class="w-100">
+        <textarea matInput rows="3"></textarea>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>

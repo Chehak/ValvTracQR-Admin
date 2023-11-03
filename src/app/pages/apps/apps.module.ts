@@ -100,6 +100,8 @@ import { AddTagComponent } from './add-tag/add-tag.component';
 import { ApiComponent } from 'src/app/api/api.component';
 import { AddApiKeyComponent } from 'src/app/add-api-key/add-api-key.component';
 import { UpdateApiKeyComponent } from 'src/app/update-api-key/update-api-key.component';
+import { WorkTimeComponent } from 'src/app/work-time/work-time.component';
+import { AddWorkTimeComponent } from 'src/app/add-work-time/add-work-time.component';
 
 @NgModule({
   imports: [
@@ -143,10 +145,8 @@ import { UpdateApiKeyComponent } from 'src/app/update-api-key/update-api-key.com
     AppFullcalendarComponent,
     CalendarDialogComponent,
     CalendarFormDialogComponent,
-    // AppTicketlistComponent,
-    // AppTicketDialogContentComponent,
-    // AppContactComponent,
-    // AppContactDialogContentComponent,
+    AddWorkTimeComponent,
+    WorkTimeComponent,
     AppCoursesComponent,
     AppCourseDetailComponent,
     AppEmployeeComponent,
