@@ -26,19 +26,29 @@
       <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
         >Clock in
       </mat-label>
-      <mat-form-field appearance="outline" class="w-100">
+      <div class="form-group">
+        <label for="daterangepicker">Select Date Range:</label>
         <input
-          matInput
-          [matDatepicker]="startDateDP"
-          placeholder="Clock in"
-          name="startDate"
+          type="text"
+          id="daterangepicker"
+          class="form-control"
+          bsDaterangepicker
+          [(ngModel)]="selectedRange"
+          [ngModelOptions]="{ standalone: true }"
+          [bsConfig]="bsConfig"
         />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="startDateDP"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #startDateDP></mat-datepicker>
-      </mat-form-field>
+      </div>
+
+      <div class="custom-ranges">
+        <label>Select a Custom Range:</label>
+        <button
+          *ngFor="let customRange of customRanges"
+          class="btn btn-link"
+          (click)="setCustomRange(customRange.range)"
+        >
+          {{ customRange.label }}
+        </button>
+      </div>
 
       <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
         >Clock out</mat-label

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { PopoverModule } from '@coreui/angular';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -102,6 +102,7 @@ import { AddApiKeyComponent } from 'src/app/add-api-key/add-api-key.component';
 import { UpdateApiKeyComponent } from 'src/app/update-api-key/update-api-key.component';
 import { WorkTimeComponent } from 'src/app/work-time/work-time.component';
 import { AddWorkTimeComponent } from 'src/app/add-work-time/add-work-time.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   imports: [
@@ -120,6 +121,8 @@ import { AddWorkTimeComponent } from 'src/app/add-work-time/add-work-time.compon
     ColorPickerModule,
     HttpClientModule,
     AngularEditorModule,
+    NgxDaterangepickerMd.forRoot(),
+    BsDatepickerModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

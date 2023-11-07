@@ -4,13 +4,13 @@
   PLN, USD.
 </p> -->
 
-<div class="text-right m-b-10">
+<div class="text-right m-b-10 m-t-10">
   <button mat-flat-button (click)="addCurrency()" color="primary">
     + Add Currency
   </button>
 </div>
 
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="submit()">
   <div class="row m-b-10">
     <div class="col"><b>Delete</b></div>
 
@@ -37,11 +37,17 @@
           />
         </div>
         <div class="col">
-          <button type="button" mat-flat-button color="primary">
+          <button
+            type="button"
+            mat-flat-button
+            color="primary"
+            formControlName="default"
+          >
             <i-tabler name="check"></i-tabler>
           </button>
         </div>
       </div>
     </div>
   </div>
+  <button mat-flat-button color="primary" class="m-t-4">Save</button>
 </form>

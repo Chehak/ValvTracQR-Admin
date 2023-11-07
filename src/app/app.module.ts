@@ -23,7 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Import Layouts
 import { FullComponent } from './layouts/full/full.component';
 import { BlankComponent } from './layouts/blank/blank.component';
-
+import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
 import { FilterPipe } from './pipe/filter.pipe';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -47,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxUiLoaderModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -68,6 +69,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
       useClass: HttpServiceService,
       multi: true,
     },
+    NgxUiLoaderService,
   ],
   bootstrap: [AppComponent],
 })

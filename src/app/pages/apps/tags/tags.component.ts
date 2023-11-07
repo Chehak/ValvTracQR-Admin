@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -11,57 +11,85 @@ export interface PeriodicElement {
   color: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    id: 1,
-    name: 'John',
-    color: 'red',
-  },
-
-  {
-    id: 1,
-    name: 'John',
-    color: 'red',
-  },
-  {
-    id: 1,
-    name: 'John',
-    color: 'red',
-  },
-  {
-    id: 1,
-    name: 'John',
-    color: 'red',
-  },
-  {
-    id: 1,
-    name: 'John',
-    color: 'red',
-  },
-];
-
 @Component({
   selector: 'app-tags',
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.css'],
 })
-export class TagsComponent {
+export class TagsComponent implements OnInit {
+  items: any[] = [];
+  dataSource = new MatTableDataSource(this.items);
   constructor(
     public dialog: MatDialog,
     public service: HttpServiceService,
     private route: Router
   ) {}
+
   @ViewChild('table') table!: MatTable<PeriodicElement>;
   displayedColumns: string[] = ['id', 'name', 'color', 'action'];
-  dataSource = ELEMENT_DATA;
 
   getPageSizeOptions() {
     return [10, 20, 30, 40];
   }
   redirect() {
-    this.route.navigate(['/apps/add-additional-fields']);
+    this.route.navigate(['/apps/add-tags']);
   }
-  redirectUpdate() {
-    this.route.navigate(['/apps/update-additional-fields']);
+  redirectUpdate(id: string) {
+    this.route.navigate([`/apps/update-tags/${id}`]);
+  }
+
+  getTags() {
+    this.service.getTags().subscribe((res: any) => {
+      console.log(res, 'response');
+      this.dataSource = res;
+    });
+  }
+
+  deleteTag(id: string) {
+    if (confirm('Are you sure to delete ')) {
+      this.service.deleteTag(id).subscribe(
+        (res: any) => {
+          console.log(res, 'del res');
+          this.service.openSnackBar(res, 'Close');
+          this.getTags();
+        },
+        (error) => {
+          console.log(error);
+          this.service.openSnackBar(error.message, 'close');
+        }
+      );
+    }
+  }
+
+  ngOnInit(): void {
+    this.getTags();
+  }
+
+  applyFilter(filterValue: string): void {
+    setTimeout(() => {
+      this.service.searchTagName(filterValue).subscribe(
+        (res: any) => {
+          this.dataSource = res;
+        },
+        (error) => {
+          this.service.openSnackBar(error.error.error, 'Close');
+          this.dataSource = new MatTableDataSource(this.items);
+        }
+      );
+    }, 2000);
+  }
+
+  applyFilterColor(filterValue: string): void {
+    setTimeout(() => {
+      this.service.searchTagColor(filterValue).subscribe(
+        (res: any) => {
+          this.dataSource = res;
+        },
+        (error) => {
+          this.service.openSnackBar(error.error.error, 'Close');
+          this.dataSource = new MatTableDataSource(this.items);
+        }
+      );
+    }, 2000);
   }
 }

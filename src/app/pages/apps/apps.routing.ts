@@ -169,7 +169,7 @@ export const AppsRoutes: Routes = [
         },
       },
       {
-        path: 'update-tags',
+        path: 'update-tags/:id',
         component: EditTagComponent,
         data: {
           title: 'Update Tag',
