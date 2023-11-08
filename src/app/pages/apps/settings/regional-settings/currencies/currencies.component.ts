@@ -73,7 +73,9 @@ export class CurrenciesComponent {
     });
 
     this.httpService.addCurrency(arrayOfObjects).subscribe((res: any) => {
-      console.log(res);
+      if (res) {
+        this.getCurrencies();
+      }
     });
   }
 
