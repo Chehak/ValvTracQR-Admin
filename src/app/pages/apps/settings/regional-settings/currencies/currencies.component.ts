@@ -9,6 +9,7 @@ import { HttpServiceService } from 'src/app/services/http-service.service';
 })
 export class CurrenciesComponent {
   form: FormGroup;
+  activeButtonIndex: number = -1;
 
   constructor(
     private fb: FormBuilder,
@@ -18,8 +19,8 @@ export class CurrenciesComponent {
     this.form = this.fb.group({
       currencies: this.fb.array([
         this.fb.group({
-          currency: ['', Validators.required],
-          default: ['', Validators.required],
+          name: ['', Validators.required],
+          default: [false, Validators.required],
         }),
       ]),
     });
@@ -35,7 +36,7 @@ export class CurrenciesComponent {
     console.log(curr);
 
     const currForm = this.fb.group({
-      currency: [curr, Validators.required],
+      name: [curr, Validators.required],
       default: [curr, Validators.required],
     });
     this.curr.push(currForm);
@@ -56,7 +57,7 @@ export class CurrenciesComponent {
       for (let i = 0; i < featEdit.length; i++) {
         const val = featEdit[i];
         const currForm = this.fb.group({
-          currency: [val.name, Validators.required],
+          name: [val.name, Validators.required],
           default: [val.default, Validators.required],
         });
         this.curr.push(currForm);
@@ -65,6 +66,26 @@ export class CurrenciesComponent {
   }
 
   submit() {
-    console.log(this.form.controls['currencies'].value);
+    const formArray = this.form.get('currencies') as FormArray;
+    const arrayOfObjects = formArray.controls.map((control) => {
+      const currencyGroup = control as FormGroup;
+      return currencyGroup.value;
+    });
+
+    this.httpService.addCurrency(arrayOfObjects).subscribe((res: any) => {
+      console.log(res);
+    });
+  }
+
+  // Update the toggleDefault function to manage the active button
+  action(index: number) {
+    if (this.activeButtonIndex !== -1) {
+      // Deactivate the previously active button
+      this.curr.at(this.activeButtonIndex)?.get('default')?.setValue(false);
+    }
+
+    // Activate the clicked button
+    this.curr.at(index).get('default')?.setValue(true);
+    this.activeButtonIndex = index;
   }
 }

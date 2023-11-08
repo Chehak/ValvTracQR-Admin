@@ -1,9 +1,3 @@
-<!-- <h2 class="header">Currencies</h2>
-<p class="title">
-  Only the 3-letter ISO 4217 currency code indicating the currency to use ex.
-  PLN, USD.
-</p> -->
-
 <div class="text-right m-b-10 m-t-10">
   <button mat-flat-button (click)="addCurrency()" color="primary">
     + Add Currency
@@ -33,15 +27,18 @@
             matInput
             class="text-white w-100 my-mat-input"
             type="text"
-            formControlName="currency"
+            formControlName="name"
           />
         </div>
         <div class="col">
           <button
             type="button"
             mat-flat-button
-            color="primary"
-            formControlName="default"
+            [ngClass]="{
+              'true-button': curr.at(i).get('default')?.value,
+              'false-button': !curr.at(i).get('default')?.value
+            }"
+            (click)="action(i)"
           >
             <i-tabler name="check"></i-tabler>
           </button>

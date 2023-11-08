@@ -102,15 +102,6 @@ export class HttpServiceService {
     );
   }
 
-  getCurrencies(): Observable<any> {
-    const API_URL = `${this.baseURL}getCurrencies`;
-    return this.http.get(API_URL).pipe(
-      map((res) => {
-        return res;
-      })
-    );
-  }
-
   getTags(): Observable<any> {
     const API_URL = `${this.baseURL}getTags`;
     return this.http.get(API_URL).pipe(
@@ -168,6 +159,42 @@ export class HttpServiceService {
   searchTagColor(form: any): Observable<any> {
     const API_URL = `${this.baseURL}searchTagColor?text=${form}`;
     return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  getCurrencies(): Observable<any> {
+    const API_URL = `${this.baseURL}getCurrencies`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  addCurrency(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}addCurrency`;
+    return this.http.post(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  getUnits(): Observable<any> {
+    const API_URL = `${this.baseURL}getUnits`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  addUnit(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}addUnit`;
+    return this.http.post(API_URL, form).pipe(
       map((res) => {
         return res;
       })

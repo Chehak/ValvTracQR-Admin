@@ -14,3 +14,13 @@
     padding: 8px;
     background: transparent;
 }
+
+.true-button {
+    background-color: #5d87ff;
+    color: white;
+}
+
+.false-button {
+    background-color: #b9becf;
+    color: white;
+}
