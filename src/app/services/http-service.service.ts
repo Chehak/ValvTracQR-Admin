@@ -176,7 +176,16 @@ export class HttpServiceService {
 
   addCurrency(form: any): Observable<any> {
     const API_URL = `${this.baseURL}addCurrency`;
-    return this.http.post(API_URL, form).pipe(
+    return this.http.post(API_URL, form, { responseType: 'text' }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  deleteCurrency(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}deleteCurrency/${form}`;
+    return this.http.delete(API_URL, { responseType: 'text' }).pipe(
       map((res) => {
         return res;
       })

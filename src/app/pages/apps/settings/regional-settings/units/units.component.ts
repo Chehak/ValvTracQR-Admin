@@ -19,7 +19,7 @@ export class UnitsComponent {
     this.form = this.fb.group({
       units: this.fb.array([
         this.fb.group({
-          unit: ['', Validators.required],
+          name: ['', Validators.required],
           default: ['', Validators.required],
         }),
       ]),
@@ -34,7 +34,7 @@ export class UnitsComponent {
   // Add a new currency control to the FormArray
   addUnit(): void {
     const unitForm = this.fb.group({
-      unit: ['', Validators.required],
+      name: ['', Validators.required],
       default: ['', Validators.required],
     });
     this.unit.push(unitForm);
@@ -46,7 +46,7 @@ export class UnitsComponent {
       for (let i = 0; i < featEdit.length; i++) {
         const val = featEdit[i];
         const currForm = this.fb.group({
-          unit: [val.name, Validators.required],
+          name: [val.name, Validators.required],
           default: [val.default, Validators.required],
         });
         this.unit.push(currForm);

@@ -10,6 +10,7 @@ import { HttpServiceService } from 'src/app/services/http-service.service';
 export class CurrenciesComponent {
   form: FormGroup;
   activeButtonIndex: number = -1;
+  currencyResponse: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -42,16 +43,29 @@ export class CurrenciesComponent {
     this.curr.push(currForm);
   }
 
-  // Remove a currency control from the FormArray
-  removeCurrency(index: number): void {
-    this.curr.removeAt(index);
+  removeCurrency(index: number, currency: any): void {
+    console.log(currency, 'currency');
+    const getId = this.currencyResponse[index];
+    console.log(getId);
+    this.httpService.deleteCurrency(getId?._id).subscribe(
+      (res: any) => {
+        console.log(res, 'del res');
+        this.httpService.openSnackBar(res, 'Close');
+        this.getCurrencies();
+      },
+      (error) => {
+        console.log(error);
+        this.httpService.openSnackBar(error.message, 'close');
+      }
+    );
+    // this.curr.removeAt(index);
     console.log('FormArray length:', this.curr.length);
   }
 
   getCurrencies() {
     this.httpService.getCurrencies().subscribe((res: any) => {
-      console.log(res, 'res');
       this.curr.clear();
+      this.currencyResponse = res;
 
       const featEdit = res;
       for (let i = 0; i < featEdit.length; i++) {
@@ -72,22 +86,27 @@ export class CurrenciesComponent {
       return currencyGroup.value;
     });
 
-    this.httpService.addCurrency(arrayOfObjects).subscribe((res: any) => {
-      if (res) {
+    this.httpService.addCurrency(arrayOfObjects).subscribe(
+      (res: any) => {
+        console.log(res, 'del res');
+        this.httpService.openSnackBar(res, 'Close');
         this.getCurrencies();
+      },
+      (error) => {
+        console.log(error);
+        this.httpService.openSnackBar(error.message, 'close');
       }
-    });
+    );
   }
 
   // Update the toggleDefault function to manage the active button
   action(index: number) {
-    if (this.activeButtonIndex !== -1) {
-      // Deactivate the previously active button
-      this.curr.at(this.activeButtonIndex)?.get('default')?.setValue(false);
+    for (let i = 0; i < this.curr.value.length; i++) {
+      if (i === index) {
+        this.curr.at(i)?.get('default')?.setValue(true);
+      } else {
+        this.curr.at(i)?.get('default')?.setValue(false);
+      }
     }
-
-    // Activate the clicked button
-    this.curr.at(index).get('default')?.setValue(true);
-    this.activeButtonIndex = index;
   }
 }
