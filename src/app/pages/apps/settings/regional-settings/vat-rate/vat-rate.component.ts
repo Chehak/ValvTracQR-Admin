@@ -18,6 +18,7 @@ export class VatRateComponent {
     this.form = this.fb.group({
       vatRate: this.fb.array([
         this.fb.group({
+          id: [null, Validators.required],
           name: ['', Validators.required],
         }),
       ]),
@@ -32,6 +33,7 @@ export class VatRateComponent {
   // Add a new currency control to the FormArray
   addVatRate(): void {
     const vatForm = this.fb.group({
+      id: [null, Validators.required],
       name: ['', Validators.required],
     });
     this.vat.push(vatForm);
@@ -63,6 +65,7 @@ export class VatRateComponent {
       for (let i = 0; i < vatEdit.length; i++) {
         const element = vatEdit[i];
         const vatForm = this.fb.group({
+          id: [element?._id, Validators.required],
           name: [element.name, Validators.required],
         });
         this.vat.push(vatForm);
