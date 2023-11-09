@@ -10,7 +10,7 @@
   </button>
 </div>
 
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="submit()">
   <div formArrayName="vatRate">
     <div class="row m-b-10">
       <div class="col"><b>Delete</b></div>
@@ -20,7 +20,13 @@
     </div>
     <div *ngFor="let rate of vat.controls; let i = index">
       <div class="row m-b-10" [formGroupName]="i">
-        <div class="col">
+        <div
+          class="col-md-2"
+          #tooltip="matTooltip"
+          matTooltip="Delete"
+          matTooltipPosition="below"
+          matTooltipHideDelay="10"
+        >
           <i-tabler
             name="trash-filled"
             style="color: #ff5733"
@@ -36,10 +42,8 @@
             formControlName="name"
           />
         </div>
-        <div class="col">
-          <button type="button" mat-flat-button color="primary">Add</button>
-        </div>
       </div>
     </div>
+    <button mat-flat-button color="primary">Save</button>
   </div>
 </form>

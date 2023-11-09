@@ -3,7 +3,14 @@
     <div class="row justify-content-between">
       <div class="col-lg-4"></div>
       <div class="col-lg-4 d-flex align-items-center justify-content-end">
-        <button mat-flat-button color="warn" class="m-r-4">Show Pauses</button>
+        <button
+          mat-flat-button
+          color="warn"
+          class="m-r-4"
+          (click)="redirectShowPauses()"
+        >
+          Show Pauses
+        </button>
 
         <button
           mat-flat-button

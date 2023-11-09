@@ -92,8 +92,8 @@ export class WorkTimeComponent {
   redirect() {
     this.route.navigate(['/apps/add-machines-operations']);
   }
-  redirectUpdate() {
-    this.route.navigate(['/apps/update-machines-operations']);
+  redirectShowPauses() {
+    this.route.navigate(['/apps/show-pauses']);
   }
 
   private _searchfilter(value: string): string[] {

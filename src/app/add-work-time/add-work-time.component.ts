@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-// import { startOfDay, endOfDay, subDays, subMonths } from 'date-fns';
-import * as moment from 'moment';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-work-time',

@@ -38,13 +38,12 @@ export class CurrenciesComponent {
 
     const currForm = this.fb.group({
       name: [curr, Validators.required],
-      default: [curr, Validators.required],
+      default: [false, Validators.required],
     });
     this.curr.push(currForm);
   }
 
-  removeCurrency(index: number, currency: any): void {
-    console.log(currency, 'currency');
+  removeCurrency(index: number): void {
     const getId = this.currencyResponse[index];
     console.log(getId);
     this.httpService.deleteCurrency(getId?._id).subscribe(

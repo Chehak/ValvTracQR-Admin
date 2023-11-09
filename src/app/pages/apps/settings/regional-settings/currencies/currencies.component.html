@@ -14,11 +14,17 @@
   <div formArrayName="currencies">
     <div *ngFor="let currency of curr.controls; let i = index">
       <div class="row m-b-10" [formGroupName]="i">
-        <div class="col">
+        <div
+          class="col"
+          #tooltip="matTooltip"
+          matTooltip="Delete"
+          matTooltipPosition="below"
+          matTooltipHideDelay="10"
+        >
           <i-tabler
             name="trash-filled"
             style="color: #ff5733"
-            (click)="removeCurrency(i, currency)"
+            (click)="removeCurrency(i)"
           ></i-tabler>
         </div>
 
@@ -29,6 +35,13 @@
             type="text"
             formControlName="name"
           />
+          <mat-error
+            *ngIf="(form?.get('name')?.touched || form?.get('name')?.dirty) &&
+                                                          form?.get('name')?.invalid 
+                                                          && form?.get('name')?.errors?.['required']"
+          >
+            Tag name is required</mat-error
+          >
         </div>
         <div class="col">
           <button

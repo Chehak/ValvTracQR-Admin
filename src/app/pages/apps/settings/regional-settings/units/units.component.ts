@@ -10,7 +10,7 @@ import { HttpServiceService } from 'src/app/services/http-service.service';
 export class UnitsComponent {
   form: FormGroup;
   activeButtonIndex: number = -1;
-
+  unitResponse: any[] = [];
   constructor(
     private fb: FormBuilder,
     private httpService: HttpServiceService
@@ -20,7 +20,7 @@ export class UnitsComponent {
       units: this.fb.array([
         this.fb.group({
           name: ['', Validators.required],
-          default: ['', Validators.required],
+          default: [false, Validators.required],
         }),
       ]),
     });
@@ -35,13 +35,15 @@ export class UnitsComponent {
   addUnit(): void {
     const unitForm = this.fb.group({
       name: ['', Validators.required],
-      default: ['', Validators.required],
+      default: [false, Validators.required],
     });
     this.unit.push(unitForm);
   }
 
   getUnits() {
     this.httpService.getUnits().subscribe((res: any) => {
+      this.unitResponse = res;
+      this.unit.clear();
       const featEdit = res;
       for (let i = 0; i < featEdit.length; i++) {
         const val = featEdit[i];
@@ -56,19 +58,19 @@ export class UnitsComponent {
 
   // Remove a currency control from the FormArray
   removeUnit(index: number): void {
-    this.unit.removeAt(index);
-    console.log('FormArray length:', this.unit.length);
-  }
-
-  action(index: number) {
-    if (this.activeButtonIndex !== -1) {
-      // Deactivate the previously active button
-      this.unit.at(this.activeButtonIndex)?.get('default')?.setValue(false);
-    }
-
-    // Activate the clicked button
-    this.unit.at(index).get('default')?.setValue(true);
-    this.activeButtonIndex = index;
+    const getId = this.unitResponse[index];
+    console.log(getId);
+    this.httpService.deleteUnit(getId?._id).subscribe(
+      (res: any) => {
+        console.log(res, 'del res');
+        this.httpService.openSnackBar(res, 'Close');
+        this.getUnits();
+      },
+      (error) => {
+        console.log(error);
+        this.httpService.openSnackBar(error.message, 'close');
+      }
+    );
   }
 
   submit() {
@@ -78,8 +80,26 @@ export class UnitsComponent {
       return currencyGroup.value;
     });
 
-    this.httpService.addUnit(arrayOfObjects).subscribe((res: any) => {
-      console.log(res);
-    });
+    this.httpService.addUnit(arrayOfObjects).subscribe(
+      (res: any) => {
+        console.log(res, 'del res');
+        this.httpService.openSnackBar(res, 'Close');
+        this.getUnits();
+      },
+      (error) => {
+        console.log(error);
+        this.httpService.openSnackBar(error.message, 'close');
+      }
+    );
+  }
+
+  action(index: number) {
+    for (let i = 0; i < this.unit.value.length; i++) {
+      if (i === index) {
+        this.unit.at(i)?.get('default')?.setValue(true);
+      } else {
+        this.unit.at(i)?.get('default')?.setValue(false);
+      }
+    }
   }
 }

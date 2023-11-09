@@ -6,7 +6,9 @@
 
 <form [formGroup]="form" (ngSubmit)="submit()">
   <div class="row m-b-10">
-    <div class="col"><b>Delete</b></div>
+    <div class="col">
+      <b>Delete</b>
+    </div>
 
     <div class="col-10 text-center"><b>Unit</b></div>
     <div class="col"><b>Default</b></div>
@@ -14,7 +16,13 @@
   <div formArrayName="units">
     <div *ngFor="let units of unit.controls; let i = index">
       <div class="row m-b-10" [formGroupName]="i">
-        <div class="col">
+        <div
+          class="col"
+          #tooltip="matTooltip"
+          matTooltip="Delete"
+          matTooltipPosition="below"
+          matTooltipHideDelay="10"
+        >
           <i-tabler
             name="trash-filled"
             style="color: #ff5733"

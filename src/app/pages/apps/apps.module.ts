@@ -103,6 +103,7 @@ import { UpdateApiKeyComponent } from 'src/app/update-api-key/update-api-key.com
 import { WorkTimeComponent } from 'src/app/work-time/work-time.component';
 import { AddWorkTimeComponent } from 'src/app/add-work-time/add-work-time.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { ShowPausesComponent } from './show-pauses/show-pauses.component';
 
 @NgModule({
   imports: [
@@ -182,6 +183,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     ApiComponent,
     AddApiKeyComponent,
     UpdateApiKeyComponent,
+    ShowPausesComponent,
   ],
   providers: [DatePipe],
 })

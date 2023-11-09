@@ -203,7 +203,43 @@ export class HttpServiceService {
 
   addUnit(form: any): Observable<any> {
     const API_URL = `${this.baseURL}addUnit`;
-    return this.http.post(API_URL, form).pipe(
+    return this.http.post(API_URL, form, { responseType: 'text' }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  deleteUnit(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}deleteUnit/${form}`;
+    return this.http.delete(API_URL, { responseType: 'text' }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  getVat(): Observable<any> {
+    const API_URL = `${this.baseURL}getVAT`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  deleteVAT(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}deleteVAT/${form}`;
+    return this.http.delete(API_URL, { responseType: 'text' }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  addVAT(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}addVAT`;
+    return this.http.post(API_URL, form, { responseType: 'text' }).pipe(
       map((res) => {
         return res;
       })

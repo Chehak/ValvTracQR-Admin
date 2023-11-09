@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { HttpServiceService } from 'src/app/services/http-service.service';
 
 @Component({
   selector: 'app-vat-rate',
@@ -8,8 +9,12 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 })
 export class VatRateComponent {
   form: FormGroup;
-
-  constructor(private fb: FormBuilder) {
+  vatResponse: any[] = [];
+  constructor(
+    private fb: FormBuilder,
+    private httpService: HttpServiceService
+  ) {
+    this.getVatRates();
     this.form = this.fb.group({
       vatRate: this.fb.array([
         this.fb.group({
@@ -34,7 +39,54 @@ export class VatRateComponent {
 
   // Remove a currency control from the FormArray
   removeVatRate(index: number): void {
-    this.vat.removeAt(index);
-    console.log('FormArray length:', this.vat.length);
+    const getId = this.vatResponse[index];
+    console.log(getId);
+    this.httpService.deleteVAT(getId?._id).subscribe(
+      (res: any) => {
+        console.log(res, 'del res');
+        this.httpService.openSnackBar(res, 'Close');
+        this.getVatRates();
+      },
+      (error) => {
+        console.log(error);
+        this.httpService.openSnackBar(error.message, 'close');
+      }
+    );
+  }
+
+  getVatRates() {
+    this.httpService.getVat().subscribe((res: any) => {
+      this.vat.clear();
+      this.vatResponse = res;
+
+      const vatEdit = res;
+      for (let i = 0; i < vatEdit.length; i++) {
+        const element = vatEdit[i];
+        const vatForm = this.fb.group({
+          name: [element.name, Validators.required],
+        });
+        this.vat.push(vatForm);
+      }
+    });
+  }
+
+  submit() {
+    const formArray = this.form.get('vatRate') as FormArray;
+    const arrayOfObjects = formArray.controls.map((control) => {
+      const currencyGroup = control as FormGroup;
+      return currencyGroup.value;
+    });
+
+    this.httpService.addVAT(arrayOfObjects).subscribe(
+      (res: any) => {
+        console.log(res, 'del res');
+        this.httpService.openSnackBar(res, 'Close');
+        this.getVatRates();
+      },
+      (error) => {
+        console.log(error);
+        this.httpService.openSnackBar(error.message, 'close');
+      }
+    );
   }
 }

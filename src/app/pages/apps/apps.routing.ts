@@ -19,6 +19,7 @@ import { AddApiKeyComponent } from 'src/app/add-api-key/add-api-key.component';
 import { UpdateApiKeyComponent } from 'src/app/update-api-key/update-api-key.component';
 import { WorkTimeComponent } from 'src/app/work-time/work-time.component';
 import { AddWorkTimeComponent } from 'src/app/add-work-time/add-work-time.component';
+import { ShowPausesComponent } from './show-pauses/show-pauses.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -246,10 +247,10 @@ export const AppsRoutes: Routes = [
       },
 
       {
-        path: 'add-work-time',
-        component: AddWorkTimeComponent,
+        path: 'show-pauses',
+        component: ShowPausesComponent,
         data: {
-          title: 'Add Work Time',
+          title: 'Work pauses registration',
         },
       },
     ],
