@@ -1,12 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Observable, map, startWith } from 'rxjs';
 import { HttpServiceService } from 'src/app/services/http-service.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 export interface PeriodicElement {
   worker: string;
@@ -102,9 +100,5 @@ export class WorkTimeComponent {
     return this.searchoption.filter((searchoption) =>
       searchoption.toLowerCase().includes(searchfilterValue)
     );
-  }
-
-  workerSort() {
-    this.workerToggle = !this.workerToggle;
   }
 }

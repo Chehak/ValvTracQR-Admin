@@ -20,6 +20,7 @@ export class CurrenciesComponent {
     this.form = this.fb.group({
       currencies: this.fb.array([
         this.fb.group({
+          id: [null, Validators.required],
           name: ['', Validators.required],
           default: [false, Validators.required],
         }),
@@ -37,6 +38,7 @@ export class CurrenciesComponent {
     console.log(curr);
 
     const currForm = this.fb.group({
+      id: [null, Validators.required],
       name: [curr, Validators.required],
       default: [false, Validators.required],
     });
@@ -70,6 +72,7 @@ export class CurrenciesComponent {
       for (let i = 0; i < featEdit.length; i++) {
         const val = featEdit[i];
         const currForm = this.fb.group({
+          id: [val?._id, Validators.required],
           name: [val.name, Validators.required],
           default: [val.default, Validators.required],
         });
