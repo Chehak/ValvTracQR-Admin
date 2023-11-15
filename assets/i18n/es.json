@@ -76,7 +76,6 @@
   "Ripples": "ondulações",
   "Slide Toggle": "Alternar slide",
   "Slider": "Controle deslizante",
-  "Roles":"hhhhh",
   "Snackbar": "Lanchonete",
   "Tabs": "Guias",
   "Toolbar": "barra de ferramentas",
@@ -99,5 +98,24 @@
   "Menu 1": "Menu 1",
   "Menu 2": "Menu 2",
   "Disabled": "Desabilitada",
-  "Welcome Back":"Bienvenido de nuevo"
+  "Welcome Back":"Bienvenido de nuevo",
+  "Users":"Usuarias",
+  "Dashboard":"Panel",
+  "Roles":"Roles",
+  "Settings":"Ajustes",
+  "Regional Settings":"Ajustes regionales",
+  "General Settings":"Configuración general",
+  "Machines/Operations":"Máquinas/operaciones",
+  "Additional Fields":"Campos Adicionales",
+  "Tags":"Etiquetas",
+  "API Key":"Clave API",
+  "Work Time":"Tiempo de trabajo",
+  "Currencies":"Monedas",
+  "VAT rate":"Tipo de IVA",
+  "Units":"Unidades",
+  "Back":"Atrás",
+  "Search Name":"Nombre de búsqueda",
+  "Add":"Agregar",
+  "Name":"Nombre"
+    
 }
