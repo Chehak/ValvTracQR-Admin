@@ -5,11 +5,12 @@ import { RouterModule } from '@angular/router';
 import { Router, NavigationEnd, ActivatedRoute, Data } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-breadcrumb',
   standalone: true,
-  imports: [RouterModule, NgIf, CommonModule],
+  imports: [RouterModule, NgIf, CommonModule, TranslateModule],
   templateUrl: './breadcrumb.component.html',
   styleUrls: [],
 })

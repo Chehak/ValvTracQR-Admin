@@ -6,7 +6,7 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import {
   MatDialog,
   MatDialogRef,
@@ -15,6 +15,7 @@ import {
 import { DatePipe } from '@angular/common';
 import { AppAddEmployeeComponent } from './add/add.component';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface Employee {
   id: number;
@@ -167,7 +168,11 @@ export class AppEmployeeComponent implements AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
     Object.create(null);
 
-  constructor(public dialog: MatDialog, public datePipe: DatePipe) {}
+  constructor(
+    public dialog: MatDialog,
+    public datePipe: DatePipe,
+    public translateService: TranslateService
+  ) {}
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

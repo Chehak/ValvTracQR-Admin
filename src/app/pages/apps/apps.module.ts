@@ -9,7 +9,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
@@ -104,6 +104,13 @@ import { WorkTimeComponent } from 'src/app/work-time/work-time.component';
 import { AddWorkTimeComponent } from 'src/app/add-work-time/add-work-time.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { ShowPausesComponent } from './show-pauses/show-pauses.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from 'src/app/pipe/translate.pipe';
+
+export function HttpLoaderFactory(http: HttpClient): any {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   imports: [
@@ -122,17 +129,26 @@ import { ShowPausesComponent } from './show-pauses/show-pauses.component';
     ColorPickerModule,
     HttpClientModule,
     AngularEditorModule,
+    TranslateModule,
     NgxDaterangepickerMd.forRoot(),
     BsDatepickerModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     MatNativeDateModule,
     NgScrollbarModule,
   ],
   exports: [TablerIconsModule],
   declarations: [
+    TranslatePipe,
     // AppChatComponent,
     AppPermissionComponent,
     // AppNotesComponent,

@@ -19,3 +19,28 @@
 .modal-dialog {
     margin: auto;
 }
+
+.date-picker-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    /* Adjust as needed for spacing */
+}
+
+.custom-ranges {
+    flex: 1;
+}
+
+.custom-ranges-buttons {
+    /* Add your styling for the custom range buttons */
+}
+
+.calendar-container {
+    flex: 2;
+    /* Adjust the flex ratio as needed */
+    display: none;
+    /* Hide the calendar initially */
+}
+
+/* Add more CSS styling as needed */
