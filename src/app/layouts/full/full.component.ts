@@ -204,7 +204,7 @@ export class FullComponent implements OnInit {
 
     this.http.get(dynamicPath).subscribe((data) => {
       console.log(data);
-      this.translateService.use(this.lang);
+      // this.translateService.use(this.lang);
     });
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
