@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { Router, NavigationEnd, ActivatedRoute, Data } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Location } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -16,13 +16,17 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class AppBreadcrumbComponent {
   // @Input() layout;
+  lang: any;
   pageInfo: Data | any = Object.create(null);
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
-    private location: Location
+    private location: Location,
+    private translateService: TranslateService
   ) {
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .pipe(map(() => this.activatedRoute))
