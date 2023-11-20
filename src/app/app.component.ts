@@ -9,8 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   lang: any;
   constructor(private translate: TranslateService) {
-    console.log('hitted');
-    this.lang = localStorage.getItem('lang');
+    // console.log('hitted');
+    // this.lang = localStorage.getItem('lang');
     // this.translate.use(this.lang);
   }
   title = 'ValvTracAdmin';

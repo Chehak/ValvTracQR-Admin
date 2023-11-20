@@ -14,6 +14,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.lang = localStorage.getItem('lang');
-    this.translateService.use(this.lang);
+    // this.translateService.use(this.lang);
   }
 }
