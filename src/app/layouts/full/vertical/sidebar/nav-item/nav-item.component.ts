@@ -17,10 +17,10 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { TranslateModule } from '@ngx-translate/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nav-item',
@@ -49,11 +49,18 @@ export class AppNavItemComponent implements OnChanges {
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item: NavItem | any;
   @Input() depth: any;
+  lang: any;
 
-  constructor(public navService: NavService, public router: Router) {
+  constructor(
+    public navService: NavService,
+    public router: Router,
+    public translateService: TranslateService
+  ) {
     if (this.depth === undefined) {
       this.depth = 0;
     }
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
   }
 
   ngOnChanges() {
