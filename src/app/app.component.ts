@@ -11,7 +11,7 @@ export class AppComponent {
   constructor(private translate: TranslateService) {
     console.log('hitted');
     this.lang = localStorage.getItem('lang');
-    this.translate.use(this.lang);
+    // this.translate.use(this.lang);
   }
   title = 'ValvTracAdmin';
 }
