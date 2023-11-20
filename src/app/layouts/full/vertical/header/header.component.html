@@ -48,7 +48,11 @@
   <!-- --------------------------------------------------------------- -->
   <button [matMenuTriggerFor]="flags" mat-icon-button class="m-r-5">
     <img
-      [src]="selectedLanguage.icon"
+      [src]="
+        lang == 'es'
+          ? 'assets/images/flag/icon-flag-es.svg'
+          : 'assets/images/flag/icon-flag-en.svg'
+      "
       class="rounded-circle object-cover icon-20"
     />
   </button>

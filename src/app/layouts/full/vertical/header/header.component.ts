@@ -68,12 +68,12 @@ export class HeaderComponent {
 
   showFiller = false;
 
-  public selectedLanguage: any = {
-    language: 'English',
-    code: 'en',
-    type: 'US',
-    icon: 'assets/images/flag/icon-flag-en.svg',
-  };
+  // public selectedLanguage: any = {
+  //   language: 'English',
+  //   code: 'en',
+  //   type: 'US',
+  //   icon: 'assets/images/flag/icon-flag-en.svg',
+  // };
 
   public languages: any[] = [
     {
@@ -108,7 +108,6 @@ export class HeaderComponent {
   changeLanguage(lang: any): void {
     localStorage.setItem('lang', lang.code);
     window.location.reload();
-    // this.translate.use(lang.code);
   }
 
   settings: settings[] = [
