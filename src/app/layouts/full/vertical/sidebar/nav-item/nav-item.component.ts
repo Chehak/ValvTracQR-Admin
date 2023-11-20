@@ -59,8 +59,8 @@ export class AppNavItemComponent implements OnChanges {
     if (this.depth === undefined) {
       this.depth = 0;
     }
-    this.lang = localStorage.getItem('lang');
-    this.translateService.use(this.lang);
+    // this.lang = localStorage.getItem('lang');
+    // this.translateService.use(this.lang);
   }
 
   ngOnChanges() {
