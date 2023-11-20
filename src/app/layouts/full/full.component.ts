@@ -21,6 +21,7 @@ import { AppHorizontalSidebarComponent } from './horizontal/sidebar/sidebar.comp
 import { AppBreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { CustomizerComponent } from './shared/customizer/customizer.component';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -195,10 +196,16 @@ export class FullComponent implements OnInit {
     private router: Router,
     private breakpointObserver: BreakpointObserver,
     private navService: NavService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private http: HttpClient
   ) {
     this.lang = localStorage.getItem('lang');
-    this.translateService.use(this.lang);
+    const dynamicPath = './assets/i18n/' + this.lang + '.json';
+
+    this.http.get(dynamicPath).subscribe((data) => {
+      console.log(data);
+      this.translateService.use(this.lang);
+    });
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
       .observe([MOBILE_VIEW, TABLET_VIEW, MONITOR_VIEW, BELOWMONITOR])

@@ -9,11 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent implements OnInit {
-  lang: any;
-  constructor(private translateService: TranslateService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.lang = localStorage.getItem('lang');
-    // this.translateService.use(this.lang);
-  }
+  ngOnInit(): void {}
 }
