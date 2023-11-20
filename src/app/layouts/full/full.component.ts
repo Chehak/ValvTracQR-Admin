@@ -192,20 +192,9 @@ export class FullComponent implements OnInit {
 
   constructor(
     private settings: CoreService,
-    private mediaMatcher: MediaMatcher,
     private router: Router,
-    private breakpointObserver: BreakpointObserver,
-    private navService: NavService,
-    private translateService: TranslateService,
-    private http: HttpClient
+    private breakpointObserver: BreakpointObserver
   ) {
-    this.lang = localStorage.getItem('lang');
-    const dynamicPath = './assets/i18n/' + this.lang + '.json';
-
-    this.http.get(dynamicPath).subscribe((data) => {
-      console.log(data);
-      // this.translateService.use(this.lang);
-    });
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
       .observe([MOBILE_VIEW, TABLET_VIEW, MONITOR_VIEW, BELOWMONITOR])

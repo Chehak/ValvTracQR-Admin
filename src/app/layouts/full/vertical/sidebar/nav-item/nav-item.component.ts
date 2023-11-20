@@ -21,6 +21,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-nav-item',
@@ -42,7 +43,6 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 export class AppNavItemComponent implements OnChanges {
   @Output() toggleMobileLink: any = new EventEmitter<void>();
   @Output() notify: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   expanded: any = false;
   disabled: any = false;
   twoLines: any = false;

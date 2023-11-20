@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -8,10 +9,13 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   lang: any;
-  constructor(private translate: TranslateService) {
-    // console.log('hitted');
-    // this.lang = localStorage.getItem('lang');
-    // this.translate.use(this.lang);
+  constructor(private translate: TranslateService, private http: HttpClient) {
+    this.lang = localStorage.getItem('lang') || 'en';
+    const dynamicPath = './assets/i18n/' + this.lang + '.json';
+
+    this.http.get(dynamicPath).subscribe((data: any) => {
+      this.translate.use(this.lang);
+    });
   }
   title = 'ValvTracAdmin';
 }
