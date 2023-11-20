@@ -108,7 +108,7 @@ export class HeaderComponent {
   changeLanguage(lang: any): void {
     localStorage.setItem('lang', lang.code);
     window.location.reload();
-    this.translate.use(lang.code);
+    // this.translate.use(lang.code);
   }
 
   settings: settings[] = [

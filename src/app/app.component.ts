@@ -16,6 +16,6 @@ export class AppComponent {
 
   switchLanguage(lang: any) {
     localStorage.setItem('lang', lang);
-    this.translate.use(lang);
+    // this.translate.use(lang);
   }
 }
