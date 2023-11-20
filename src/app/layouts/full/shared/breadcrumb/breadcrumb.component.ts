@@ -25,8 +25,6 @@ export class AppBreadcrumbComponent {
     private location: Location,
     private translateService: TranslateService
   ) {
-    // this.lang = localStorage.getItem('lang');
-    // this.translateService.use(this.lang);
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .pipe(map(() => this.activatedRoute))

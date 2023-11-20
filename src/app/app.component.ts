@@ -11,11 +11,8 @@ export class AppComponent {
   lang: any;
   constructor(private translate: TranslateService, private http: HttpClient) {
     this.lang = localStorage.getItem('lang') || 'en';
-    const dynamicPath = './assets/i18n/' + this.lang + '.json';
 
-    this.http.get(dynamicPath).subscribe((data: any) => {
-      this.translate.use(this.lang);
-    });
+    this.translate.use(this.lang);
   }
   title = 'ValvTracAdmin';
 }

@@ -66,8 +66,13 @@ export class ApiComponent implements AfterViewInit {
     private router: Router,
     private translateService: TranslateService
   ) {
-    this.lang = localStorage.getItem('lang');
-    this.translateService.use(this.lang);
+    console.log('hitted');
+
+    this.switchLanguage(localStorage.getItem('lang'));
+  }
+
+  switchLanguage(lang: any) {
+    this.translateService.use(lang);
   }
 
   ngAfterViewInit(): void {
