@@ -49,18 +49,11 @@ export class AppNavItemComponent implements OnChanges {
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item: NavItem | any;
   @Input() depth: any;
-  lang: any;
 
-  constructor(
-    public navService: NavService,
-    public router: Router,
-    public translateService: TranslateService
-  ) {
+  constructor(public navService: NavService, public router: Router) {
     if (this.depth === undefined) {
       this.depth = 0;
     }
-    this.lang = localStorage.getItem('lang');
-    this.translateService.use(this.lang);
   }
 
   ngOnChanges() {

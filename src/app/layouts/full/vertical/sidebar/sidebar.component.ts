@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BrandingComponent } from './branding.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,7 +9,11 @@ import { BrandingComponent } from './branding.component';
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent implements OnInit {
-  constructor() {}
+  lang: any;
+  constructor(private translateService: TranslateService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
+  }
 }
