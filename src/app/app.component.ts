@@ -7,15 +7,11 @@ import { TranslateService } from '@ngx-translate/core';
   // styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  lang: any;
   constructor(private translate: TranslateService) {
     console.log('hitted');
-
-    this.switchLanguage(localStorage.getItem('lang') || 'en');
+    this.lang = localStorage.getItem('lang');
+    this.translate.use(this.lang);
   }
   title = 'ValvTracAdmin';
-
-  switchLanguage(lang: any) {
-    localStorage.setItem('lang', lang);
-    this.translate.use(lang);
-  }
 }
