@@ -32,7 +32,7 @@ import { AlphabetOnlyDirective } from './directives/alphabet-only.directive';
 import { HttpServiceService } from './services/http-service.service';
 
 export function HttpLoaderFactory(http: HttpClient): any {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http);
 }
 
 @NgModule({
@@ -69,6 +69,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
       useClass: HttpServiceService,
       multi: true,
     },
+    HttpClient,
     NgxUiLoaderService,
   ],
   bootstrap: [AppComponent],

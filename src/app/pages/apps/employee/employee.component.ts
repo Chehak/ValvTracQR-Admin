@@ -174,8 +174,11 @@ export class AppEmployeeComponent implements AfterViewInit {
     public translateService: TranslateService
   ) {}
 
+  lang: any;
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
   }
 
   applyFilter(filterValue: string): void {

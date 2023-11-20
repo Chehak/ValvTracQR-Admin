@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Observable, map, startWith } from 'rxjs';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface PeriodicElement {
   orderOnSchedule: number;
@@ -55,6 +56,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./additional-fields.component.css'],
 })
 export class AdditionalFieldsComponent {
+  lang: any;
   @ViewChild('table') table!: MatTable<PeriodicElement>;
   displayedColumns: string[] = [
     'order on schedule',
@@ -73,8 +75,12 @@ export class AdditionalFieldsComponent {
   constructor(
     public dialog: MatDialog,
     public service: HttpServiceService,
-    private route: Router
-  ) {}
+    private route: Router,
+    private translateService: TranslateService
+  ) {
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
+  }
 
   ngAfterViewInit(): void {
     this.searchfilteredOptions = this.filterControl.valueChanges.pipe(

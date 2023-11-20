@@ -9,7 +9,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
@@ -107,8 +111,10 @@ import { ShowPausesComponent } from './show-pauses/show-pauses.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslatePipe } from 'src/app/pipe/translate.pipe';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { HttpServiceService } from 'src/app/services/http-service.service';
 
-export function HttpLoaderFactory(http: HttpClient): any {
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -201,6 +207,15 @@ export function HttpLoaderFactory(http: HttpClient): any {
     UpdateApiKeyComponent,
     ShowPausesComponent,
   ],
-  providers: [DatePipe],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpServiceService,
+      multi: true,
+    },
+    HttpClient,
+    NgxUiLoaderService,
+    DatePipe,
+  ],
 })
 export class AppsModule {}

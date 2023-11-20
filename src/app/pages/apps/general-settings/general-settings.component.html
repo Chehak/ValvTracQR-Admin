@@ -10,27 +10,27 @@
           <ng-template mat-tab-label>
             <div class="d-flex align-items-center text-white">
               <i class="fa fa-tasks fa-lg"></i
-              ><span class="m-l-4"> ORDERS</span>
+              ><span class="m-l-4"> {{ "ORDERS" | translate }}</span>
             </div>
           </ng-template>
           <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
             <ul class="text-white">
               <li>
-                <mat-slide-toggle color="primary"
-                  >Check to display cancelled and close orders</mat-slide-toggle
-                >
+                <mat-slide-toggle color="primary">{{
+                  "Check to display cancelled and close orders" | translate
+                }}</mat-slide-toggle>
               </li>
               <li>
-                <mat-slide-toggle color="primary"
-                  >Check to display files attached to orders on shop
-                  floor</mat-slide-toggle
-                >
+                <mat-slide-toggle color="primary">{{
+                  "Check to display files attached to orders on shop floor"
+                    | translate
+                }}</mat-slide-toggle>
               </li>
               <li>
-                <mat-slide-toggle color="primary"
-                  >Disable automatic product creation while adding new order,
-                  when product of the same name doesn't exist</mat-slide-toggle
-                >
+                <mat-slide-toggle color="primary">{{
+                  "Disable automatic product creation while adding new order, when product of the same name doesn't exist"
+                    | translate
+                }}</mat-slide-toggle>
               </li>
             </ul>
           </div>
@@ -40,70 +40,89 @@
           <ng-template mat-tab-label>
             <div class="d-flex align-items-center text-white">
               <i class="fa fa-cogs fa-lg"></i
-              ><span class="m-l-4"> PRODUCTION SCHEDULE</span>
+              ><span class="m-l-4">
+                {{ "PRODUCTION SCHEDULE" | translate }}</span
+              >
             </div>
           </ng-template>
           <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
             <ul class="text-white">
               <li>
-                <mat-slide-toggle color="primary"
-                  >Check to display inactive tasks</mat-slide-toggle
-                >
+                <mat-slide-toggle color="primary">{{
+                  "Check to display inactive tasks" | translate
+                }}</mat-slide-toggle>
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Check to hide done tasks
+                  {{ "Check to hide done tasks" | translate }}
                 </mat-slide-toggle>
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Check to display date when manufacturing tasks was
-                  added</mat-slide-toggle
+                  {{
+                    "Check to display date when manufacturing tasks was added"
+                      | translate
+                  }}</mat-slide-toggle
                 >
               </li>
 
               <li>
                 <mat-slide-toggle color="primary">
-                  Check to display who added manufacturing
-                  tasks</mat-slide-toggle
+                  {{
+                    "Check to display who added manufacturing tasks" | translate
+                  }}</mat-slide-toggle
                 >
               </li>
 
               <li>
                 <mat-slide-toggle color="primary">
-                  Check to display client info on the production
-                  schedule</mat-slide-toggle
+                  {{
+                    "Check to display client info on the production schedule"
+                      | translate
+                  }}</mat-slide-toggle
                 >
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Check to display client's phone number and e-mail on the
-                  production schedule</mat-slide-toggle
+                  {{
+                    " Check to display client'\s phone number and e-mail on the production schedule"
+                      | translate
+                  }}</mat-slide-toggle
                 >
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Check to display external order ID on production schedule and
-                  dashboard</mat-slide-toggle
+                  {{
+                    "Check to display external order ID on production schedule and dashboard"
+                      | translate
+                  }}</mat-slide-toggle
                 >
               </li>
 
               <li>
                 <mat-slide-toggle color="primary">
-                  Check manufacturing tasks waiting for their
-                  predecessor</mat-slide-toggle
+                  {{
+                    "Check manufacturing tasks waiting for their predecessor"
+                      | translate
+                  }}</mat-slide-toggle
                 >
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Disallow workers to start any tasks before they clock in
+                  {{
+                    "Disallow workers to start any tasks before they clock in"
+                      | translate
+                  }}
                 </mat-slide-toggle>
                 <div class="dot m-t-4">
                   <i-tabler
                     name="question-mark"
                     class="iconStyle text-white text-align-center"
                     #tooltip="matTooltip"
-                    matTooltip="If this option is enabled,a worker who does not clock in,while clicking any production order,they will appear on the workers list as inactive with a comment that they must first clock in before starting any task."
+                    matTooltip="{{
+                      'If this option is enabled,a worker who does not clock in,while clicking any production order,they will appear on the workers list as inactive with a comment that they must first clock in before starting any task.'
+                        | translate
+                    }}"
                     matTooltipPosition="right"
                     matTooltipHideDelay="100000"
                   ></i-tabler>
@@ -111,7 +130,10 @@
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Hide efficiency on production schedule for workers
+                  {{
+                    "Hide efficiency on production schedule for workers"
+                      | translate
+                  }}
                 </mat-slide-toggle>
                 <div class="dot m-t-4">
                   <i-tabler
@@ -126,24 +148,27 @@
               </li>
 
               <li>
-                <mat-slide-toggle
-                  >Mark red overdue manufacturing tasks</mat-slide-toggle
-                >
+                <mat-slide-toggle>{{
+                  "Mark red overdue manufacturing tasks" | translate
+                }}</mat-slide-toggle>
               </li>
               <li>
-                <mat-slide-toggle
-                  >Hide from production schedule machine/operation without
-                  manufacturing tasks</mat-slide-toggle
-                >
+                <mat-slide-toggle>{{
+                  "Hide from production schedule machine/operation without manufacturing tasks"
+                    | translate
+                }}</mat-slide-toggle>
               </li>
               <li>
-                <mat-slide-toggle
-                  >Hide barcode/RFID from production schedule</mat-slide-toggle
-                >
+                <mat-slide-toggle>{{
+                  "Hide barcode/RFID from production schedule" | translate
+                }}</mat-slide-toggle>
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Allow workers to work on one task only at the same time
+                  {{
+                    "Allow workers to work on one task only at the same time"
+                      | translate
+                  }}
                 </mat-slide-toggle>
                 <div class="dot m-t-4">
                   <i-tabler
@@ -158,9 +183,14 @@
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Show the sum of all products on each machine/operation
+                  {{
+                    "Show the sum of all products on each machine/operation"
+                      | translate
+                  }}
                 </mat-slide-toggle>
-                <span class="background m-l-4"><b>new</b></span>
+                <span class="background m-l-4"
+                  ><b>{{ "new" | translate }}</b></span
+                >
                 <div class="dot m-t-4">
                   <i-tabler
                     name="question-mark"
@@ -174,9 +204,13 @@
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Let the external order ID be used for barcodes
+                  {{
+                    "Let the external order ID be used for barcodes" | translate
+                  }}
                 </mat-slide-toggle>
-                <span class="background m-l-4"><b>new</b></span>
+                <span class="background m-l-4"
+                  ><b>{{ "new" | translate }}</b></span
+                >
                 <div class="dot m-t-4">
                   <i-tabler
                     name="question-mark"
@@ -190,9 +224,14 @@
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Show "Add pieces" button while working on manufacturing tasks
+                  {{
+                    'Show "Add pieces" button while working on manufacturing tasks'
+                      | translate
+                  }}
                 </mat-slide-toggle>
-                <span class="background m-l-4"><b>new</b></span>
+                <span class="background m-l-4"
+                  ><b>{{ "new" | translate }}</b></span
+                >
                 <div class="dot m-t-4">
                   <i-tabler
                     name="question-mark"
@@ -206,27 +245,38 @@
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Enable use of QR code
+                  {{ "Enable use of QR code" | translate }}
                 </mat-slide-toggle>
-                <span class="background m-l-4"><b>new</b></span>
+                <span class="background m-l-4"
+                  ><b>{{ "new" | translate }}</b></span
+                >
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Enable the ability to add photos from production by workers
+                  {{
+                    "Enable the ability to add photos from production by workers"
+                      | translate
+                  }}
                 </mat-slide-toggle>
-                <span class="background m-l-4"><b>new</b></span>
+                <span class="background m-l-4"
+                  ><b>{{ "new" | translate }}</b></span
+                >
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Prompt the amount of used raw material
+                  {{ "Prompt the amount of used raw material" | translate }}
                 </mat-slide-toggle>
-                <span class="background m-l-4"><b>new</b></span>
+                <span class="background m-l-4"
+                  ><b>{{ "new" | translate }}</b></span
+                >
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Hide "Finished product" checkbox from plan
+                  {{ 'Hide "Finished product" checkbox from plan' | translate }}
                 </mat-slide-toggle>
-                <span class="background m-l-4"><b>new</b></span>
+                <span class="background m-l-4"
+                  ><b>{{ "new" | translate }}</b></span
+                >
                 <div class="dot m-t-4">
                   <i-tabler
                     name="question-mark"
@@ -240,16 +290,22 @@
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Show scheduler on the shop floor views
+                  {{ "Show scheduler on the shop floor views" | translate }}
                 </mat-slide-toggle>
-                <span class="background m-l-4"><b>new</b></span>
+                <span class="background m-l-4"
+                  ><b>{{ "new" | translate }}</b></span
+                >
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Hide buttons for clock-in/clock out and pause from shop floor
-                  view
+                  {{
+                    "Hide buttons for clock-in/clock out and pause from shop floor view"
+                      | translate
+                  }}
                 </mat-slide-toggle>
-                <span class="background m-l-4"><b>new</b></span>
+                <span class="background m-l-4"
+                  ><b>{{ "new" | translate }}</b></span
+                >
               </li>
             </ul>
           </div>
@@ -259,22 +315,24 @@
           <ng-template mat-tab-label>
             <div class="d-flex align-items-center text-white">
               <i class="fa fa-cubes fa-lg"></i
-              ><span class="m-l-4">PRODUCTS</span>
+              ><span class="m-l-4">{{ "PRODUCTS" | translate }}</span>
             </div>
           </ng-template>
           <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
             <ul class="text-white">
               <li>
                 <mat-slide-toggle color="primary">
-                  Disable the ability to add new products after pressing enter
-                  in the product field
+                  {{
+                    "Disable the ability to add new products after pressing enter  in the product field"
+                      | translate
+                  }}
                 </mat-slide-toggle>
               </li>
               <li>
-                <mat-slide-toggle color="primary"
-                  >Enable to add price for products and orders (additional
-                  fields: price, tax and currency)</mat-slide-toggle
-                >
+                <mat-slide-toggle color="primary">{{
+                  "Enable to add price for products and orders (additional fields: price, tax and currency)"
+                    | translate
+                }}</mat-slide-toggle>
                 <div class="dot m-t-4">
                   <i-tabler
                     name="question-mark"
@@ -287,20 +345,28 @@
                 </div>
                 <div>
                   <h5 style="font-size: 15px; margin-top: 5px">
-                    Default efficiency unit
+                    {{ "Default efficiency unit" | translate }}
                   </h5>
                   <div class="row">
                     <div class="col-md-3">
-                      <mat-slide-toggle> Products per hour </mat-slide-toggle>
+                      <mat-slide-toggle>
+                        {{ "Products per hour" | translate }}
+                      </mat-slide-toggle>
                     </div>
                     <div class="col-md-3">
-                      <mat-slide-toggle> Norm in seconds </mat-slide-toggle>
+                      <mat-slide-toggle>
+                        {{ "Norm in seconds" | translate }}
+                      </mat-slide-toggle>
                     </div>
                     <div class="col-md-3">
-                      <mat-slide-toggle> Norm in minutes </mat-slide-toggle>
+                      <mat-slide-toggle>
+                        {{ "Norm in minutes" | translate }}
+                      </mat-slide-toggle>
                     </div>
                     <div class="col-md-3">
-                      <mat-slide-toggle> Norm in hours </mat-slide-toggle>
+                      <mat-slide-toggle>
+                        {{ "Norm in hours" | translate }}
+                      </mat-slide-toggle>
                     </div>
                   </div>
                 </div>
@@ -313,43 +379,52 @@
           <ng-template mat-tab-label>
             <div class="d-flex align-items-center text-white">
               <i class="fa fa-print fa-lg"></i>
-              <span class="m-l-4">PRINTS</span>
+              <span class="m-l-4">{{ "PRINTS" | translate }}</span>
             </div>
           </ng-template>
           <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
             <ul class="text-white">
               <li>
-                <mat-slide-toggle color="primary"
-                  >Disable printing of manufacturing task from shop
-                  floor</mat-slide-toggle
-                >
+                <mat-slide-toggle color="primary">{{
+                  "Disable printing of manufacturing task from shop floor"
+                    | translate
+                }}</mat-slide-toggle>
               </li>
               <li>
-                <mat-slide-toggle color="primary"
-                  >Disable printing of pallet card from shop
-                  floor</mat-slide-toggle
+                <mat-slide-toggle color="primary">{{
+                  "Disable printing of pallet card from shop floor" | translate
+                }}</mat-slide-toggle>
+              </li>
+              <li>
+                <mat-slide-toggle color="primary">
+                  {{
+                    "Disable printing of label from shop floor" | translate
+                  }}</mat-slide-toggle
                 >
               </li>
               <li>
                 <mat-slide-toggle color="primary">
-                  Disable printing of label from shop floor</mat-slide-toggle
-                >
-              </li>
-              <li>
-                <mat-slide-toggle color="primary">
-                  Hide name and last name of worker, from pallet cards and
-                  labels</mat-slide-toggle
+                  {{
+                    "Hide name and last name of worker, from pallet cards and labels"
+                      | translate
+                  }}</mat-slide-toggle
                 >
               </li>
               <li>
                 <h5 style="font-size: 15px">
-                  Choose template for printing order and tasks:
+                  {{
+                    "Choose template for printing order and tasks" | translate
+                  }}:
                 </h5>
                 <mat-slide-toggle color="primary">
-                  Enable showing planned and confirmed dates on PDF print with
-                  order</mat-slide-toggle
+                  {{
+                    "Enable showing planned and confirmed dates on PDF print with order"
+                      | translate
+                  }}</mat-slide-toggle
                 >
-                <span class="background m-l-4"><b>new</b></span>
+                <span class="background m-l-4"
+                  ><b>{{ "new" | translate }}</b></span
+                >
                 <div class="dot m-t-4">
                   <i-tabler
                     name="question-mark"
@@ -363,23 +438,35 @@
 
                 <div class="row m-t-8">
                   <div class="col-md-2">
-                    <mat-slide-toggle>Default</mat-slide-toggle>
+                    <mat-slide-toggle>{{
+                      "Default" | translate
+                    }}</mat-slide-toggle>
                   </div>
                   <div class="col-md-2">
-                    <mat-slide-toggle>Custom 1</mat-slide-toggle>
+                    <mat-slide-toggle
+                      >{{ "Custom" | translate }} 1</mat-slide-toggle
+                    >
                   </div>
                   <div class="col-md-2">
-                    <mat-slide-toggle>Custom 2</mat-slide-toggle>
+                    <mat-slide-toggle
+                      >{{ "Custom" | translate }} 2</mat-slide-toggle
+                    >
                   </div>
                   <div class="col-md-6">
-                    <mat-slide-toggle>Custom 6 - By Desktops</mat-slide-toggle>
+                    <mat-slide-toggle
+                      >{{ "Custom" | translate }} 6 -
+                      {{ "By Desktops" | translate }}</mat-slide-toggle
+                    >
                   </div>
                 </div>
 
                 <div>
                   <div>
                     <h5 style="font-size: 15px" class="m-t-10">
-                      Information attached to the order confirmation
+                      {{
+                        "Information attached to the order confirmation"
+                          | translate
+                      }}
                       <span>
                         <div class="dot">
                           <i-tabler
@@ -403,7 +490,9 @@
                     </mat-form-field>
 
                     <h5 style="font-size: 15px">
-                      Information used for your inventory prints
+                      {{
+                        "Information used for your inventory prints" | translate
+                      }}
                     </h5>
 
                     <div class="row">
@@ -411,7 +500,10 @@
                         <mat-label
                           class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
                           style="font-size: 12px"
-                          >Information attached to the inventory receipts<span>
+                          >{{
+                            "Information attached to the inventory receipts"
+                              | translate
+                          }}<span>
                             <div class="dot">
                               <i-tabler
                                 name="question-mark"
@@ -436,7 +528,10 @@
                         <mat-label
                           class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
                           style="font-size: 12px"
-                          >Information attached to the inventory releases<span>
+                          >{{
+                            "Information attached to the inventory releases"
+                              | translate
+                          }}<span>
                             <div class="dot">
                               <i-tabler
                                 name="question-mark"
@@ -461,7 +556,10 @@
                         <mat-label
                           class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
                           style="font-size: 12px"
-                          >Information attached to the supplier order<span>
+                          >{{
+                            "Information attached to the supplier order"
+                              | translate
+                          }}<span>
                             <div class="dot">
                               <i-tabler
                                 name="question-mark"
@@ -494,16 +592,16 @@
           <ng-template mat-tab-label>
             <div class="d-flex align-items-center text-white">
               <i class="fa fa-print fa-lg"></i>
-              <span class="m-l-4">OTHERS</span>
+              <span class="m-l-4">{{ "OTHERS" | translate }}</span>
             </div>
           </ng-template>
           <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
             <ul class="text-white">
               <li>
-                <mat-slide-toggle color="primary"
-                  >Hide eye icon (for seeing typed password) on login
-                  page</mat-slide-toggle
-                >
+                <mat-slide-toggle color="primary">{{
+                  "Hide eye icon (for seeing typed password) on login page"
+                    | translate
+                }}</mat-slide-toggle>
               </li>
             </ul>
           </div>
@@ -513,26 +611,26 @@
           <ng-template mat-tab-label>
             <div class="d-flex align-items-center text-white">
               <i class="fa fa-truck fa-lg"></i>
-              <span class="m-l-4">INVENTORY</span>
+              <span class="m-l-4">{{ "INVENTORY" | translate }}</span>
             </div>
           </ng-template>
           <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
             <ul class="text-white">
               <li>
-                <mat-slide-toggle color="primary"
-                  >Enable multiple inventory</mat-slide-toggle
-                >
+                <mat-slide-toggle color="primary">{{
+                  "Enable multiple inventory" | translate
+                }}</mat-slide-toggle>
               </li>
               <li>
-                <mat-slide-toggle color="primary"
-                  >Stop counting the usage of raw materials in stock
-                  level</mat-slide-toggle
-                >
+                <mat-slide-toggle color="primary">{{
+                  "Stop counting the usage of raw materials in stock level"
+                    | translate
+                }}</mat-slide-toggle>
               </li>
               <li>
-                <mat-slide-toggle color="primary"
-                  >Enable your finished product inventory</mat-slide-toggle
-                >
+                <mat-slide-toggle color="primary">{{
+                  "Enable your finished product inventory" | translate
+                }}</mat-slide-toggle>
               </li>
             </ul>
           </div>

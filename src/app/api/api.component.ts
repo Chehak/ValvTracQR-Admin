@@ -2,6 +2,7 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface Keys {
   id: number;
@@ -39,6 +40,7 @@ const key = [
   styleUrls: ['./api.component.css'],
 })
 export class ApiComponent implements AfterViewInit {
+  lang: any;
   pageSize: number = 10;
   @ViewChild(MatTable, { static: true }) table: MatTable<any> =
     Object.create(null);
@@ -60,7 +62,13 @@ export class ApiComponent implements AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
     Object.create(null);
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private translateService: TranslateService
+  ) {
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

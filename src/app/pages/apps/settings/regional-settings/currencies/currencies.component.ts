@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 
 @Component({
@@ -11,11 +12,14 @@ export class CurrenciesComponent {
   form: FormGroup;
   activeButtonIndex: number = -1;
   currencyResponse: any[] = [];
-
+  lang: any;
   constructor(
     private fb: FormBuilder,
-    private httpService: HttpServiceService
+    private httpService: HttpServiceService,
+    private translateService: TranslateService
   ) {
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
     this.getCurrencies();
     this.form = this.fb.group({
       currencies: this.fb.array([

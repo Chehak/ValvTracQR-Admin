@@ -1,17 +1,21 @@
 <div class="text-right m-b-10">
   <button mat-flat-button (click)="addUnit()" color="primary">
-    + Add Unit
+    + {{ "Add" | translate }} {{ "Unit" | translate }}
   </button>
 </div>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
   <div class="row m-b-10">
     <div class="col">
-      <b>Delete</b>
+      <b>{{ "Delete" | translate }}</b>
     </div>
 
-    <div class="col-10 text-center"><b>Unit</b></div>
-    <div class="col"><b>Default</b></div>
+    <div class="col-10 text-center">
+      <b>{{ "Unit" | translate }}</b>
+    </div>
+    <div class="col">
+      <b>{{ "Default" | translate }}</b>
+    </div>
   </div>
   <div formArrayName="units">
     <div *ngFor="let units of unit.controls; let i = index">
@@ -54,5 +58,7 @@
       </div>
     </div>
   </div>
-  <button mat-flat-button color="primary" class="m-t-4">Save</button>
+  <button mat-flat-button color="primary" class="m-t-4">
+    {{ "Save" | translate }}
+  </button>
 </form>

@@ -4,6 +4,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface PeriodicElement {
   id: number;
@@ -18,12 +19,17 @@ export interface PeriodicElement {
 })
 export class TagsComponent implements OnInit {
   items: any[] = [];
+  lang: any;
   dataSource = new MatTableDataSource(this.items);
   constructor(
     public dialog: MatDialog,
     public service: HttpServiceService,
-    private route: Router
-  ) {}
+    private route: Router,
+    private translateService: TranslateService
+  ) {
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
+  }
 
   @ViewChild('table') table!: MatTable<PeriodicElement>;
   displayedColumns: string[] = ['id', 'name', 'color', 'action'];

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 
 @Component({
@@ -9,13 +10,17 @@ import { HttpServiceService } from 'src/app/services/http-service.service';
 })
 export class UnitsComponent {
   form: FormGroup;
+  lang: any;
   activeButtonIndex: number = -1;
   unitResponse: any[] = [];
   constructor(
     private fb: FormBuilder,
-    private httpService: HttpServiceService
+    private httpService: HttpServiceService,
+    private translateService: TranslateService
   ) {
     this.getUnits();
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
     this.form = this.fb.group({
       units: this.fb.array([
         this.fb.group({

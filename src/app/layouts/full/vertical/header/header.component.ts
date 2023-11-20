@@ -59,6 +59,7 @@ interface quicklinks {
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
+  lang: any;
   @Input() showToggle = true;
   @Input() toggleChecked = false;
   @Output() toggleMobileNav = new EventEmitter<void>();
@@ -93,7 +94,7 @@ export class HeaderComponent {
     public dialog: MatDialog,
     private translate: TranslateService
   ) {
-    translate.setDefaultLang('en');
+    this.lang = localStorage.getItem('lang');
   }
 
   openDialog() {
@@ -105,10 +106,9 @@ export class HeaderComponent {
   }
 
   changeLanguage(lang: any): void {
-    console.log('hhhhhh999');
-
+    localStorage.setItem('lang', lang.code);
+    window.location.reload();
     this.translate.use(lang.code);
-    this.selectedLanguage = lang;
   }
 
   settings: settings[] = [

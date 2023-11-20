@@ -6,17 +6,23 @@
 
 <div class="text-right m-b-10">
   <button mat-flat-button (click)="addVatRate()" color="primary">
-    + Add Vat Rate
+    + {{ "Add" | translate }} {{ "VAT Rate" | translate }}
   </button>
 </div>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
   <div formArrayName="vatRate">
     <div class="row m-b-10">
-      <div class="col"><b>Delete</b></div>
+      <div class="col">
+        <b>{{ "Delete" | translate }}</b>
+      </div>
 
-      <div class="col-10 text-center"><b>Vat Rate</b></div>
-      <div class="col"><b>Default</b></div>
+      <div class="col-10 text-center">
+        <b>{{ "VAT Rate" | translate }}</b>
+      </div>
+      <div class="col">
+        <b>{{ "Default" | translate }}</b>
+      </div>
     </div>
     <div *ngFor="let rate of vat.controls; let i = index">
       <div class="row m-b-10" [formGroupName]="i">
@@ -44,6 +50,6 @@
         </div>
       </div>
     </div>
-    <button mat-flat-button color="primary">Save</button>
+    <button mat-flat-button color="primary">{{ "Save" | translate }}</button>
   </div>
 </form>

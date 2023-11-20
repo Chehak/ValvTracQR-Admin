@@ -52,27 +52,13 @@ export const AppsRoutes: Routes = [
         component: CurrenciesComponent,
         data: {
           title: 'Currencies',
-          urls: [
-            {
-              title: 'Currencies',
-              url: '/settings/regional-settings/currencies',
-            },
-            { title: 'Currencies' },
-          ],
         },
       },
       {
         path: 'vat-rate',
         component: VatRateComponent,
         data: {
-          title: 'Vat Rate',
-          urls: [
-            {
-              title: 'Vat Rate',
-              url: '/settings/regional-settings/vat-rate',
-            },
-            { title: 'Vat Rate' },
-          ],
+          title: 'VAT Rate',
         },
       },
       {
@@ -80,13 +66,6 @@ export const AppsRoutes: Routes = [
         component: UnitsComponent,
         data: {
           title: 'Units',
-          urls: [
-            {
-              title: 'Units',
-              url: '/settings/regional-settings/units',
-            },
-            { title: 'Units' },
-          ],
         },
       },
       {

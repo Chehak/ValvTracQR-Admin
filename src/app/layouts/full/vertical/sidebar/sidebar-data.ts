@@ -31,7 +31,7 @@ export const navItems: NavItem[] = [
           },
 
           {
-            displayName: 'VAT rate',
+            displayName: 'VAT Rate',
             route: 'apps/vat-rate',
           },
 

@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, map, startWith } from 'rxjs';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 
@@ -53,6 +54,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./work-time.component.css'],
 })
 export class WorkTimeComponent {
+  lang: any;
   workerToggle: boolean = true;
   @ViewChild('table') table!: MatTable<PeriodicElement>;
   displayedColumns: string[] = [
@@ -74,8 +76,12 @@ export class WorkTimeComponent {
   constructor(
     public dialog: MatDialog,
     public service: HttpServiceService,
-    private route: Router
-  ) {}
+    private route: Router,
+    private translateService: TranslateService
+  ) {
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
+  }
 
   ngAfterViewInit(): void {
     this.searchfilteredOptions = this.filterControl.valueChanges.pipe(

@@ -10,11 +10,12 @@ export class AppComponent {
   constructor(private translate: TranslateService) {
     console.log('hitted');
 
-    this.switchLanguage('en');
+    this.switchLanguage(localStorage.getItem('lang') || 'en');
   }
   title = 'ValvTracAdmin';
 
-  switchLanguage(lang: 'de' | 'en') {
+  switchLanguage(lang: any) {
+    localStorage.setItem('lang', lang);
     this.translate.use(lang);
   }
 }

@@ -14,6 +14,7 @@ import {
 } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { HttpServiceService } from 'src/app/services/http-service.service';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface Roles {
   id: number;
@@ -43,13 +44,16 @@ export class RolesUsersComponent implements AfterViewInit {
   constructor(
     public dialog: MatDialog,
     public datePipe: DatePipe,
-    public service: HttpServiceService
+    public service: HttpServiceService,
+    public translateService: TranslateService
   ) {
     this.getRoles();
   }
-
+  lang: any;
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.lang = localStorage.getItem('lang');
+    this.translateService.use(this.lang);
   }
 
   applyFilter(filterValue: string): void {

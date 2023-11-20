@@ -1,15 +1,21 @@
 <div class="text-right m-b-10 m-t-10">
   <button mat-flat-button (click)="addCurrency()" color="primary">
-    + Add Currency
+    + {{ "Add Currency" | translate }}
   </button>
 </div>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
   <div class="row m-b-10">
-    <div class="col"><b>Delete</b></div>
+    <div class="col">
+      <b>{{ "Delete" | translate }}</b>
+    </div>
 
-    <div class="col-10 text-center"><b>Currency</b></div>
-    <div class="col"><b>Default</b></div>
+    <div class="col-10 text-center">
+      <b>{{ "Currency" | translate }}</b>
+    </div>
+    <div class="col">
+      <b>{{ "Default" | translate }}</b>
+    </div>
   </div>
   <div formArrayName="currencies">
     <div *ngFor="let currency of curr.controls; let i = index">
@@ -40,7 +46,7 @@
                                                           form?.get('name')?.invalid 
                                                           && form?.get('name')?.errors?.['required']"
           >
-            Tag name is required</mat-error
+            {{ "Tag name is required" | translate }}</mat-error
           >
         </div>
         <div class="col">
@@ -59,5 +65,7 @@
       </div>
     </div>
   </div>
-  <button mat-flat-button color="primary" class="m-t-4">Save</button>
+  <button mat-flat-button color="primary" class="m-t-4">
+    {{ "Save" | translate }}
+  </button>
 </form>
