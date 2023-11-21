@@ -245,4 +245,60 @@ export class HttpServiceService {
       })
     );
   }
+
+  // api key api's
+
+  getApiKeys(): Observable<any> {
+    const API_URL = `${this.baseURL}getAPI`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  addApiKey(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}addAPI`;
+    return this.http.post(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  getApiKeybyId(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}getAPI/${form}`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  updateApiKey(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}updateAPI/${form?.id}`;
+    return this.http.patch(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  deleteAPI(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}deleteAPI/${form}`;
+    return this.http.delete(API_URL, { responseType: 'text' }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchApiKey(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchAPI?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
 }

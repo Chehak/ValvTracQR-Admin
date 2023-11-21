@@ -1,42 +1,52 @@
 <mat-card class="cardWithShadow theme-card">
   <mat-card-content class="b-t-1">
-    <form>
+    <form (ngSubmit)="submit()" [formGroup]="form">
       <!-- input -->
       <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Status</mat-label>
       <mat-form-field appearance="outline" class="w-100">
-        <mat-select value="uk">
-          <mat-option value="uk">Aktyyy</mat-option>
-          <mat-option value="ru">Hkussyu</mat-option>
+        <mat-select formControlName="status">
+          <mat-option value="active">Active</mat-option>
+          <mat-option value="inactive">Inactive</mat-option>
         </mat-select>
+        <mat-error
+          *ngIf="(form?.get('status')?.touched || form?.get('status')?.dirty) &&
+                                                          form?.get('status')?.invalid 
+                                                          && form?.get('status')?.errors?.['required']"
+        >
+          Status is required</mat-error
+        >
       </mat-form-field>
 
       <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Key</mat-label>
       <mat-form-field appearance="outline" class="w-100" color="primary">
-        <input
-          matInput
-          readonly
-          placeholder="cmRNZVN1QTUxU3g0akkxSFRIQzRmc1plZXdtVEIxd3o=-india"
-        />
+        <input matInput readonly formControlName="api" readonly />
       </mat-form-field>
-      <button mat-menu-item class="p-l-0">
-        <span>
-          <mat-checkbox color="primary">Products</mat-checkbox>
-        </span>
-        <br />
-        <span>
-          <mat-checkbox color="primary">Orders</mat-checkbox>
-        </span>
-        <br />
-        <span>
-          <mat-checkbox color="primary">Files</mat-checkbox>
-        </span>
-        <br />
-        <span>
-          <mat-checkbox color="primary">Clients</mat-checkbox>
-        </span>
-      </button>
 
-      <div class="m-t-12">
+      <span>
+        <mat-checkbox color="primary" formControlName="products"
+          >Products</mat-checkbox
+        >
+      </span>
+      <br />
+      <span>
+        <mat-checkbox color="primary" formControlName="orders"
+          >Orders</mat-checkbox
+        >
+      </span>
+      <br />
+      <span>
+        <mat-checkbox color="primary" formControlName="files"
+          >Files</mat-checkbox
+        >
+      </span>
+      <br />
+      <span>
+        <mat-checkbox color="primary" formControlName="clients"
+          >Clients</mat-checkbox
+        >
+      </span>
+
+      <div class="m-t-12 text-right">
         <button mat-flat-button color="primary">Edit</button>
       </div>
     </form>

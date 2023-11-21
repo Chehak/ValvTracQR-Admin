@@ -189,7 +189,7 @@ export const AppsRoutes: Routes = [
         },
       },
       {
-        path: 'update-api-keys',
+        path: 'update-api-keys/:id',
         component: UpdateApiKeyComponent,
         data: {
           title: ' Update API Keys',

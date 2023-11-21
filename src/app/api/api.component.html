@@ -53,7 +53,7 @@
             <div class="d-flex align-items-center">
               <div class="">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  {{ element.Key }}
+                  {{ element.api }}
                 </p>
                 <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
               </div>
@@ -69,10 +69,10 @@
             <div class="d-flex align-items-center">
               <div class="">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  <ng-container *ngIf="element.Products == true">
+                  <ng-container *ngIf="element.products == true">
                     <i-tabler name="check" style="color: #4caf50"></i-tabler>
                   </ng-container>
-                  <ng-container *ngIf="element.Products == false">
+                  <ng-container *ngIf="element.products == false">
                     <i-tabler name="X" style="color: #f44336"></i-tabler>
                   </ng-container>
                 </p>
@@ -90,10 +90,10 @@
             <div class="d-flex align-items-center">
               <div class="">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  <ng-container *ngIf="element.Orders == true">
+                  <ng-container *ngIf="element.orders == true">
                     <i-tabler name="check" style="color: #4caf50"></i-tabler>
                   </ng-container>
-                  <ng-container *ngIf="element.Orders == false">
+                  <ng-container *ngIf="element.orders == false">
                     <i-tabler name="X" style="color: #f44336"></i-tabler>
                   </ng-container>
                 </p>
@@ -110,10 +110,10 @@
             <div class="d-flex align-items-center">
               <div class="">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  <ng-container *ngIf="element.Files == true">
+                  <ng-container *ngIf="element.files == true">
                     <i-tabler name="check" style="color: #4caf50"></i-tabler>
                   </ng-container>
-                  <ng-container *ngIf="element.Files == false">
+                  <ng-container *ngIf="element.files == false">
                     <i-tabler name="X" style="color: #f44336"></i-tabler>
                   </ng-container>
                 </p>
@@ -131,10 +131,10 @@
             <div class="d-flex align-items-center">
               <div class="">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  <ng-container *ngIf="element.Client == true">
+                  <ng-container *ngIf="element.clients == true">
                     <i-tabler name="check" style="color: #4caf50"></i-tabler>
                   </ng-container>
-                  <ng-container *ngIf="element.Client == false">
+                  <ng-container *ngIf="element.clients == false">
                     <i-tabler name="X" style="color: #f44336"></i-tabler>
                   </ng-container>
                 </p>
@@ -151,8 +151,17 @@
           <td mat-cell *matCellDef="let element">
             <div class="d-flex align-items-center">
               <div class="">
-                <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  {{ element.Status }}
+                <p
+                  class="f-w-400 mat-subtitle-1 f-s-14 m-t-0 text-success"
+                  *ngIf="element.status == 'active'"
+                >
+                  Active
+                </p>
+                <p
+                  class="f-w-400 mat-subtitle-1 f-s-14 m-t-0 text-danger"
+                  *ngIf="element.status == 'inactive'"
+                >
+                  Inactive
                 </p>
                 <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
               </div>
@@ -172,10 +181,13 @@
             <a
               class="m-r-10 cursor-pointer text-white"
               style="margin-right: 9px"
-              (click)="redirectUpdate()"
+              (click)="redirectUpdate(element?._id)"
               ><i-tabler name="edit" class="icon-18"></i-tabler
             ></a>
-            <a class="m-r-10 cursor-pointer text-white">
+            <a
+              class="m-r-10 cursor-pointer text-white"
+              (click)="deleteApiKey(element?._id)"
+            >
               <i-tabler name="trash" class="icon-18"></i-tabler>
             </a>
           </td>
@@ -184,12 +196,12 @@
         <tr mat-header-row *matHeaderRowDef="dynamicColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: dynamicColumns"></tr>
       </table>
-      <mat-paginator
+      <!-- <mat-paginator
         [length]="dataSource.data.length"
         [pageSize]="paginator.pageSize"
         [pageSizeOptions]="[10, 20]"
         showFirstLastButtons
-      ></mat-paginator>
+      ></mat-paginator> -->
     </div>
   </mat-card-content>
 </mat-card>

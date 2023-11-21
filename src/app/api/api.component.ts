@@ -3,6 +3,7 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpServiceService } from '../services/http-service.service';
 
 export interface Keys {
   id: number;
@@ -14,26 +15,6 @@ export interface Keys {
   Status: string;
 }
 
-const key = [
-  {
-    id: 1,
-    Key: 'VWk1aW10Q2F4dDFoZDlJa1BfWGw1M01hVEtEMUNfLWs=-india',
-    Products: true,
-    Orders: true,
-    Files: true,
-    Client: true,
-    Status: 'yes',
-  },
-  {
-    id: 2,
-    Key: 'VWk1aW10Q2F4dDFoZDlJa1BfWGw1M01hVEtEMUNfLWs=-india',
-    Products: false,
-    Orders: true,
-    Files: true,
-    Client: true,
-    Status: 'no',
-  },
-];
 @Component({
   selector: 'app-api',
   templateUrl: './api.component.html',
@@ -55,17 +36,20 @@ export class ApiComponent implements AfterViewInit {
     'Status',
     'Actions',
   ];
+  data: any[] = [];
 
   // dynamicColumns: string[] = ['firstname', 'lastname'];
 
-  dataSource = new MatTableDataSource(key);
+  dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
     Object.create(null);
 
   constructor(
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private service: HttpServiceService
   ) {
+    this.getApis();
     console.log('hitted');
 
     this.switchLanguage(localStorage.getItem('lang'));
@@ -80,13 +64,47 @@ export class ApiComponent implements AfterViewInit {
   }
 
   applyFilter(filterValue: string): void {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    setTimeout(() => {
+      this.service.searchApiKey(filterValue).subscribe(
+        (res: any) => {
+          this.dataSource = res;
+        },
+        (error) => {
+          this.service.openSnackBar(error.error.error, 'Close');
+          this.dataSource = new MatTableDataSource(this.data);
+        }
+      );
+    }, 2000);
   }
 
   redirectAdd() {
     this.router.navigate(['/apps/add-api-keys']);
   }
-  redirectUpdate() {
-    this.router.navigate(['/apps/update-api-keys']);
+  redirectUpdate(id: string) {
+    this.router.navigate([`/apps/update-api-keys/${id}`]);
+  }
+
+  getApis() {
+    this.service.getApiKeys().subscribe((res: any) => {
+      console.log(res, 'response');
+      this.dataSource = res;
+      this.data = res;
+    });
+  }
+
+  deleteApiKey(id: string) {
+    if (confirm('Are you sure to delete ')) {
+      this.service.deleteAPI(id).subscribe(
+        (res: any) => {
+          console.log(res, 'del res');
+          this.service.openSnackBar(res, 'Close');
+          this.getApis();
+        },
+        (error) => {
+          console.log(error);
+          this.service.openSnackBar(error.message, 'close');
+        }
+      );
+    }
   }
 }
