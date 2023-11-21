@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(private translate: TranslateService, private http: HttpClient) {
     this.lang = localStorage.getItem('lang') || 'en';
 
-    this.translate.use(this.lang);
+    // this.translate.use(this.lang);
   }
   title = 'ValvTracAdmin';
 }
