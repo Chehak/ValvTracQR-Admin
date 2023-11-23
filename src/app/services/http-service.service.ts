@@ -301,4 +301,42 @@ export class HttpServiceService {
       })
     );
   }
+
+  // Additional Fields
+
+  getAdditionalFields(): Observable<any> {
+    const API_URL = `${this.baseURL}getAPI`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  addAdditionalField(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}addField`;
+    return this.http.post(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  getAdditionalFieldId(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}getField/${form}`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  updateAdditionalField(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}updateField/${form?.id}`;
+    return this.http.patch(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
 }
