@@ -1,4 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
@@ -8,6 +14,7 @@ import { Observable, map, startWith } from 'rxjs';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 
 export interface PeriodicElement {
+  id: number;
   worker: string;
   clockIn: Date;
   clockOut: Date;
@@ -19,6 +26,7 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
+    id: 1,
     worker: 'Sam',
     clockIn: new Date('2023-11-02'),
     clockOut: new Date('2023-11-02'),
@@ -29,6 +37,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   },
 
   {
+    id: 2,
     worker: 'Jack',
     clockIn: new Date('2023-11-02'),
     clockOut: new Date('2023-11-02'),
@@ -38,6 +47,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     comment: 'Good',
   },
   {
+    id: 3,
     worker: 'John',
     clockIn: new Date('2023-11-02'),
     clockOut: new Date('2023-11-02'),
@@ -54,6 +64,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./work-time.component.css'],
 })
 export class WorkTimeComponent {
+  activePopoverId: string | null = null;
+  @ViewChild('toggleButton') toggleButton!: ElementRef;
+  @ViewChild('menu') menu!: ElementRef;
   lang: any;
   workerToggle: boolean = true;
   @ViewChild('table') table!: MatTable<PeriodicElement>;
@@ -77,10 +90,22 @@ export class WorkTimeComponent {
     public dialog: MatDialog,
     public service: HttpServiceService,
     private route: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private renderer: Renderer2
   ) {
     this.lang = localStorage.getItem('lang');
     this.translateService.use(this.lang);
+
+    this.renderer.listen('window', 'click', (e: Event) => {
+      console.log(e, 'event');
+
+      if (
+        e.target !== this.toggleButton.nativeElement &&
+        e.target !== this.menu.nativeElement
+      ) {
+        this.closePopover();
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -106,5 +131,16 @@ export class WorkTimeComponent {
     return this.searchoption.filter((searchoption) =>
       searchoption.toLowerCase().includes(searchfilterValue)
     );
+  }
+
+  togglePopover(popoverId: string) {
+    console.log('popover id', popoverId);
+
+    this.activePopoverId =
+      this.activePopoverId === popoverId ? null : popoverId;
+  }
+
+  closePopover() {
+    this.activePopoverId = null;
   }
 }
