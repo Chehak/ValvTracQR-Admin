@@ -1,5 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -16,46 +21,13 @@ export interface PeriodicElement {
   field: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    orderOnSchedule: 1,
-    assignedTo: 'Products',
-    group: 'Hydrogen',
-    field: 'yes',
-  },
-
-  {
-    orderOnSchedule: 1,
-    assignedTo: 'Orders ',
-    group: 'Helium',
-    field: 'yes',
-  },
-  {
-    orderOnSchedule: 1,
-    assignedTo: 'Orders ',
-    group: 'Lithium',
-    field: 'yes',
-  },
-  {
-    orderOnSchedule: 1,
-    assignedTo: 'Orders ',
-    group: 'Beryllium',
-    field: 'yes',
-  },
-  {
-    orderOnSchedule: 1,
-    assignedTo: 'Orders ',
-    group: 'Boron',
-    field: 'yes',
-  },
-];
-
 @Component({
   selector: 'app-additional-fields',
   templateUrl: './additional-fields.component.html',
   styleUrls: ['./additional-fields.component.css'],
 })
 export class AdditionalFieldsComponent {
+  data: any[] = [];
   lang: any;
   @ViewChild('table') table!: MatTable<PeriodicElement>;
   displayedColumns: string[] = [
@@ -65,11 +37,10 @@ export class AdditionalFieldsComponent {
     'field',
     'action',
   ];
-  dataSource = ELEMENT_DATA;
+  // dataSource = ELEMENT_DATA;
   dragDisabled = true;
-
   filterControl = new FormControl('');
-  searchoption: string[] = ['One', 'Two', 'Three'];
+  searchoption: string[] = ['Default Group'];
   searchfilteredOptions!: Observable<string[]>;
 
   constructor(
@@ -78,6 +49,7 @@ export class AdditionalFieldsComponent {
     private route: Router,
     private translateService: TranslateService
   ) {
+    this.getFields();
     this.lang = localStorage.getItem('lang');
     this.translateService.use(this.lang);
   }
@@ -90,8 +62,8 @@ export class AdditionalFieldsComponent {
   }
 
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
-    const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
-    moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
+    const prevIndex = this.data.findIndex((d) => d === event.item.data);
+    moveItemInArray(this.data, prevIndex, event.currentIndex);
     this.table.renderRows();
   }
 
@@ -101,8 +73,8 @@ export class AdditionalFieldsComponent {
   redirect() {
     this.route.navigate(['/apps/add-additional-fields']);
   }
-  redirectUpdate() {
-    this.route.navigate(['/apps/update-additional-fields']);
+  redirectUpdate(id: string) {
+    this.route.navigate([`/apps/update-additional-fields/${id}`]);
   }
 
   private _searchfilter(value: string): string[] {
@@ -111,5 +83,74 @@ export class AdditionalFieldsComponent {
     return this.searchoption.filter((searchoption) =>
       searchoption.toLowerCase().includes(searchfilterValue)
     );
+  }
+
+  getFields() {
+    this.service.getAdditionalFields().subscribe((res: any) => {
+      console.log(res, 'response');
+      this.data = res;
+    });
+  }
+
+  deleteField(id: string) {
+    if (confirm('Are you sure to delete ')) {
+      this.service.deleteField(id).subscribe(
+        (res: any) => {
+          console.log(res, 'del res');
+          this.service.openSnackBar(res, 'Close');
+          this.getFields();
+        },
+        (error) => {
+          console.log(error);
+          this.service.openSnackBar(error.message, 'close');
+        }
+      );
+    }
+  }
+
+  applyFilterAssigned(filterValue: string): void {
+    console.log(filterValue);
+
+    setTimeout(() => {
+      this.service.searchAssigned(filterValue).subscribe(
+        (res: any) => {
+          this.data = res;
+        },
+        (error) => {
+          this.data = [];
+          this.service.openSnackBar(error.error.error, 'Close');
+        }
+      );
+    }, 1000);
+  }
+
+  applyFilterGroup(filterValue: any): void {
+    console.log(filterValue);
+
+    setTimeout(() => {
+      this.service.searchGroup(filterValue.option.value).subscribe(
+        (res: any) => {
+          this.data = res;
+        },
+        (error) => {
+          this.service.openSnackBar(error.error.error, 'Close');
+          this.data = [];
+        }
+      );
+    }, 2000);
+  }
+
+  applyFilterField(filterValue: string): void {
+    setTimeout(() => {
+      this.service.searchField(filterValue).subscribe(
+        (res: any) => {
+          this.data = res;
+        },
+        (error) => {
+          this.service.openSnackBar(error.error.error, 'Close');
+          this.data = [];
+        }
+      );
+    }, 2000);
   }
 }

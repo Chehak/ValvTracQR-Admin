@@ -119,7 +119,7 @@ export const AppsRoutes: Routes = [
         },
       },
       {
-        path: 'update-additional-fields',
+        path: 'update-additional-fields/:id',
         component: UpdateAdditionalFieldsComponent,
         data: {
           title: 'Update Additional Fields',

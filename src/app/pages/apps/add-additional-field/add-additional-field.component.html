@@ -1,17 +1,22 @@
 <mat-card class="cardWithShadow theme-card">
   <mat-card-content class="b-t-1">
-    <form>
+    <form [formGroup]="fieldForm" (ngSubmit)="submitForm()">
       <!-- input -->
       <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"
         >Assigned to</mat-label
       >
       <mat-form-field appearance="outline" class="w-100">
-        <mat-select value="in">
-          <mat-option value="in">India</mat-option>
-          <mat-option value="us">United States</mat-option>
-          <mat-option value="uk">United Kingdom</mat-option>
-          <mat-option value="ru">Russia</mat-option>
+        <mat-select value="Products" formControlName="assigned">
+          <mat-option value="Products">Products</mat-option>
+          <mat-option value="Orders">Orders</mat-option>
         </mat-select>
+        <mat-error
+          *ngIf="(fieldForm?.get('assigned')?.touched || fieldForm?.get('assigned')?.dirty) &&
+                                                          fieldForm?.get('assigned')?.invalid 
+                                                          && fieldForm?.get('assigned')?.errors?.['required']"
+        >
+          Assigned is required</mat-error
+        >
       </mat-form-field>
 
       <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Group</mat-label>
@@ -21,7 +26,7 @@
           placeholder="Choose group"
           aria-label="Number"
           matInput
-          [formControl]="filterControl"
+          formControlName="group"
           [matAutocomplete]="auto3"
         />
         <mat-autocomplete #auto3="matAutocomplete">
@@ -32,11 +37,25 @@
             {{ searchoption }}
           </mat-option>
         </mat-autocomplete>
+        <mat-error
+          *ngIf="(fieldForm?.get('group')?.touched || fieldForm?.get('group')?.dirty) &&
+                                                          fieldForm?.get('group')?.invalid 
+                                                          && fieldForm?.get('group')?.errors?.['required']"
+        >
+          Group is required</mat-error
+        >
       </mat-form-field>
 
       <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Field</mat-label>
       <mat-form-field appearance="outline" class="w-100" color="primary">
-        <input matInput />
+        <input matInput formControlName="field" />
+        <mat-error
+          *ngIf="(fieldForm?.get('field')?.touched || fieldForm?.get('field')?.dirty) &&
+                                                          fieldForm?.get('field')?.invalid 
+                                                          && fieldForm?.get('field')?.errors?.['required']"
+        >
+          Field is required</mat-error
+        >
         <!-- <mat-hint> We'll never share your email with anyone else.</mat-hint> -->
       </mat-form-field>
       <!-- input -->

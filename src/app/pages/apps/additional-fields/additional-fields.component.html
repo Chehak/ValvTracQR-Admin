@@ -12,9 +12,6 @@
           <!-- routerLink="./apps/add-machines-operations" -->
           {{ "Add" | translate }} {{ "Additional Field" | translate }}
         </button>
-        <button mat-flat-button color="primary">
-          <i-tabler class="" name="tool" matBadgeColor="primary"></i-tabler>
-        </button>
       </div>
     </div>
   </mat-card-content>
@@ -25,10 +22,10 @@
       <table
         mat-table
         #table
-        [dataSource]="dataSource"
+        [dataSource]="data"
         class="mat-elevation-z8"
         cdkDropList
-        [cdkDropListData]="dataSource"
+        [cdkDropListData]="data"
         (cdkDropListDropped)="dropTable($event)"
         class="text-white"
       >
@@ -61,20 +58,21 @@
             {{ "Assigned to" | translate }}
             <form action="" class="m-t-10">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-select value="in">
-                  <mat-option value="in">India</mat-option>
-                  <mat-option value="us">United States</mat-option>
-                  <mat-option value="uk">United Kingdom</mat-option>
-                  <mat-option value="ru">Russia</mat-option>
+                <mat-select
+                  value=""
+                  (selectionChange)="applyFilterAssigned($event.value)"
+                >
+                  <mat-option value="Products">Products</mat-option>
+                  <mat-option value="Orders">Orders</mat-option>
                 </mat-select>
               </mat-form-field>
             </form>
           </th>
           <td mat-cell *matCellDef="let element">
             <div class="d-flex align-items-center">
-              <div class="">
+              <div class="w-100 text-center">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  {{ element.assignedTo }}
+                  {{ element.assigned }}
                 </p>
                 <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
               </div>
@@ -93,13 +91,16 @@
               <mat-form-field class="w-100" appearance="outline">
                 <input
                   type="text"
-                  placeholder="Choose shop floor view"
+                  placeholder="Search..."
                   aria-label="Number"
                   matInput
                   [formControl]="filterControl"
                   [matAutocomplete]="auto3"
                 />
-                <mat-autocomplete #auto3="matAutocomplete">
+                <mat-autocomplete
+                  #auto3="matAutocomplete"
+                  (optionSelected)="applyFilterGroup($event)"
+                >
                   <mat-option
                     *ngFor="let searchoption of searchfilteredOptions | async"
                     [value]="searchoption"
@@ -112,7 +113,7 @@
           </th>
           <td mat-cell *matCellDef="let element">
             <div class="d-flex align-items-center">
-              <div class="">
+              <div class="w-100 text-center">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
                   {{ element.group }}
                 </p>
@@ -132,13 +133,17 @@
             {{ "Field" | translate }}
             <form class="m-t-10">
               <mat-form-field class="w-100" appearance="outline">
-                <input type="text" matInput />
+                <input
+                  type="text"
+                  matInput
+                  (keyup)="applyFilterField($any($event.target).value)"
+                />
               </mat-form-field>
             </form>
           </th>
           <td mat-cell *matCellDef="let element">
             <div class="d-flex align-items-center">
-              <div class="">
+              <div class="w-100 text-center">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
                   {{ element.field }}
                 </p>
@@ -149,18 +154,24 @@
         </ng-container>
 
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef class="f-s-14 f-w-600">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            class="f-s-14 f-w-600"
+            style="vertical-align: top"
+          >
             {{ "Action" | translate }}
           </th>
           <td mat-cell *matCellDef="let element" class="action-link">
             <a
               class="m-r-10 cursor-pointer text-white"
-              (click)="redirectUpdate()"
+              (click)="redirectUpdate(element?._id)"
               ><i-tabler name="edit" class="icon-18"></i-tabler
             ></a>
-            <!--  (click)="openDialog('Update', element)" -->
-            <a class="m-r-10 cursor-pointer text-white">
-              <!--  (click)="openDialog('Delete', element)" -->
+            <a
+              class="m-r-10 cursor-pointer text-white"
+              (click)="deleteField(element?._id)"
+            >
               <i-tabler name="trash" class="icon-18"></i-tabler>
             </a>
           </td>

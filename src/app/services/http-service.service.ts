@@ -305,7 +305,7 @@ export class HttpServiceService {
   // Additional Fields
 
   getAdditionalFields(): Observable<any> {
-    const API_URL = `${this.baseURL}getAPI`;
+    const API_URL = `${this.baseURL}getField`;
     return this.http.get(API_URL).pipe(
       map((res) => {
         return res;
@@ -331,9 +331,45 @@ export class HttpServiceService {
     );
   }
 
+  deleteField(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}deleteField/${form}`;
+    return this.http.delete(API_URL, { responseType: 'text' }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
   updateAdditionalField(form: any): Observable<any> {
     const API_URL = `${this.baseURL}updateField/${form?.id}`;
     return this.http.patch(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchField(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchField?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchGroup(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchGroup?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchAssigned(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchAssigned?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
       map((res) => {
         return res;
       })
