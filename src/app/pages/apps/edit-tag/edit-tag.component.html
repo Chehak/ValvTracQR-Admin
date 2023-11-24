@@ -1,46 +1,54 @@
-<form (ngSubmit)="tagsForm()" [formGroup]="tags">
-  <div class="row">
-    <div class="col-sm-12 d-flex align-items-center">
-      <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Name</mat-label>
-    </div>
-    <div class="col-sm-12">
-      <mat-form-field appearance="outline" class="w-100">
-        <input
-          matInput
-          placeholder="Name"
-          class="m-l-4"
-          formControlName="name"
-        />
-      </mat-form-field>
-      <mat-error
-        *ngIf="(tags?.get('name')?.touched || tags?.get('name')?.dirty) &&
+<mat-card class="m-t-10">
+  <mat-card-content class="cardWithShadow">
+    <form (ngSubmit)="tagsForm()" [formGroup]="tags">
+      <div class="row">
+        <div class="col-sm-12 d-flex align-items-center">
+          <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+            >Name</mat-label
+          >
+        </div>
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline" class="w-100">
+            <input
+              matInput
+              placeholder="Name"
+              class="m-l-4"
+              formControlName="name"
+            />
+          </mat-form-field>
+          <mat-error
+            *ngIf="(tags?.get('name')?.touched || tags?.get('name')?.dirty) &&
                                                           tags?.get('name')?.invalid 
                                                           && tags?.get('name')?.errors?.['required']"
-      >
-        Tag name is required</mat-error
-      >
-    </div>
-  </div>
+          >
+            Tag name is required</mat-error
+          >
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col-sm-12 d-flex align-items-center">
-      <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Color</mat-label>
-    </div>
-    <div class="col-sm-12">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-icon matPrefix class="op-5">
-          <input
-            style="width: 50px"
-            [(colorPicker)]="color"
-            [style.background]="color"
-            [cpPosition]="'bottom'"
-          />
-        </mat-icon>
-        <input matInput placeholder="{{ color }}" class="m-l-4" />
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="m-t-12">
-    <button mat-flat-button color="primary">Update</button>
-  </div>
-</form>
+      <div class="row">
+        <div class="col-sm-12 d-flex align-items-center">
+          <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+            >Color</mat-label
+          >
+        </div>
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-icon matPrefix class="op-5">
+              <input
+                style="width: 50px"
+                [(colorPicker)]="color"
+                [style.background]="color"
+                [cpPosition]="'top'"
+              />
+            </mat-icon>
+            <input matInput placeholder="{{ color }}" class="m-l-4" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="m-t-12">
+        <button mat-flat-button color="primary">Update</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

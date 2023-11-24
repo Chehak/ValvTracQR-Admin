@@ -36,3 +36,16 @@ svg.mdc-switch__icon.mdc-switch__icon--on {
     border: 1px solid black;
     font-weight: 600;
 }
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    padding-top: 8px !important;
+    padding-bottom: 0px !important;
+}
+
+.mat-mdc-form-field-infix {
+    min-height: 39px !important;
+}
+
+.mat-mdc-option {
+    min-height: 31px !important;
+}

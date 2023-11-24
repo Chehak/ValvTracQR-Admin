@@ -65,8 +65,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class WorkTimeComponent {
   activePopoverId: string | null = null;
-  @ViewChild('toggleButton') toggleButton!: ElementRef;
-  @ViewChild('menu') menu!: ElementRef;
+  activePopoverIdout: string | null = null;
   lang: any;
   workerToggle: boolean = true;
   @ViewChild('table') table!: MatTable<PeriodicElement>;
@@ -95,17 +94,6 @@ export class WorkTimeComponent {
   ) {
     this.lang = localStorage.getItem('lang');
     this.translateService.use(this.lang);
-
-    this.renderer.listen('window', 'click', (e: Event) => {
-      console.log(e, 'event');
-
-      if (
-        e.target !== this.toggleButton.nativeElement &&
-        e.target !== this.menu.nativeElement
-      ) {
-        this.closePopover();
-      }
-    });
   }
 
   ngAfterViewInit(): void {
@@ -134,13 +122,23 @@ export class WorkTimeComponent {
   }
 
   togglePopover(popoverId: string) {
-    console.log('popover id', popoverId);
+    this.activePopoverIdout = null;
 
     this.activePopoverId =
       this.activePopoverId === popoverId ? null : popoverId;
   }
 
+  togglePopoverOut(popoverId: string) {
+    this.activePopoverId = null;
+
+    this.activePopoverIdout =
+      this.activePopoverIdout === popoverId ? null : popoverId;
+  }
+
   closePopover() {
     this.activePopoverId = null;
+  }
+  closePopoverOut() {
+    this.activePopoverIdout = null;
   }
 }

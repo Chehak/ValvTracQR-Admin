@@ -10,6 +10,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TranslateService } from '@ngx-translate/core';
 
 export interface PeriodicElement {
+  id: number;
   orderOnSchedule: number;
   shopFloorView: string;
   name: string;
@@ -21,6 +22,7 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
+    id: 1,
     orderOnSchedule: 1,
     shopFloorView: 'Default',
     name: 'Hydrogen',
@@ -31,6 +33,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   },
 
   {
+    id: 2,
     orderOnSchedule: 1,
     shopFloorView: 'Default shop floor view ',
     name: 'Helium',
@@ -40,6 +43,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     currency: 'INR',
   },
   {
+    id: 3,
     orderOnSchedule: 1,
     shopFloorView: 'Default shop floor view ',
     name: 'Lithium',
@@ -49,6 +53,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     currency: 'INR',
   },
   {
+    id: 4,
     orderOnSchedule: 1,
     shopFloorView: 'Default shop floor view ',
     name: 'Beryllium',
@@ -58,6 +63,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     currency: 'INR',
   },
   {
+    id: 5,
     orderOnSchedule: 1,
     shopFloorView: 'Default shop floor view ',
     name: 'Boron',
@@ -77,7 +83,6 @@ export class MachinesOperationsComponent {
   @ViewChild('table') table!: MatTable<PeriodicElement>;
   displayedColumns: string[] = [
     'order on schedule',
-    'shop floor view',
     'name',
     'active',
     'end machine',
@@ -87,9 +92,10 @@ export class MachinesOperationsComponent {
   ];
   dataSource = ELEMENT_DATA;
   dragDisabled = true;
-
+  activePopoverId: string | null = null;
+  activePopoverIdout: string | null = null;
   filterControl = new FormControl('');
-  searchoption: string[] = ['One', 'Two', 'Three'];
+  searchoption: any[] = [];
   searchfilteredOptions!: Observable<string[]>;
   lang: any;
   constructor(
@@ -98,6 +104,8 @@ export class MachinesOperationsComponent {
     private route: Router,
     private translateService: TranslateService
   ) {
+    this.getCurrenciesList();
+    this.getData();
     this.lang = localStorage.getItem('lang');
     this.translateService.use(this.lang);
   }
@@ -131,5 +139,39 @@ export class MachinesOperationsComponent {
     return this.searchoption.filter((searchoption) =>
       searchoption.toLowerCase().includes(searchfilterValue)
     );
+  }
+
+  togglePopover(popoverId: string) {
+    this.activePopoverIdout = null;
+
+    this.activePopoverId =
+      this.activePopoverId === popoverId ? null : popoverId;
+  }
+
+  togglePopoverOut(popoverId: string) {
+    this.activePopoverId = null;
+
+    this.activePopoverIdout =
+      this.activePopoverIdout === popoverId ? null : popoverId;
+  }
+
+  closePopover() {
+    this.activePopoverId = null;
+  }
+
+  closePopoverOut() {
+    this.activePopoverIdout = null;
+  }
+
+  getData() {
+    this.service.getMachineOperations().subscribe((res: any) => {
+      console.log(res);
+    });
+  }
+
+  getCurrenciesList() {
+    this.service.getCurrencies().subscribe((res: any) => {
+      this.searchoption = res;
+    });
   }
 }

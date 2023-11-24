@@ -49,7 +49,7 @@ export class UpdateApiKeyComponent {
       this.service.updateApiKey(form).subscribe(
         (res) => {
           console.log(res);
-          if (res.status == 200) {
+          if ((res.status = 200)) {
             console.log(res, 'res');
             this.service.openSnackBar('Api Key Updated', 'Close');
             this.route.navigate(['/apps/api-keys']);

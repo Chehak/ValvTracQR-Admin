@@ -8,7 +8,15 @@
             placeholder="{{ 'Search Name' | translate }}"
             (keyup)="applyFilter($any($event.target).value)"
           />
-          <mat-icon matSuffix style="height: 29px !important; padding: 6px">
+          <mat-icon
+            matSuffix
+            style="
+              vertical-align: top;
+              padding-right: 5px;
+              padding-bottom: 5px;
+              margin-top: -20px;
+            "
+          >
             <i-tabler name="search" class="icon-20"></i-tabler>
           </mat-icon>
         </mat-form-field>

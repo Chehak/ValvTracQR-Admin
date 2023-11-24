@@ -62,9 +62,24 @@ export class AdditionalFieldsComponent {
   }
 
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
+    console.log(event, 'event');
+
     const prevIndex = this.data.findIndex((d) => d === event.item.data);
     moveItemInArray(this.data, prevIndex, event.currentIndex);
+
     this.table.renderRows();
+    this.updateWithIncrement('order');
+  }
+
+  updateWithIncrement(keyToUpdate: string): void {
+    this.data.forEach((obj, index) => {
+      obj[keyToUpdate] = index + 1;
+    });
+    this.service.sortField(this.data).subscribe((res: any) => {
+      if ((res.status = 200)) {
+        this.service.openSnackBar(res, 'Close');
+      }
+    });
   }
 
   getPageSizeOptions() {
@@ -111,17 +126,21 @@ export class AdditionalFieldsComponent {
   applyFilterAssigned(filterValue: string): void {
     console.log(filterValue);
 
-    setTimeout(() => {
-      this.service.searchAssigned(filterValue).subscribe(
-        (res: any) => {
-          this.data = res;
-        },
-        (error) => {
-          this.data = [];
-          this.service.openSnackBar(error.error.error, 'Close');
-        }
-      );
-    }, 1000);
+    if (filterValue == undefined) {
+      this.getFields();
+    } else {
+      setTimeout(() => {
+        this.service.searchAssigned(filterValue).subscribe(
+          (res: any) => {
+            this.data = res;
+          },
+          (error) => {
+            this.data = [];
+            this.service.openSnackBar(error.error.error, 'Close');
+          }
+        );
+      }, 1000);
+    }
   }
 
   applyFilterGroup(filterValue: any): void {

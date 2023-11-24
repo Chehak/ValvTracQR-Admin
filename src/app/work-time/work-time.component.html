@@ -181,26 +181,15 @@
                   </p>
                 </div>
               </div>
-              <!-- <div
-                *ngIf="activePopoverId == element.id"
-                class="popover"
-                id="popover-{{ element.id }}"
-              >
-                <div class="popover-header">
-                  <span class="close-icon" (click)="closePopover()">&times;</span>
-                </div>
-                <p>Popover content for ID: {{ element.id }}</p>
-              </div> -->
-
               <div
-                class="popover"
+                class="popover popover-in"
                 *ngIf="activePopoverId == element.id"
                 id="popover-{{ element.id }}"
               >
                 <div class="wrap_pop">
                   <div class="d-flex">
                     <h3 class="popover-header mb-2">
-                      Edit Work hour price{{ element?.id }}
+                      Edit Work hour price {{ element?.id }}
                       <span class="close-icon" (click)="closePopover()"
                         >&times;</span
                       >
@@ -252,12 +241,57 @@
               </mat-form-field>
             </form>
           </th>
-          <td mat-cell *matCellDef="let element">
-            <div class="d-flex align-items-center">
-              <div class="w-100 text-center">
-                <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  {{ element.clockOut | date }}
-                </p>
+          <td class="ovr_flws" mat-cell *matCellDef="let element">
+            <div class="position-relative">
+              <div class="d-flex align-items-center">
+                <div class="w-100 text-center">
+                  <p
+                    class="f-w-400 mat-subtitle-1 f-s-14 m-t-0"
+                    #toggleButton
+                    (click)="togglePopoverOut(element.id)"
+                  >
+                    {{ element.clockOut | date }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="popover popover-out"
+                *ngIf="activePopoverIdout == element.id"
+                id="popover-{{ element.id }}"
+              >
+                <div class="wrap_pop">
+                  <div class="d-flex">
+                    <h3 class="popover-header mb-2">
+                      Edit Work hour price out{{ element?.id }}
+                      <span class="close-icon" (click)="closePopoverOut()"
+                        >&times;</span
+                      >
+                    </h3>
+                    <mat-icon
+                      class="mat-icon-rtl-mirror"
+                      svgIcon="cross"
+                    ></mat-icon>
+                  </div>
+                  <mat-form-field class="w-100" appearance="outline">
+                    <input type="text" matInput />
+                  </mat-form-field>
+                  <div class="div_btns">
+                    <button
+                      mat-flat-button
+                      color="primary"
+                      style="margin-right: 10px"
+                    >
+                      Reset
+                    </button>
+                    <button
+                      mat-flat-button
+                      color="accent"
+                      style="margin-right: 10px"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </td>

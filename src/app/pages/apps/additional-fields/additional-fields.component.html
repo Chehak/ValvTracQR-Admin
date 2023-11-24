@@ -27,7 +27,6 @@
         cdkDropList
         [cdkDropListData]="data"
         (cdkDropListDropped)="dropTable($event)"
-        class="text-white"
       >
         <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -39,9 +38,14 @@
             *matHeaderCellDef
             class="f-s-14 f-w-600 m-l-2"
             style="vertical-align: top"
+            #tooltip="matTooltip"
+            matTooltip="Simply drag and drop if you want change item position on the production schedule"
+            matTooltipPosition="above"
+            matTooltipHideDelay="10"
           >
             {{ "Order on schedule" | translate }}
           </th>
+          <!--  -->
           <td mat-cell *matCellDef="let element; let i = index">
             <mat-icon class="dragCursor" (mousedown)="dragDisabled = false"
               >reorder</mat-icon
@@ -62,6 +66,7 @@
                   value=""
                   (selectionChange)="applyFilterAssigned($event.value)"
                 >
+                  <mat-option></mat-option>
                   <mat-option value="Products">Products</mat-option>
                   <mat-option value="Orders">Orders</mat-option>
                 </mat-select>

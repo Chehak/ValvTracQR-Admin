@@ -52,47 +52,6 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="shop floor view">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="f-s-14 f-w-600 m-l-2"
-            style="text-align: center; vertical-align: top"
-          >
-            {{ "Shop floor view" | translate }}
-            <form class="m-t-10">
-              <mat-form-field class="w-100" appearance="outline">
-                <input
-                  type="text"
-                  placeholder="Choose shop floor view"
-                  aria-label="Number"
-                  matInput
-                  [formControl]="filterControl"
-                  [matAutocomplete]="auto3"
-                />
-                <mat-autocomplete #auto3="matAutocomplete">
-                  <mat-option
-                    *ngFor="let searchoption of searchfilteredOptions | async"
-                    [value]="searchoption"
-                  >
-                    {{ searchoption | translate }}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </form>
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <div class="d-flex align-items-center">
-              <div class="">
-                <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  {{ element.shopFloorView }}
-                </p>
-                <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
-              </div>
-            </div>
-          </td>
-        </ng-container>
-
         <ng-container matColumnDef="name">
           <th
             mat-header-cell
@@ -128,11 +87,10 @@
             {{ "Active" | translate }}
             <form action="" class="m-t-10">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-select value="in">
-                  <mat-option value="in">India</mat-option>
-                  <mat-option value="us">United States</mat-option>
-                  <mat-option value="uk">United Kingdom</mat-option>
-                  <mat-option value="ru">Russia</mat-option>
+                <mat-select value="">
+                  <mat-option value=""></mat-option>
+                  <mat-option value="yes">Yes</mat-option>
+                  <mat-option value="no">No</mat-option>
                 </mat-select>
               </mat-form-field>
             </form>
@@ -158,11 +116,10 @@
             {{ "End Machine" | translate }}
             <form action="" class="m-t-10">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-select value="in">
-                  <mat-option value="in">India</mat-option>
-                  <mat-option value="us">United States</mat-option>
-                  <mat-option value="uk">United Kingdom</mat-option>
-                  <mat-option value="ru">Russia</mat-option>
+                <mat-select value="">
+                  <mat-option value=""></mat-option>
+                  <mat-option value="yes">Yes</mat-option>
+                  <mat-option value="no">No</mat-option>
                 </mat-select>
               </mat-form-field>
             </form>
@@ -192,38 +149,45 @@
               </mat-form-field>
             </form>
           </th>
-          <td mat-cell *matCellDef="let element; let i = index">
-            <div>
-              <button
-                [cPopover]="popoverHtml"
-                cPopoverPlacement="right"
-                [cPopoverTrigger]="'click'"
-                popover-template="level.changeLevelTemplate"
-                popover-trigger="focus"
-                class="m-1"
-                style="
-                  background: none;
-                  color: white;
-                  border: none;
-                  font-size: 14px;
-                "
-              >
-                {{ element.workHourPrice }}
-                <ng-template #popoverHtml>
-                  <h3 class="popover-header">Edit Work hour price</h3>
-                  <div class="popover-body">
-                    <mat-form-field class="w-100" appearance="outline">
-                      <input type="text" matInput />
-                    </mat-form-field>
-                  </div>
-                  <div
-                    class="d-flex"
-                    style="
-                      justify-content: flex-end;
-                      margin-top: -10px;
-                      margin-bottom: 10px;
-                    "
+          <td
+            class="ovr_flws"
+            mat-cell
+            *matCellDef="let element; let i = index"
+          >
+            <div class="position-relative">
+              <div class="d-flex align-items-center">
+                <div class="w-100 text-center">
+                  <p
+                    class="f-w-400 mat-subtitle-1 f-s-14 m-t-0"
+                    #toggleButton
+                    (click)="togglePopover(element.id)"
                   >
+                    {{ element.workHourPrice | date }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="popover popover-in"
+                *ngIf="activePopoverId == element.id"
+                id="popover-{{ element.id }}"
+              >
+                <div class="wrap_pop">
+                  <div class="d-flex">
+                    <h3 class="popover-header mb-2">
+                      Edit Work hour price
+                      <span class="close-icon" (click)="closePopover()"
+                        >&times;</span
+                      >
+                    </h3>
+                    <mat-icon
+                      class="mat-icon-rtl-mirror"
+                      svgIcon="cross"
+                    ></mat-icon>
+                  </div>
+                  <mat-form-field class="w-100" appearance="outline">
+                    <input type="text" matInput />
+                  </mat-form-field>
+                  <div class="div_btns">
                     <button
                       mat-flat-button
                       color="primary"
@@ -239,8 +203,8 @@
                       Save
                     </button>
                   </div>
-                </ng-template>
-              </button>
+                </div>
+              </div>
             </div>
           </td>
         </ng-container>
@@ -268,42 +232,47 @@
                     *ngFor="let searchoption of searchfilteredOptions | async"
                     [value]="searchoption"
                   >
-                    {{ searchoption | translate }}
+                    {{ searchoption }}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
             </form>
           </th>
-          <td mat-cell *matCellDef="let element">
-            <div>
-              <button
-                [cPopover]="popoverHtml"
-                cPopoverPlacement="right"
-                [cPopoverTrigger]="'click'"
-                class="m-1"
-                style="
-                  background: none;
-                  color: white;
-                  border: none;
-                  font-size: 14px;
-                "
-              >
-                {{ element.role == 1 ? "Admin" : "Worker" }}
-                <ng-template #popoverHtml>
-                  <h3 class="popover-header">Edit Currency</h3>
-                  <div class="popover-body">
-                    <mat-form-field class="w-100" appearance="outline">
-                      <input type="text" matInput />
-                    </mat-form-field>
-                  </div>
-                  <div
-                    class="d-flex"
-                    style="
-                      justify-content: flex-end;
-                      margin-top: -10px;
-                      margin-bottom: 10px;
-                    "
+          <td class="ovr_flws" mat-cell *matCellDef="let element">
+            <div class="position-relative">
+              <div class="d-flex align-items-center">
+                <div class="w-100 text-center">
+                  <p
+                    class="f-w-400 mat-subtitle-1 f-s-14 m-t-0"
+                    #toggleButton
+                    (click)="togglePopoverOut(element.id)"
                   >
+                    PLN
+                  </p>
+                </div>
+              </div>
+              <div
+                class="popover popover-out"
+                *ngIf="activePopoverIdout == element.id"
+                id="popover-{{ element.id }}"
+              >
+                <div class="wrap_pop">
+                  <div class="d-flex">
+                    <h3 class="popover-header mb-2">
+                      Edit currency
+                      <span class="close-icon" (click)="closePopoverOut()"
+                        >&times;</span
+                      >
+                    </h3>
+                    <mat-icon
+                      class="mat-icon-rtl-mirror"
+                      svgIcon="cross"
+                    ></mat-icon>
+                  </div>
+                  <mat-form-field class="w-100" appearance="outline">
+                    <input type="text" matInput />
+                  </mat-form-field>
+                  <div class="div_btns">
                     <button
                       mat-flat-button
                       color="primary"
@@ -319,8 +288,8 @@
                       Save
                     </button>
                   </div>
-                </ng-template>
-              </button>
+                </div>
+              </div>
             </div>
           </td>
         </ng-container>

@@ -375,4 +375,62 @@ export class HttpServiceService {
       })
     );
   }
+
+  // drag and drop
+
+  sortField(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}sortFields`;
+    return this.http.post(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  // additional fields ends here
+
+  getMachineOperations(): Observable<any> {
+    const API_URL = `${this.baseURL}getMachines`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  addMachine(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}addMachine`;
+    return this.http.post(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  getMachineId(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}getMachine/${form}`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  deleteMachine(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}deleteMachine/${form}`;
+    return this.http.delete(API_URL, { responseType: 'text' }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  updateMachine(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}updateMachine/${form?.id}`;
+    return this.http.patch(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
 }
