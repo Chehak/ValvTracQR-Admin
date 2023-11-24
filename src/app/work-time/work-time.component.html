@@ -1,6 +1,6 @@
 <mat-card style="border: 0px solid white !important">
   <mat-card-content>
-    <div class="row justify-content-between">
+    <div class="row justify-content-between m-b-15">
       <div class="col-lg-4"></div>
       <div class="col-lg-4 d-flex align-items-center justify-content-end">
         <button
@@ -26,64 +26,19 @@
   </mat-card-content>
 </mat-card>
 <mat-card class="cardWithShadow">
-  <!-- <mat-card-content class="b-t-1">
-    <div
-      class="d-flex flex-sm-row flex-column align-items-center justify-content-end gap-8 m-b-10"
-    >
-      <div style="border: 1px solid black">
-        <button
-          style="
-            color: white;
-            background-color: #3f51b5;
-            border: 1px solid #3f51b5;
-            padding: 4px;
-          "
-          #tooltip="matTooltip"
-          matTooltip="Export data to Excel (all rows) including selected filters in table below"
-          matTooltipPosition="above"
-          class="m-l-8"
-          matTooltipHideDelay="100000"
-        >
-          <i-tabler name="file-download"></i-tabler>Export
-        </button>
-        <button
-          style="
-            color: black;
-            background-color: white;
-            border: 1px solid black;
-            padding: 4px;
-          "
-        >
-          <i-tabler
-            name="tool"
-            style="-webkit-transform: scaleX(-1); transform: scaleX(-1)"
-          ></i-tabler>
-        </button>
-        <button
-          style="
-            color: black;
-            background-color: white;
-            border: 1px solid black;
-            padding: 4px;
-          "
-        >
-          <i-tabler name="arrows-diagonal-minimize-2"></i-tabler>Page
-        </button>
-      </div>
-    </div>
-  </mat-card-content> -->
   <div
-    class="d-flex flex-sm-row flex-column align-items-center justify-content-end gap-8 m-10"
+    class="d-flex flex-sm-row flex-column align-items-center justify-content-end gap-8 m-10 m-b-16 m-t-10"
   >
     <div class="btn-group">
       <button
         #tooltip="matTooltip"
         matTooltip="Export data to Excel (all rows) including selected filters in table below"
         matTooltipPosition="above"
-        class="m-l-8"
+        class="m-l-8 d-flex align-items-center justify-content-center"
         matTooltipHideDelay="100000"
       >
-        <i-tabler name="file-download"></i-tabler>Export
+        <i-tabler name="file-download" class="export"></i-tabler
+        ><span style="font-size: 12px">Export</span>
       </button>
       <button>
         <i-tabler
