@@ -6,3 +6,17 @@
 .row {
     margin-top: 16px;
 }
+
+.color-input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.color-picker {
+    width: 5%;
+}
+
+.hex-input {
+    width: 90%;
+}

@@ -50,4 +50,9 @@ export class EditTagComponent {
       this.tags.patchValue(res);
     });
   }
+
+  colorChange(event: any) {
+    console.log(event.target.value, 'event');
+    this.color = event.target.value;
+  }
 }

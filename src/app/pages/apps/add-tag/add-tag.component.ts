@@ -24,6 +24,8 @@ export class AddTagComponent {
   }
 
   tagsForm() {
+    console.log(this.color, 'color is');
+
     const form = this.tags.value;
     if (!this.tags.valid) {
       this.tags.markAllAsTouched();
@@ -37,5 +39,10 @@ export class AddTagComponent {
         this.route.navigate(['apps/tags']);
       });
     }
+  }
+
+  colorChange(event: any) {
+    console.log(event.target.value, 'event');
+    this.color = event.target.value;
   }
 }
