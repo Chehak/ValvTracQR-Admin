@@ -50,6 +50,8 @@ svg.mdc-switch__icon.mdc-switch__icon--on {
     min-height: 31px !important;
 }
 
-.mat-mdc-card-content:last-child {
-    padding-bottom: 0px !important;
+
+
+::ng-deep .mat-mdc-card-content:last-child {
+    padding-bottom: 5px !important;
 }
