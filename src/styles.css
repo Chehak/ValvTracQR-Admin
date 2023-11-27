@@ -55,3 +55,12 @@ svg.mdc-switch__icon.mdc-switch__icon--on {
 ::ng-deep .mat-mdc-card-content:last-child {
     padding-bottom: 5px !important;
 }
+
+.pop-class {
+
+    color: #5d87ff;
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom: 1px dashed;
+
+}

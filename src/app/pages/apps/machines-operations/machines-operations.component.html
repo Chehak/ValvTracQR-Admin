@@ -25,10 +25,10 @@
       <table
         mat-table
         #table
-        [dataSource]="dataSource"
+        [dataSource]="data"
         class="mat-elevation-z8"
         cdkDropList
-        [cdkDropListData]="dataSource"
+        [cdkDropListData]="data"
         (cdkDropListDropped)="dropTable($event)"
         class="text-white"
       >
@@ -68,7 +68,7 @@
           </th>
           <td mat-cell *matCellDef="let element">
             <div class="d-flex align-items-center">
-              <div class="">
+              <div class="w-100 text-center">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
                   {{ element.name }}
                 </p>
@@ -97,9 +97,14 @@
           </th>
           <td mat-cell *matCellDef="let element">
             <div class="d-flex align-items-center">
-              <div class="">
+              <div class="w-100 text-center">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  {{ element.active }}
+                  <ng-container *ngIf="element.active == 'yes'">
+                    <i-tabler name="check" style="color: #4caf50"></i-tabler>
+                  </ng-container>
+                  <ng-container *ngIf="element.active == 'no'">
+                    <i-tabler name="X" style="color: #f44336"></i-tabler>
+                  </ng-container>
                 </p>
                 <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
               </div>
@@ -126,9 +131,14 @@
           </th>
           <td mat-cell *matCellDef="let element">
             <div class="d-flex align-items-center">
-              <div class="">
+              <div class="w-100 text-center">
                 <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
-                  {{ element.endMachine }}
+                  <ng-container *ngIf="element.end_machine == 'yes'">
+                    <i-tabler name="check" style="color: #4caf50"></i-tabler>
+                  </ng-container>
+                  <ng-container *ngIf="element.end_machine == 'no'">
+                    <i-tabler name="X" style="color: #f44336"></i-tabler>
+                  </ng-container>
                 </p>
                 <!-- <small class="mat-body-1 f-s-14">{{ element.Role }}</small> -->
               </div>
@@ -157,50 +167,54 @@
             <div class="position-relative">
               <div class="d-flex align-items-center">
                 <div class="w-100 text-center">
-                  <p
-                    class="f-w-400 mat-subtitle-1 f-s-14 m-t-0"
-                    #toggleButton
-                    (click)="togglePopover(element.id)"
-                  >
-                    {{ element.workHourPrice | date }}
+                  <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
+                    <a
+                      (click)="togglePopover(element?._id)"
+                      class="pop-class"
+                      >{{ element.price ? element.price : 0 }}</a
+                    >
                   </p>
                 </div>
               </div>
               <div
                 class="popover popover-in"
-                *ngIf="activePopoverId == element.id"
+                *ngIf="activePopoverId == element?._id"
                 id="popover-{{ element.id }}"
               >
-                <div class="wrap_pop">
-                  <div class="d-flex">
-                    <h3 class="popover-header mb-2">
-                      Edit Work hour price
-                      <span class="close-icon" (click)="closePopover()"
-                        >&times;</span
-                      >
-                    </h3>
-                    <mat-icon
-                      class="mat-icon-rtl-mirror"
-                      svgIcon="cross"
-                    ></mat-icon>
+                <div>
+                  <div class="custom-container d-flex">
+                    <div class="custom-title">
+                      <i-tabler name="edit"></i-tabler>
+                    </div>
+                    <div class="custom-title m-l-6">
+                      <b>Edit work hour price</b>
+                    </div>
+                    <div class="close-icon" (click)="closePopover()">
+                      &times;
+                    </div>
                   </div>
+
                   <mat-form-field class="w-100" appearance="outline">
                     <input type="text" matInput />
                   </mat-form-field>
-                  <div class="div_btns">
+                  <div class="div_btns text-right" style="margin-top: -12px">
                     <button
                       mat-flat-button
-                      color="primary"
-                      style="margin-right: 10px"
+                      color="warn"
+                      style="
+                        margin-right: 6px;
+                        width: 25px !important;
+                        height: 30px !important;
+                      "
                     >
-                      Reset
+                      <i-tabler name="ban" style="width: 21px"></i-tabler>
                     </button>
                     <button
                       mat-flat-button
                       color="accent"
-                      style="margin-right: 10px"
+                      style="width: 25px !important; height: 30px !important"
                     >
-                      Save
+                      <i-tabler name="check" style="width: 18px"></i-tabler>
                     </button>
                   </div>
                 </div>
@@ -242,50 +256,53 @@
             <div class="position-relative">
               <div class="d-flex align-items-center">
                 <div class="w-100 text-center">
-                  <p
-                    class="f-w-400 mat-subtitle-1 f-s-14 m-t-0"
-                    #toggleButton
-                    (click)="togglePopoverOut(element.id)"
-                  >
-                    PLN
+                  <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
+                    <a
+                      class="pop-class"
+                      (click)="togglePopoverOut(element?._id)"
+                      >{{ getCurrencyName(element?.currency) }}</a
+                    >
                   </p>
                 </div>
               </div>
               <div
                 class="popover popover-out"
-                *ngIf="activePopoverIdout == element.id"
-                id="popover-{{ element.id }}"
+                *ngIf="activePopoverIdout == element?._id"
+                id="popover-{{ element?._id }}"
               >
-                <div class="wrap_pop">
-                  <div class="d-flex">
-                    <h3 class="popover-header mb-2">
-                      Edit currency
-                      <span class="close-icon" (click)="closePopoverOut()"
-                        >&times;</span
-                      >
-                    </h3>
-                    <mat-icon
-                      class="mat-icon-rtl-mirror"
-                      svgIcon="cross"
-                    ></mat-icon>
+                <div>
+                  <div class="custom-container-curr d-flex">
+                    <div class="custom-title">
+                      <i-tabler name="edit"></i-tabler>
+                    </div>
+                    <div class="custom-title m-l-6">
+                      <b>Edit currency</b>
+                    </div>
+                    <div class="close-icon-curr" (click)="closePopoverOut()">
+                      &times;
+                    </div>
                   </div>
                   <mat-form-field class="w-100" appearance="outline">
                     <input type="text" matInput />
                   </mat-form-field>
-                  <div class="div_btns">
+                  <div class="div_btns text-right" style="margin-top: -12px">
                     <button
                       mat-flat-button
-                      color="primary"
-                      style="margin-right: 10px"
+                      color="warn"
+                      style="
+                        margin-right: 6px;
+                        width: 25px !important;
+                        height: 30px !important;
+                      "
                     >
-                      Reset
+                      <i-tabler name="ban" style="width: 21px"></i-tabler>
                     </button>
                     <button
                       mat-flat-button
                       color="accent"
-                      style="margin-right: 10px"
+                      style="width: 25px !important; height: 30px !important"
                     >
-                      Save
+                      <i-tabler name="check" style="width: 18px"></i-tabler>
                     </button>
                   </div>
                 </div>
@@ -306,11 +323,14 @@
           <td mat-cell *matCellDef="let element" class="action-link">
             <a
               class="m-r-10 cursor-pointer text-white"
-              (click)="redirectUpdate()"
+              (click)="redirectUpdate(element?._id)"
               ><i-tabler name="edit" class="icon-18"></i-tabler
             ></a>
             <!--  (click)="openDialog('Update', element)" -->
-            <a class="m-r-10 cursor-pointer text-white">
+            <a
+              class="m-r-10 cursor-pointer text-white"
+              (click)="deleteRecord(element?._id)"
+            >
               <!--  (click)="openDialog('Delete', element)" -->
               <i-tabler name="trash" class="icon-18"></i-tabler>
             </a>

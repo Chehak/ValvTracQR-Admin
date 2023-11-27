@@ -99,7 +99,7 @@ export const AppsRoutes: Routes = [
         },
       },
       {
-        path: 'update-machines-operations',
+        path: 'update-machines-operations/:id',
         component: MachineUpdateComponent,
         data: {
           title: 'Update Machines/Operations',

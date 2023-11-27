@@ -20,66 +20,14 @@ export interface PeriodicElement {
   currency: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    id: 1,
-    orderOnSchedule: 1,
-    shopFloorView: 'Default',
-    name: 'Hydrogen',
-    active: 'yes',
-    endMachine: 'yes',
-    workHourPrice: 2,
-    currency: 'INR',
-  },
-
-  {
-    id: 2,
-    orderOnSchedule: 1,
-    shopFloorView: 'Default shop floor view ',
-    name: 'Helium',
-    active: 'yes',
-    endMachine: 'yes',
-    workHourPrice: 2,
-    currency: 'INR',
-  },
-  {
-    id: 3,
-    orderOnSchedule: 1,
-    shopFloorView: 'Default shop floor view ',
-    name: 'Lithium',
-    active: 'yes',
-    endMachine: 'yes',
-    workHourPrice: 2,
-    currency: 'INR',
-  },
-  {
-    id: 4,
-    orderOnSchedule: 1,
-    shopFloorView: 'Default shop floor view ',
-    name: 'Beryllium',
-    active: 'yes',
-    endMachine: 'yes',
-    workHourPrice: 2,
-    currency: 'INR',
-  },
-  {
-    id: 5,
-    orderOnSchedule: 1,
-    shopFloorView: 'Default shop floor view ',
-    name: 'Boron',
-    active: 'yes',
-    endMachine: 'yes',
-    workHourPrice: 2,
-    currency: 'INR',
-  },
-];
-
 @Component({
   selector: 'app-machines-operations',
   templateUrl: './machines-operations.component.html',
   styleUrls: ['./machines-operations.component.css'],
 })
 export class MachinesOperationsComponent {
+  currencies: any[] = [];
+  data: any[] = [];
   @ViewChild('table') table!: MatTable<PeriodicElement>;
   displayedColumns: string[] = [
     'order on schedule',
@@ -90,7 +38,7 @@ export class MachinesOperationsComponent {
     'currency',
     'action',
   ];
-  dataSource = ELEMENT_DATA;
+  // dataSource = ELEMENT_DATA;
   dragDisabled = true;
   activePopoverId: string | null = null;
   activePopoverIdout: string | null = null;
@@ -118,9 +66,24 @@ export class MachinesOperationsComponent {
   }
 
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
-    const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
-    moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
+    console.log(event, 'event');
+
+    const prevIndex = this.data.findIndex((d) => d === event.item.data);
+    moveItemInArray(this.data, prevIndex, event.currentIndex);
+
     this.table.renderRows();
+    this.updateWithIncrement('order');
+  }
+
+  updateWithIncrement(keyToUpdate: string): void {
+    this.data.forEach((obj, index) => {
+      obj[keyToUpdate] = index + 1;
+    });
+    this.service.sortField(this.data).subscribe((res: any) => {
+      if ((res.status = 200)) {
+        this.service.openSnackBar(res, 'Close');
+      }
+    });
   }
 
   getPageSizeOptions() {
@@ -129,8 +92,8 @@ export class MachinesOperationsComponent {
   redirect() {
     this.route.navigate(['/apps/add-machines-operations']);
   }
-  redirectUpdate() {
-    this.route.navigate(['/apps/update-machines-operations']);
+  redirectUpdate(id: string) {
+    this.route.navigate([`/apps/update-machines-operations/${id}`]);
   }
 
   private _searchfilter(value: string): string[] {
@@ -165,13 +128,37 @@ export class MachinesOperationsComponent {
 
   getData() {
     this.service.getMachineOperations().subscribe((res: any) => {
-      console.log(res);
+      this.data = res;
     });
   }
 
   getCurrenciesList() {
     this.service.getCurrencies().subscribe((res: any) => {
-      this.searchoption = res;
+      this.currencies = res;
     });
+  }
+
+  getCurrencyName(id: string) {
+    console.log(id);
+    console.log(this.currencies);
+
+    const el = this.currencies.find((el) => el?._id == id);
+    return el?.name;
+  }
+
+  deleteRecord(id: string) {
+    if (confirm('Are you sure to delete ')) {
+      this.service.deleteMachine(id).subscribe(
+        (res: any) => {
+          console.log(res, 'del res');
+          this.service.openSnackBar(res, 'Close');
+          this.getData();
+        },
+        (error) => {
+          console.log(error);
+          this.service.openSnackBar(error.message, 'close');
+        }
+      );
+    }
   }
 }

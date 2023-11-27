@@ -6,70 +6,93 @@
           <ng-template mat-tab-label>
             <div class="d-flex align-items-center text-white">BASIC</div>
           </ng-template>
-          <div class="mat-body-1 p-16 rounded m-t-12">
-            <div class="d-flex row">
-              <div class="col-lg-6">
-                <mat-label
-                  class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
-                  >Name
-                </mat-label>
-                <mat-form-field appearance="outline" class="w-100">
-                  <input matInput placeholder="Jackson" />
-                </mat-form-field>
+          <form [formGroup]="formBasic">
+            <div class="mat-body-1 p-16 rounded m-t-12">
+              <div class="d-flex row">
+                <div class="col-lg-6">
+                  <mat-label
+                    class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
+                    >Name <span class="text-danger">*</span>
+                  </mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input matInput formControlName="name" />
+                  </mat-form-field>
+                  <mat-error
+                    *ngIf="(formBasic?.get('name')?.touched || formBasic?.get('name')?.dirty) &&
+                                                          formBasic?.get('name')?.invalid 
+                                                          && formBasic?.get('name')?.errors?.['required']"
+                  >
+                    Name is required</mat-error
+                  >
+                </div>
+                <div class="col-lg-3">
+                  <mat-label
+                    class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
+                    >Active <span class="text-danger">*</span>
+                  </mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-select value="yes" formControlName="active">
+                      <mat-option value="yes">Yes</mat-option>
+                      <mat-option value="no">No</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                  <mat-label
+                    class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
+                    >End Machine
+                  </mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-select value="yes" formControlName="end_machine">
+                      <mat-option value="yes">Yes</mat-option>
+                      <mat-option value="no">No</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
               </div>
-              <div class="col-lg-3">
-                <mat-label
-                  class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
-                  >Active
-                </mat-label>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-select value="1">
-                    <mat-option value="1">Yes</mat-option>
-                    <mat-option value="0">No</mat-option>
-                  </mat-select>
-                </mat-form-field>
+              <div class="row d-flex">
+                <div class="col-lg-12">
+                  <mat-label
+                    class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white m-t-10"
+                    >Notes</mat-label
+                  >
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100"
+                    color="primary"
+                  >
+                    <textarea
+                      matInput
+                      rows="5"
+                      formControlName="notes"
+                      placeholder="This text will be shown on the production schedule to all workers"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
               </div>
-              <div class="col-lg-3">
-                <mat-label
-                  class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
-                  >End Machine
-                </mat-label>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-select value="1">
-                    <mat-option value="1">Yes</mat-option>
-                    <mat-option value="0">No</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row d-flex">
-              <div class="col-lg-12">
-                <mat-label
-                  class="mat-subtitle-2 f-w-600 m-b-8 d-block text-white"
-                  >Notes</mat-label
-                >
-                <mat-form-field
-                  appearance="outline"
-                  class="w-100"
+              <div class="m-t-12 d-flex">
+                <button
+                  mat-flat-button
                   color="primary"
+                  class="m-r-10"
+                  (click)="saveBasic()"
                 >
-                  <textarea
-                    matInput
-                    rows="5"
-                    placeholder="This text will be shown on the production schedule to all workers"
-                  ></textarea>
-                </mat-form-field>
+                  Save
+                </button>
+                <button
+                  mat-flat-button
+                  color="accent"
+                  #tooltip="matTooltip"
+                  matTooltip="After saving it redirects you to the same screen with filled inputs"
+                  matTooltipPosition="above"
+                  matTooltipHideDelay="10"
+                  (click)="saveSimilarBasic()"
+                >
+                  Save and add similar
+                </button>
               </div>
             </div>
-            <div class="m-t-12 d-flex">
-              <button mat-flat-button color="primary" class="m-r-10">
-                Save
-              </button>
-              <button mat-flat-button color="accent">
-                Save and add similar
-              </button>
-            </div>
-          </div>
+          </form>
         </mat-tab>
 
         <mat-tab>
@@ -78,77 +101,113 @@
               ADVANCED (OPTIONAL)
             </div>
           </ng-template>
-          <div class="mat-body-1 p-16 rounded m-t-12">
-            <div class="d-flex row">
-              <div class="col-lg-3">
-                <mat-label
-                  class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
-                  >Work hour price
-                </mat-label>
-                <mat-form-field appearance="outline" class="w-100">
-                  <input matInput placeholder="" />
-                </mat-form-field>
+          <form [formGroup]="formAdvanced">
+            <div class="mat-body-1 p-16 rounded m-t-12">
+              <div class="d-flex row">
+                <div class="col-lg-3">
+                  <mat-label
+                    class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
+                    >Work hour price
+                  </mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="price"
+                      (keypress)="numberOnly($event)"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                  <mat-label
+                    class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
+                    >Currency
+                  </mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-select formControlName="currency">
+                      <mat-option
+                        *ngFor="let curr of currencies"
+                        [value]="curr?._id"
+                      >
+                        {{ curr?.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                  <mat-label
+                    class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
+                    >Number of shifts
+                  </mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-select value="1" formControlName="shift">
+                      <mat-option value="1">1</mat-option>
+                      <mat-option value="2">2</mat-option>
+                      <mat-option value="3">3</mat-option>
+                      <mat-option value="4">4</mat-option>
+                      <mat-option value="5">5</mat-option>
+                      <mat-option value="6">6</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                  <mat-label
+                    class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
+                    >Hours per day
+                  </mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-select value="1" formControlName="hour">
+                      <mat-option value="1">1</mat-option>
+                      <mat-option value="2">2</mat-option>
+                      <mat-option value="3">3</mat-option>
+                      <mat-option value="4">4</mat-option>
+                      <mat-option value="5">5</mat-option>
+                      <mat-option value="6">6</mat-option>
+                      <mat-option value="7">7</mat-option>
+                      <mat-option value="8">8</mat-option>
+                      <mat-option value="9">9</mat-option>
+                      <mat-option value="10">10</mat-option>
+                      <mat-option value="11">11</mat-option>
+                      <mat-option value="12">12</mat-option>
+                      <mat-option value="13">13</mat-option>
+                      <mat-option value="14">14</mat-option>
+                      <mat-option value="15">15</mat-option>
+                      <mat-option value="16">16</mat-option>
+                      <mat-option value="17">17</mat-option>
+                      <mat-option value="18">18</mat-option>
+                      <mat-option value="19">19</mat-option>
+                      <mat-option value="20">20</mat-option>
+                      <mat-option value="21">21</mat-option>
+                      <mat-option value="22">22</mat-option>
+                      <mat-option value="23">23</mat-option>
+                      <mat-option value="24">24</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
               </div>
-              <div class="col-lg-3">
-                <mat-label
-                  class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
-                  >Currency
-                </mat-label>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-select value="1">
-                    <mat-option value="1">PLN</mat-option>
-                    <mat-option value="0">USD</mat-option>
-                    <mat-option value="0">EUR</mat-option>
-                    <mat-option value="0">GBP</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-lg-3">
-                <mat-label
-                  class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
-                  >Number of shifts
-                </mat-label>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-select value="1">
-                    <mat-option value="1">1</mat-option>
-                    <mat-option value="0">2</mat-option>
-                    <mat-option value="0">3</mat-option>
-                    <mat-option value="0">4</mat-option>
-                    <mat-option value="0">5</mat-option>
-                    <mat-option value="0">6</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-lg-3">
-                <mat-label
-                  class="mat-subtitle-2 f-w-600 d-block m-b-16 text-white"
-                  >Hours per day
-                </mat-label>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-select value="1">
-                    <mat-option value="1">1</mat-option>
-                    <mat-option value="0">2</mat-option>
-                    <mat-option value="0">3</mat-option>
-                    <mat-option value="0">4</mat-option>
-                    <mat-option value="0">5</mat-option>
-                    <mat-option value="0">6</mat-option>
-                    <mat-option value="0">7</mat-option>
-                    <mat-option value="0">8</mat-option>
-                    <mat-option value="0">9</mat-option>
-                    <mat-option value="0">10</mat-option>
-                  </mat-select>
-                </mat-form-field>
+              <div class="m-t-12 d-flex">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  class="m-r-10"
+                  (click)="saveAdvanced()"
+                >
+                  Save
+                </button>
+                <button
+                  (click)="saveSimilarAdvanced()"
+                  mat-flat-button
+                  color="accent"
+                  #tooltip="matTooltip"
+                  matTooltip="After saving it redirects you to the same screen with filled inputs"
+                  matTooltipPosition="above"
+                  matTooltipHideDelay="10"
+                >
+                  Save and add similar
+                </button>
               </div>
             </div>
-            <div class="m-t-12 d-flex">
-              <button mat-flat-button color="primary" class="m-r-10">
-                Save
-              </button>
-              <button mat-flat-button color="accent">
-                Save and add similar
-              </button>
-            </div>
-          </div>
+          </form>
         </mat-tab>
       </mat-tab-group>
     </mat-card-content>
