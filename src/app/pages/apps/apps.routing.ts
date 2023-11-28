@@ -20,6 +20,7 @@ import { UpdateApiKeyComponent } from 'src/app/update-api-key/update-api-key.com
 import { WorkTimeComponent } from 'src/app/work-time/work-time.component';
 import { AddWorkTimeComponent } from 'src/app/add-work-time/add-work-time.component';
 import { ShowPausesComponent } from './show-pauses/show-pauses.component';
+import { ViewMachinesOperationsComponent } from './view-machines-operations/view-machines-operations.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -103,6 +104,16 @@ export const AppsRoutes: Routes = [
         component: MachineUpdateComponent,
         data: {
           title: 'Update Machines/Operations',
+          urls: [
+            // { title: 'General Settings', url: '/settings/general-settings' },
+          ],
+        },
+      },
+      {
+        path: 'view-machines-operations/:id',
+        component: ViewMachinesOperationsComponent,
+        data: {
+          title: 'View',
           urls: [
             // { title: 'General Settings', url: '/settings/general-settings' },
           ],

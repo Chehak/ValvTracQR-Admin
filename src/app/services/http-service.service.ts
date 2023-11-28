@@ -433,4 +433,57 @@ export class HttpServiceService {
       })
     );
   }
+
+  sortFieldMachines(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}sortMachines`;
+    return this.http.post(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchMachineName(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchMachine?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchMachineActive(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchActive?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+  searchMachineEnd(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchEndMachine?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchMachinePrice(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchPrice?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchMachineCurrency(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchMachineCurrency?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
 }

@@ -35,17 +35,45 @@ export class MachineUpdateComponent {
       id: [this.id],
       price: [''],
       currency: [''],
-      shift: ['1'],
-      hour: ['1'],
+      shift: [''],
+      hour: [''],
     });
   }
 
   getValues() {
     this.service.getMachineId(this.id).subscribe((res: any) => {
       console.log(res, 'res');
-      this.formBasic.patchValue(res);
-      this.formAdvanced.patchValue(res);
+      this.patchFormValues(res);
     });
+  }
+
+  patchFormValues(res: any) {
+    // Iterate through the form controls and patch values
+    Object.keys(res).forEach((key) => {
+      const basicControl = this.formBasic.get(key);
+      const advancedControl = this.formAdvanced.get(key);
+
+      if (basicControl) {
+        this.formBasic
+          .get(key)
+          ?.patchValue(this.convertToDisplayValue(res[key]));
+      }
+
+      if (advancedControl) {
+        this.formAdvanced
+          .get(key)
+          ?.patchValue(this.convertToDisplayValue(res[key]));
+      }
+    });
+  }
+
+  convertToDisplayValue(value: any): string | any {
+    // Convert numbers to strings or apply other conversions if needed
+    if (typeof value === 'number') {
+      return value.toString();
+    }
+
+    return value;
   }
 
   saveBasic() {

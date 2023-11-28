@@ -1,5 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -44,18 +49,28 @@ export class MachinesOperationsComponent {
   activePopoverIdout: string | null = null;
   filterControl = new FormControl('');
   searchoption: any[] = [];
+  currencyForm!: FormGroup;
+  workHourForm!: FormGroup;
   searchfilteredOptions!: Observable<string[]>;
   lang: any;
   constructor(
     public dialog: MatDialog,
     public service: HttpServiceService,
     private route: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private fb: FormBuilder
   ) {
     this.getCurrenciesList();
     this.getData();
     this.lang = localStorage.getItem('lang');
     this.translateService.use(this.lang);
+
+    this.currencyForm = this.fb.group({
+      currencyEdit: ['', Validators.required],
+    });
+    this.workHourForm = this.fb.group({
+      workHourEdit: ['', Validators.required],
+    });
   }
 
   ngAfterViewInit(): void {
@@ -66,8 +81,6 @@ export class MachinesOperationsComponent {
   }
 
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
-    console.log(event, 'event');
-
     const prevIndex = this.data.findIndex((d) => d === event.item.data);
     moveItemInArray(this.data, prevIndex, event.currentIndex);
 
@@ -79,7 +92,7 @@ export class MachinesOperationsComponent {
     this.data.forEach((obj, index) => {
       obj[keyToUpdate] = index + 1;
     });
-    this.service.sortField(this.data).subscribe((res: any) => {
+    this.service.sortFieldMachines(this.data).subscribe((res: any) => {
       if ((res.status = 200)) {
         this.service.openSnackBar(res, 'Close');
       }
@@ -104,16 +117,52 @@ export class MachinesOperationsComponent {
     );
   }
 
-  togglePopover(popoverId: string) {
+  togglePopover(popoverId: string, price: number) {
+    this.workHourForm.get('workHourEdit')?.setValue(price);
     this.activePopoverIdout = null;
 
     this.activePopoverId =
       this.activePopoverId === popoverId ? null : popoverId;
   }
 
-  togglePopoverOut(popoverId: string) {
-    this.activePopoverId = null;
+  resetWorkEdit(price: number) {
+    this.workHourForm.get('workHourEdit')?.setValue(price);
+  }
 
+  saveWorkHour(element: any) {
+    element.price = this.workHourForm.get('workHourEdit')?.value;
+    element.id = element._id;
+    // console.log(this.workHourForm.get('workHourEdit')?.value, element);
+    this.service.updateMachine(element).subscribe((res: any) => {
+      if ((res.status = 200)) {
+        this.service.openSnackBar('Work hour price updated', 'Close');
+        this.getData();
+        this.activePopoverId = null;
+        this.activePopoverIdout = null;
+      }
+    });
+  }
+
+  resetCurrencyEdit(curr_id: string) {
+    this.currencyForm.get('currencyEdit')?.setValue(curr_id);
+  }
+
+  saveCurrency(element: any) {
+    element.currency = this.currencyForm.get('currencyEdit')?.value;
+    element.id = element._id;
+    this.service.updateMachine(element).subscribe((res: any) => {
+      if ((res.status = 200)) {
+        this.service.openSnackBar('Currency updated', 'Close');
+        this.getData();
+        this.activePopoverId = null;
+        this.activePopoverIdout = null;
+      }
+    });
+  }
+
+  togglePopoverOut(popoverId: string, curr_id: string) {
+    this.currencyForm.get('currencyEdit')?.setValue(curr_id);
+    this.activePopoverId = null;
     this.activePopoverIdout =
       this.activePopoverIdout === popoverId ? null : popoverId;
   }
@@ -139,9 +188,6 @@ export class MachinesOperationsComponent {
   }
 
   getCurrencyName(id: string) {
-    console.log(id);
-    console.log(this.currencies);
-
     const el = this.currencies.find((el) => el?._id == id);
     return el?.name;
   }
@@ -150,15 +196,102 @@ export class MachinesOperationsComponent {
     if (confirm('Are you sure to delete ')) {
       this.service.deleteMachine(id).subscribe(
         (res: any) => {
-          console.log(res, 'del res');
+          // console.log(res, 'del res');
           this.service.openSnackBar(res, 'Close');
           this.getData();
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.service.openSnackBar(error.message, 'close');
         }
       );
+    }
+  }
+
+  applyFilterName(filterValue: string): void {
+    setTimeout(() => {
+      this.service.searchMachineName(filterValue).subscribe(
+        (res: any) => {
+          this.data = res;
+        },
+        (error) => {
+          this.service.openSnackBar(error.error.error, 'Close');
+          this.data = [];
+        }
+      );
+    }, 2000);
+  }
+
+  applyFilterActive(filterValue: string): void {
+    console.log(filterValue);
+
+    if (filterValue == undefined) {
+      this.getData();
+    } else {
+      setTimeout(() => {
+        this.service.searchMachineActive(filterValue).subscribe(
+          (res: any) => {
+            this.data = res;
+          },
+          (error) => {
+            this.data = [];
+            this.service.openSnackBar(error.error.error, 'Close');
+          }
+        );
+      }, 1000);
+    }
+  }
+
+  applyFilterEndMachine(filterValue: string): void {
+    console.log(filterValue);
+
+    if (filterValue == undefined) {
+      this.getData();
+    } else {
+      setTimeout(() => {
+        this.service.searchMachineEnd(filterValue).subscribe(
+          (res: any) => {
+            this.data = res;
+          },
+          (error) => {
+            this.data = [];
+            this.service.openSnackBar(error.error.error, 'Close');
+          }
+        );
+      }, 1000);
+    }
+  }
+
+  applyFilterWorkHour(filterValue: string): void {
+    setTimeout(() => {
+      this.service.searchMachinePrice(filterValue).subscribe(
+        (res: any) => {
+          this.data = res;
+        },
+        (error) => {
+          this.service.openSnackBar(error.error.error, 'Close');
+          this.data = [];
+        }
+      );
+    }, 3000);
+  }
+
+  applyFilterCurrency(filterValue: string): void {
+    console.log(filterValue);
+    if (filterValue == undefined) {
+      this.getData();
+    } else {
+      setTimeout(() => {
+        this.service.searchMachineCurrency(filterValue).subscribe(
+          (res: any) => {
+            this.data = res;
+          },
+          (error) => {
+            this.data = [];
+            this.service.openSnackBar(error.error.error, 'Close');
+          }
+        );
+      }, 1000);
     }
   }
 }

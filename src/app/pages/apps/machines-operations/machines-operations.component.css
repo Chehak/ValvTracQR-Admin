@@ -27,10 +27,11 @@
 
 .popover {
     position: absolute !important;
-    background-color: #fff;
+    background-color: #1d232f;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 10px;
     z-index: 1000 !important;
+    color: black !important;
 
 }
 
@@ -68,7 +69,7 @@
     width: 0;
     height: 0;
     border-top: 10px solid transparent;
-    border-right: 16px solid white;
+    border-right: 16px solid #1d232f;
     border-bottom: 10px solid transparent;
     left: -15px;
 }
@@ -103,7 +104,7 @@
 .custom-title {
     font-size: 16px;
     font-weight: 300;
-    color: black;
+    color: white;
     /* margin-bottom: 10px; */
 }
 
@@ -127,3 +128,8 @@
 .mdc-button {
     min-width: 10px !important;
 }
+
+/* ::ng-deep.mat-mdc-select-value-text {
+    color: rgb(133, 129, 129) !important;
+    white-space: nowrap;
+} */

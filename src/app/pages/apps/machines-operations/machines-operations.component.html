@@ -42,6 +42,10 @@
             *matHeaderCellDef
             class="f-s-14 f-w-600 m-l-2"
             style="vertical-align: top"
+            #tooltip="matTooltip"
+            matTooltip="Simply drag and drop if you want change item position on the production schedule"
+            matTooltipPosition="above"
+            matTooltipHideDelay="10"
           >
             {{ "Order on schedule" | translate }}
           </th>
@@ -62,7 +66,11 @@
             {{ "Name" | translate }}
             <form class="m-t-10">
               <mat-form-field class="w-100" appearance="outline">
-                <input type="text" matInput />
+                <input
+                  type="text"
+                  matInput
+                  (keyup)="applyFilterName($any($event.target).value)"
+                />
               </mat-form-field>
             </form>
           </th>
@@ -87,7 +95,10 @@
             {{ "Active" | translate }}
             <form action="" class="m-t-10">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-select value="">
+                <mat-select
+                  value=""
+                  (selectionChange)="applyFilterActive($event.value)"
+                >
                   <mat-option value=""></mat-option>
                   <mat-option value="yes">Yes</mat-option>
                   <mat-option value="no">No</mat-option>
@@ -121,7 +132,10 @@
             {{ "End Machine" | translate }}
             <form action="" class="m-t-10">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-select value="">
+                <mat-select
+                  value=""
+                  (selectionChange)="applyFilterEndMachine($event.value)"
+                >
                   <mat-option value=""></mat-option>
                   <mat-option value="yes">Yes</mat-option>
                   <mat-option value="no">No</mat-option>
@@ -155,7 +169,11 @@
             {{ "Work hour price" | translate }}
             <form class="m-t-10">
               <mat-form-field class="w-100" appearance="outline">
-                <input type="text" matInput />
+                <input
+                  type="text"
+                  matInput
+                  (keyup)="applyFilterWorkHour($any($event.target).value)"
+                />
               </mat-form-field>
             </form>
           </th>
@@ -169,7 +187,7 @@
                 <div class="w-100 text-center">
                   <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
                     <a
-                      (click)="togglePopover(element?._id)"
+                      (click)="togglePopover(element?._id, element?.price)"
                       class="pop-class"
                       >{{ element.price ? element.price : 0 }}</a
                     >
@@ -194,29 +212,37 @@
                     </div>
                   </div>
 
-                  <mat-form-field class="w-100" appearance="outline">
-                    <input type="text" matInput />
-                  </mat-form-field>
-                  <div class="div_btns text-right" style="margin-top: -12px">
-                    <button
-                      mat-flat-button
-                      color="warn"
-                      style="
-                        margin-right: 6px;
-                        width: 25px !important;
-                        height: 30px !important;
-                      "
-                    >
-                      <i-tabler name="ban" style="width: 21px"></i-tabler>
-                    </button>
-                    <button
-                      mat-flat-button
-                      color="accent"
-                      style="width: 25px !important; height: 30px !important"
-                    >
-                      <i-tabler name="check" style="width: 18px"></i-tabler>
-                    </button>
-                  </div>
+                  <form [formGroup]="workHourForm">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <input
+                        type="text"
+                        matInput
+                        formControlName="workHourEdit"
+                      />
+                    </mat-form-field>
+                    <div class="div_btns text-right" style="margin-top: -12px">
+                      <button
+                        mat-flat-button
+                        color="warn"
+                        style="
+                          margin-right: 6px;
+                          width: 25px !important;
+                          height: 30px !important;
+                        "
+                        (click)="resetWorkEdit(element?.price)"
+                      >
+                        <i-tabler name="ban" style="width: 21px"></i-tabler>
+                      </button>
+                      <button
+                        mat-flat-button
+                        color="accent"
+                        style="width: 25px !important; height: 30px !important"
+                        (click)="saveWorkHour(element)"
+                      >
+                        <i-tabler name="check" style="width: 18px"></i-tabler>
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -233,22 +259,13 @@
             {{ "Currency" | translate }}
             <form class="m-t-10">
               <mat-form-field class="w-100" appearance="outline">
-                <input
-                  type="text"
-                  placeholder="Choose currency"
-                  aria-label="Number"
-                  matInput
-                  [formControl]="filterControl"
-                  [matAutocomplete]="auto3"
-                />
-                <mat-autocomplete #auto3="matAutocomplete">
-                  <mat-option
-                    *ngFor="let searchoption of searchfilteredOptions | async"
-                    [value]="searchoption"
-                  >
-                    {{ searchoption }}
+                <mat-select
+                  (selectionChange)="applyFilterCurrency($event.value)"
+                >
+                  <mat-option *ngFor="let curr of currencies" [value]="curr._id"
+                    >{{ curr.name }}
                   </mat-option>
-                </mat-autocomplete>
+                </mat-select>
               </mat-form-field>
             </form>
           </th>
@@ -259,7 +276,9 @@
                   <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
                     <a
                       class="pop-class"
-                      (click)="togglePopoverOut(element?._id)"
+                      (click)="
+                        togglePopoverOut(element?._id, element?.currency)
+                      "
                       >{{ getCurrencyName(element?.currency) }}</a
                     >
                   </p>
@@ -282,29 +301,43 @@
                       &times;
                     </div>
                   </div>
-                  <mat-form-field class="w-100" appearance="outline">
-                    <input type="text" matInput />
-                  </mat-form-field>
-                  <div class="div_btns text-right" style="margin-top: -12px">
-                    <button
-                      mat-flat-button
-                      color="warn"
-                      style="
-                        margin-right: 6px;
-                        width: 25px !important;
-                        height: 30px !important;
-                      "
-                    >
-                      <i-tabler name="ban" style="width: 21px"></i-tabler>
-                    </button>
-                    <button
-                      mat-flat-button
-                      color="accent"
-                      style="width: 25px !important; height: 30px !important"
-                    >
-                      <i-tabler name="check" style="width: 18px"></i-tabler>
-                    </button>
-                  </div>
+                  <form [formGroup]="currencyForm">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-select
+                        formControlName="currencyEdit"
+                        class="custom-class"
+                      >
+                        <mat-option
+                          *ngFor="let curr of currencies"
+                          [value]="curr?._id"
+                        >
+                          {{ curr.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div class="div_btns text-right" style="margin-top: -12px">
+                      <button
+                        mat-flat-button
+                        color="warn"
+                        style="
+                          margin-right: 6px;
+                          width: 25px !important;
+                          height: 30px !important;
+                        "
+                        (click)="resetCurrencyEdit(element?.currency)"
+                      >
+                        <i-tabler name="ban" style="width: 21px"></i-tabler>
+                      </button>
+                      <button
+                        mat-flat-button
+                        color="accent"
+                        style="width: 25px !important; height: 30px !important"
+                        (click)="saveCurrency(element)"
+                      >
+                        <i-tabler name="check" style="width: 18px"></i-tabler>
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -322,12 +355,27 @@
           </th>
           <td mat-cell *matCellDef="let element" class="action-link">
             <a
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="View"
+              class="m-r-10 cursor-pointer text-white"
+              [routerLink]="['/apps/view-machines-operations/', element?._id]"
+              ><i-tabler name="eye" class="icon-18"></i-tabler
+            ></a>
+
+            <a
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Update"
               class="m-r-10 cursor-pointer text-white"
               (click)="redirectUpdate(element?._id)"
               ><i-tabler name="edit" class="icon-18"></i-tabler
             ></a>
             <!--  (click)="openDialog('Update', element)" -->
             <a
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Delete"
               class="m-r-10 cursor-pointer text-white"
               (click)="deleteRecord(element?._id)"
             >

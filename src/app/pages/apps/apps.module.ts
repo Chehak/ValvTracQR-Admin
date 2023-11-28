@@ -113,6 +113,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslatePipe } from 'src/app/pipe/translate.pipe';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { HttpServiceService } from 'src/app/services/http-service.service';
+import { ViewMachinesOperationsComponent } from './view-machines-operations/view-machines-operations.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -206,6 +207,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AddApiKeyComponent,
     UpdateApiKeyComponent,
     ShowPausesComponent,
+    ViewMachinesOperationsComponent,
   ],
   providers: [
     {

@@ -1,0 +1,47 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <span>
+      <div class="row">
+        <div class="col-sm-4 d-flex align-items-center">
+          <h4 class="text-white f-s-18 f-w-600">{{ response?.name }}</h4>
+        </div>
+        <div class="col-sm-8 text-right">
+          <a
+            [routerLink]="['/apps/update-machines-operations/', id]"
+            mat-flat-button
+            color="accent"
+            class="m-r-10"
+            >Update</a
+          >
+          <a mat-flat-button color="warn" (click)="deleteRecord(id)">Delete</a>
+        </div>
+      </div>
+    </span>
+  </mat-card-content>
+</mat-card>
+<div class="container mt-4">
+  <table class="table table-bordered vertical-table">
+    <tbody>
+      <tr>
+        <th scope="row">Name</th>
+        <td>{{ response?.name }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Active</th>
+        <td>
+          <ng-container *ngIf="response.active == 'yes'">
+            <i-tabler name="check" style="color: #4caf50"></i-tabler>
+          </ng-container>
+          <ng-container *ngIf="response.active == 'no'">
+            <i-tabler name="X" style="color: #f44336"></i-tabler>
+          </ng-container>
+        </td>
+      </tr>
+      <tr *ngIf="response.notes != ''">
+        <th scope="row">Notes:</th>
+        <td>{{ response?.notes }}</td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+</div>
