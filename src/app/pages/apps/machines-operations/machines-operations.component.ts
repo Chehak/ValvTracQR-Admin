@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, Subject, debounceTime, map, startWith } from 'rxjs';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TranslateService } from '@ngx-translate/core';
@@ -30,7 +30,7 @@ export interface PeriodicElement {
   templateUrl: './machines-operations.component.html',
   styleUrls: ['./machines-operations.component.css'],
 })
-export class MachinesOperationsComponent {
+export class MachinesOperationsComponent implements OnInit {
   currencies: any[] = [];
   data: any[] = [];
   @ViewChild('table') table!: MatTable<PeriodicElement>;
@@ -53,6 +53,8 @@ export class MachinesOperationsComponent {
   workHourForm!: FormGroup;
   searchfilteredOptions!: Observable<string[]>;
   lang: any;
+  private subjectKeyUp = new Subject<any>();
+  private subjectKeyUpName = new Subject<any>();
   constructor(
     public dialog: MatDialog,
     public service: HttpServiceService,
@@ -263,17 +265,15 @@ export class MachinesOperationsComponent {
   }
 
   applyFilterWorkHour(filterValue: string): void {
-    setTimeout(() => {
-      this.service.searchMachinePrice(filterValue).subscribe(
-        (res: any) => {
-          this.data = res;
-        },
-        (error) => {
-          this.service.openSnackBar(error.error.error, 'Close');
-          this.data = [];
-        }
-      );
-    }, 3000);
+    this.service.searchMachinePrice(filterValue).subscribe(
+      (res: any) => {
+        this.data = res;
+      },
+      (error) => {
+        this.service.openSnackBar(error.error.error, 'Close');
+        this.data = [];
+      }
+    );
   }
 
   applyFilterCurrency(filterValue: string): void {
@@ -293,5 +293,32 @@ export class MachinesOperationsComponent {
         );
       }, 1000);
     }
+  }
+
+  onSearch(filterValue: any) {
+    // this.applyFilterCurrency(filterValue);
+    if (!filterValue) {
+      this.getData();
+    } else {
+      this.subjectKeyUp.next(filterValue);
+    }
+  }
+
+  onSearchName(filterValue: any) {
+    // this.applyFilterCurrency(filterValue);
+    if (!filterValue) {
+      this.getData();
+    } else {
+      this.subjectKeyUpName.next(filterValue);
+    }
+  }
+
+  ngOnInit(): void {
+    this.subjectKeyUp.pipe(debounceTime(500)).subscribe((d) => {
+      this.applyFilterWorkHour(d);
+    });
+    this.subjectKeyUpName.pipe(debounceTime(500)).subscribe((d) => {
+      this.applyFilterName(d);
+    });
   }
 }
