@@ -115,6 +115,7 @@
     top: -8px;
     right: 2px;
     cursor: pointer;
+    color: white;
 }
 
 .close-icon-curr {
@@ -123,6 +124,7 @@
     top: -6px;
     right: -21px;
     cursor: pointer;
+    color: white;
 }
 
 .mdc-button {
