@@ -105,3 +105,168 @@
 .repn_new {
     height: 370px !important;
 }
+
+::ng-deep.md-drppicker .calendar td {
+    color: black !important;
+
+}
+
+::ng-deep .md-drppicker .clear svg {
+    display: none;
+}
+
+
+
+::ng-deep.md-drppicker table tr {
+    height: 26px !important;
+}
+
+::ng-deep .md-drppicker .btn.btn-default {
+    font-size: 13px !important;
+}
+
+::ng-deep.md-drppicker .btn {
+    line-height: 26px !important;
+}
+
+::ng-deep.md-drppicker.shown {
+    left: auto !important;
+    right: auto !important;
+
+}
+
+::ng-deep.md-drppicker .calendar td {
+    min-width: 25px !important;
+}
+
+::ng-deep.md-drppicker .calendar th {
+    min-width: 25px !important;
+}
+
+.text-input {
+
+    border: 1px solid #465670 !important;
+    height: 38px;
+    color: white;
+    width: 187px;
+    border-radius: 6px;
+    background-color: #2a3447;
+}
+
+.text-input::placeholder {
+    color: #a3a7b0;
+    padding-left: 10px;
+    /* Replace with your desired color */
+}
+
+::ng-deep.md-drppicker {
+
+    font-weight: normal !important;
+    font-size: 12px !important;
+}
+
+.ovr_flws {
+    overflow: visible;
+}
+
+.popover {
+    position: absolute !important;
+    background-color: #1d232f;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000 !important;
+    color: black !important;
+
+}
+
+.popover-out {
+    width: 190px;
+    top: -78px;
+    left: 147px;
+}
+
+.popover-in {
+    top: -77px;
+    left: 142px;
+}
+
+.popover-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+
+    padding: 8px 14px;
+    margin: 0;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ebebeb;
+    border-radius: 5px 5px 0 0;
+
+}
+
+
+
+.popover::after {
+    content: "";
+    position: absolute;
+    top: 80px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 16px solid #1d232f;
+    border-bottom: 10px solid transparent;
+    left: -15px;
+}
+
+.over_flow {
+    overflow: visible !important;
+}
+
+.repn_new {
+    height: 370px !important;
+}
+
+.custom-container {
+    position: relative;
+    width: 210px;
+    /* Adjust the width as needed */
+    padding-bottom: 7px;
+    border-radius: 5px;
+    margin-top: -5px;
+}
+
+.custom-container-curr {
+    position: relative;
+    width: 150px;
+    /* Adjust the width as needed */
+    padding-bottom: 7px;
+    border-radius: 5px;
+    margin-top: -5px;
+}
+
+/* Style for the title */
+.custom-title {
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    /* margin-bottom: 10px; */
+}
+
+/* Style for the close (cross) icon */
+.close-icon {
+    font-size: 20px;
+    position: absolute;
+    top: -8px;
+    right: 2px;
+    cursor: pointer;
+    color: white;
+}
+
+.close-icon-curr {
+    font-size: 20px;
+    position: absolute;
+    top: -6px;
+    right: -21px;
+    cursor: pointer;
+    color: white;
+}

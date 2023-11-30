@@ -30,14 +30,14 @@
         >
           {{ "Add Users" | translate }}
         </button>
-
-        <button mat-flat-button color="primary" (click)="openFilterDialog()">
+        <mat-slide-toggle>Show Inactive</mat-slide-toggle>
+        <!-- <button mat-flat-button color="primary" (click)="openFilterDialog()">
           <i-tabler
             class="d-flex"
             name="tool"
             matBadgeColor="primary"
           ></i-tabler>
-        </button>
+        </button> -->
       </div>
     </div>
   </mat-card-content>
@@ -96,6 +96,7 @@
         <tr mat-header-row *matHeaderRowDef="dynamicColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: dynamicColumns"></tr>
       </table>
+
       <mat-paginator
         [length]="dataSource.data.length"
         [pageSize]="paginator.pageSize"

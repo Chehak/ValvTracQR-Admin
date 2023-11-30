@@ -44,3 +44,55 @@
 }
 
 /* Add more CSS styling as needed */
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-ranges {
+    width: 30%;
+    /* Adjust as needed */
+}
+
+.custom-ranges ul {
+    list-style: none;
+    padding: 0;
+}
+
+.custom-ranges li {
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.date-picker-container {
+    width: 65%;
+    /* Adjust as needed */
+}
+
+:host {
+    display: block;
+    padding: 1rem;
+    max-width: 600px;
+}
+
+:host /deep/ igx-calendar-container {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+:host /deep/ #actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: 0 10px;
+}
+
+:host /deep/ #actions button {
+    margin: 6px 0;
+}
+
+:host /deep/ #actions button:last-of-type {
+    margin: 24px 0 18px 0;
+}

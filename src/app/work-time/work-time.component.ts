@@ -5,13 +5,14 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, map, startWith } from 'rxjs';
 import { HttpServiceService } from 'src/app/services/http-service.service';
+import * as moment from 'moment';
 
 export interface PeriodicElement {
   id: number;
@@ -64,8 +65,33 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./work-time.component.css'],
 })
 export class WorkTimeComponent {
-  activePopoverId: string | null = null;
-  activePopoverIdout: string | null = null;
+  myDate: any;
+  clockInForm!: FormGroup;
+  selected: any;
+  selectedClockOut: any;
+  alwaysShowCalendars: boolean;
+  ranges: any = {
+    Today: [moment(), moment()],
+    Yesterday: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    'This Month': [moment().startOf('month'), moment().endOf('month')],
+    'Last Month': [
+      moment().subtract(1, 'month').startOf('month'),
+      moment().subtract(1, 'month').endOf('month'),
+    ],
+  };
+  invalidDates: moment.Moment[] = [
+    moment().add(2, 'days'),
+    moment().add(3, 'days'),
+    moment().add(5, 'days'),
+  ];
+
+  isInvalidDate = (m: moment.Moment) => {
+    return this.invalidDates.some((d) => d.isSame(m, 'day'));
+  };
+  activePopoverId: any;
+  activePopoverIdout: any;
   lang: any;
   workerToggle: boolean = true;
   @ViewChild('table') table!: MatTable<PeriodicElement>;
@@ -89,9 +115,9 @@ export class WorkTimeComponent {
     public dialog: MatDialog,
     public service: HttpServiceService,
     private route: Router,
-    private translateService: TranslateService,
-    private renderer: Renderer2
+    private translateService: TranslateService
   ) {
+    this.alwaysShowCalendars = true;
     this.lang = localStorage.getItem('lang');
     this.translateService.use(this.lang);
   }
@@ -107,7 +133,7 @@ export class WorkTimeComponent {
     return [10, 20, 30, 40];
   }
   redirect() {
-    this.route.navigate(['/apps/add-machines-operations']);
+    this.route.navigate(['/apps/add-work-time']);
   }
   redirectShowPauses() {
     this.route.navigate(['/apps/show-pauses']);
@@ -121,11 +147,11 @@ export class WorkTimeComponent {
     );
   }
 
-  togglePopover(popoverId: string) {
-    this.activePopoverIdout = null;
+  togglePopoverClockIn(popoverId: string, val: any) {
+    // this.activePopoverIdout = null;
 
-    this.activePopoverId =
-      this.activePopoverId === popoverId ? null : popoverId;
+    this.activePopoverIdout =
+      this.activePopoverIdout === popoverId ? null : popoverId;
   }
 
   togglePopoverOut(popoverId: string) {
@@ -141,4 +167,8 @@ export class WorkTimeComponent {
   closePopoverOut() {
     this.activePopoverIdout = null;
   }
+
+  resetClockIn(id: any) {}
+
+  saveClockIn(element: any) {}
 }

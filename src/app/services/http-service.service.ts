@@ -486,4 +486,129 @@ export class HttpServiceService {
       })
     );
   }
+
+  getClients(): Observable<any> {
+    const API_URL = `${this.baseURL}getClients`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  addClient(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}addClient`;
+    return this.http.post(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  deleteClient(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}deleteClient/${form}`;
+    return this.http.delete(API_URL, { responseType: 'text' }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchClientName(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchClientName?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchClientActive(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchClientActive?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchClientAddress(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchClientAddress?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchClientPhone(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchClientPhone?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+  searchClientCity(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchClientCity?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchClientTax(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchClientTax?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchClientPostalCode(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchClientPostal?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchClientWeb(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchClientWeb?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  searchClientComment(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}searchClientComments?text=${form}`;
+    return this.http.get(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  getClientId(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}getClient/${form}`;
+    return this.http.get(API_URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  updateClient(form: any): Observable<any> {
+    const API_URL = `${this.baseURL}updateClient/${form?.id}`;
+    return this.http.patch(API_URL, form).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
 }

@@ -114,6 +114,15 @@ import { TranslatePipe } from 'src/app/pipe/translate.pipe';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 import { ViewMachinesOperationsComponent } from './view-machines-operations/view-machines-operations.component';
+import { IgxDateRangePickerModule } from 'igniteui-angular';
+
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatTimepickerModule,
+} from '@angular-material-components/datetime-picker';
+import { ClientsComponent } from './clients/clients.component';
+
+// import {  } from 'angular-moment-picker';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -133,8 +142,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DragDropModule,
     NgxPaginationModule,
     MdbPopoverModule,
+    IgxDateRangePickerModule,
     ColorPickerModule,
     HttpClientModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
     AngularEditorModule,
     TranslateModule,
     NgxDaterangepickerMd.forRoot(),
@@ -208,6 +220,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     UpdateApiKeyComponent,
     ShowPausesComponent,
     ViewMachinesOperationsComponent,
+    ClientsComponent,
   ],
   providers: [
     {

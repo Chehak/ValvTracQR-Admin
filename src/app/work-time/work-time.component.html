@@ -109,7 +109,7 @@
           <th
             mat-header-cell
             *matHeaderCellDef
-            class="f-s-14 f-w-600"
+            class="f-s-14 f-w-600 p-b-24"
             style="text-align: center"
           >
             <a href="" style="color: white; text-decoration: none">
@@ -118,61 +118,78 @@
               ><i class="fa fa-long-arrow-down" aria-hidden="true"></i
             ></a>
             <form class="m-t-10">
-              <mat-form-field class="w-100" appearance="outline">
-                <input type="text" matInput />
-              </mat-form-field>
+              <input
+                class="text-input"
+                ngxDaterangepickerMd
+                [(ngModel)]="selected"
+                [showCustomRangeLabel]="true"
+                [alwaysShowCalendars]="true"
+                [ranges]="ranges"
+                [linkedCalendars]="true"
+                [isInvalidDate]="isInvalidDate"
+                [showClearButton]="true"
+                placeholder="Select please..."
+              />
             </form>
           </th>
           <td class="ovr_flws" mat-cell *matCellDef="let element">
             <div class="position-relative">
               <div class="d-flex align-items-center">
                 <div class="w-100 text-center">
-                  <p
-                    class="f-w-400 mat-subtitle-1 f-s-14 m-t-0"
-                    #toggleButton
-                    (click)="togglePopover(element.id)"
-                  >
-                    {{ element.clockIn | date }}
+                  <p class="f-w-400 mat-subtitle-1 f-s-14 m-t-0">
+                    <a
+                      class="pop-class"
+                      (click)="
+                        togglePopoverClockIn(element?.id, element?.clockIn)
+                      "
+                      >{{ element?.clockIn | date }}</a
+                    >
                   </p>
                 </div>
               </div>
               <div
-                class="popover popover-in"
-                *ngIf="activePopoverId == element.id"
-                id="popover-{{ element.id }}"
+                class="popover popover-out"
+                *ngIf="activePopoverIdout == element?.id"
+                id="popover-{{ element?.id }}"
               >
-                <div class="wrap_pop">
-                  <div class="d-flex">
-                    <h3 class="popover-header mb-2">
-                      Edit Work hour price {{ element?.id }}
-                      <span class="close-icon" (click)="closePopover()"
-                        >&times;</span
+                <div>
+                  <div class="custom-container-curr d-flex">
+                    <div class="custom-title">
+                      <i-tabler name="edit"></i-tabler>
+                    </div>
+                    <div class="custom-title m-l-6">
+                      <b>Edit Start Time</b>
+                    </div>
+                    <div class="close-icon-curr" (click)="closePopoverOut()">
+                      &times;
+                    </div>
+                  </div>
+                  <form [formGroup]="clockInForm">
+                    <input type="text" id="" />
+
+                    <div class="div_btns text-right" style="margin-top: -12px">
+                      <button
+                        mat-flat-button
+                        color="warn"
+                        style="
+                          margin-right: 6px;
+                          width: 25px !important;
+                          height: 30px !important;
+                        "
+                        (click)="resetClockIn(element?.clockIn)"
                       >
-                    </h3>
-                    <mat-icon
-                      class="mat-icon-rtl-mirror"
-                      svgIcon="cross"
-                    ></mat-icon>
-                  </div>
-                  <mat-form-field class="w-100" appearance="outline">
-                    <input type="text" matInput />
-                  </mat-form-field>
-                  <div class="div_btns">
-                    <button
-                      mat-flat-button
-                      color="primary"
-                      style="margin-right: 10px"
-                    >
-                      Reset
-                    </button>
-                    <button
-                      mat-flat-button
-                      color="accent"
-                      style="margin-right: 10px"
-                    >
-                      Save
-                    </button>
-                  </div>
+                        <i-tabler name="ban" style="width: 21px"></i-tabler>
+                      </button>
+                      <button
+                        mat-flat-button
+                        color="accent"
+                        style="width: 25px !important; height: 30px !important"
+                        (click)="saveClockIn(element)"
+                      >
+                        <i-tabler name="check" style="width: 18px"></i-tabler>
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -182,7 +199,7 @@
           <th
             mat-header-cell
             *matHeaderCellDef
-            class="f-s-14 f-w-600"
+            class="f-s-14 f-w-600 p-b-24"
             style="text-align: center"
           >
             <a href="" style="color: white; text-decoration: none">
@@ -190,10 +207,21 @@
               <i class="fa fa-long-arrow-up" aria-hidden="true"></i
               ><i class="fa fa-long-arrow-down" aria-hidden="true"></i
             ></a>
-            <form class="m-t-10">
-              <mat-form-field class="w-100" appearance="outline">
-                <input type="text" matInput />
-              </mat-form-field>
+            <form class="m-t-10 w-100">
+              <input
+                class="text-input"
+                matInput
+                type="text"
+                ngxDaterangepickerMd
+                [(ngModel)]="selectedClockOut"
+                [showCustomRangeLabel]="true"
+                [alwaysShowCalendars]="true"
+                [ranges]="ranges"
+                [linkedCalendars]="true"
+                [isInvalidDate]="isInvalidDate"
+                [showClearButton]="true"
+                placeholder="Select please..."
+              />
             </form>
           </th>
           <td class="ovr_flws" mat-cell *matCellDef="let element">
@@ -329,7 +357,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-      <mat-paginator class="mt-3" #myPaginator [pageSize]="10"></mat-paginator>
+      <!-- <mat-paginator class="mt-3" #myPaginator [pageSize]="10"></mat-paginator> -->
     </div>
   </mat-card-content>
 </mat-card>

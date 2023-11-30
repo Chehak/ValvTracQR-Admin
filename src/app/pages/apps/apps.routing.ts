@@ -21,6 +21,7 @@ import { WorkTimeComponent } from 'src/app/work-time/work-time.component';
 import { AddWorkTimeComponent } from 'src/app/add-work-time/add-work-time.component';
 import { ShowPausesComponent } from './show-pauses/show-pauses.component';
 import { ViewMachinesOperationsComponent } from './view-machines-operations/view-machines-operations.component';
+import { ClientsComponent } from './clients/clients.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -241,6 +242,20 @@ export const AppsRoutes: Routes = [
         component: ShowPausesComponent,
         data: {
           title: 'Work pauses registration',
+        },
+      },
+
+      {
+        path: 'clients',
+        component: ClientsComponent,
+        data: {
+          title: 'Clients',
+          // urls: [
+          //   {
+          //     title:
+          //       'Here you can edit your workers clock in and clock out time',
+          //   },
+          // ],
         },
       },
     ],

@@ -1,11 +1,13 @@
 .cdk-drag-preview {
-    background-color: #2a3447;
+    background-color: #394c72d6;
     color: #ffffff;
     overflow: auto !important;
+    margin: 0 auto !important;
 }
 
 .cdk-drag-preview td {
     padding-right: 40px;
+    margin: 0 auto !important;
 }
 
 .cdk-drag-preview td:last-child {

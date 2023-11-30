@@ -71,6 +71,11 @@ export const navItems: NavItem[] = [
 
         route: 'apps/work-time',
       },
+      {
+        displayName: 'Clients',
+
+        route: 'apps/clients',
+      },
     ],
   },
 ];

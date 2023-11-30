@@ -1,0 +1,118 @@
+::ng-deep.custom-class {
+    right: 0px !important;
+    left: unset !important;
+}
+
+
+div span:nth-child(n+2):hover {
+    background: #555;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+
+}
+
+
+.form-class {
+    margin-left: -57px;
+    margin-right: -55px;
+}
+
+th {
+    min-width: 111px
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#container {
+    position: relative;
+    overflow: hidden;
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    height: 100%;
+    width: 400px;
+    background-color: #2a3447;
+    color: #fff;
+    box-sizing: border-box;
+    transition: right 0.3s ease;
+    z-index: 99999;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+#sidebarEdit {
+    position: fixed;
+    top: 0;
+    right: -900px;
+    height: 100%;
+    width: 900px;
+    background-color: #2a3447;
+    color: #fff;
+    box-sizing: border-box;
+    transition: right 0.3s ease;
+    z-index: 99999;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+#toggle-btn,
+#close-btn {
+    position: fixed;
+    top: 20px;
+    background-color: #2c3545;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+
+#toggle-btn {
+    right: 20px;
+}
+
+#close-btn {
+    right: 40px;
+    z-index: 1;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(0, 0, 0, 0.4); */
+    /* Adjust the color and transparency as needed */
+    z-index: 2;
+}
+
+
+
+.active {
+    color: white !important;
+    background-color: green;
+}
+
+.inactive {
+    color: white !important;
+    background-color: red;
+}
+
+.button-style {
+
+    color: rgb(23, 21, 21);
+    height: 38px;
+    width: 40px;
+    border-radius: 25px;
+    border: none;
+    margin-right: 10px;
+}
